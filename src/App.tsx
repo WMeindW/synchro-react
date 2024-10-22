@@ -3,7 +3,8 @@ import CreateForm from "./components/CreateForm.tsx";
 import {useEffect, useState} from "react";
 
 interface Event {
-    timeStart: string,
+    id: number
+    timeStart: string
     timeEnd: string
     username: string
     type: string
@@ -11,15 +12,15 @@ interface Event {
 
 interface Group {
     id: number
-    title: string
+    content: string
 }
 
 interface Items {
     id: number,
     group: number,
-    title: string,
-    start_time: Date,
-    end_time: Date
+    content: string,
+    start: Date,
+    end: Date
 }
 
 export default function App() {
@@ -46,7 +47,7 @@ export default function App() {
         let giduser = null;
         let last_gid = -1;
         for (const group of groups) {
-            if (group.title == user)
+            if (group.content == user)
                 giduser = group.id;
             last_gid = group.id;
         }
@@ -55,21 +56,23 @@ export default function App() {
             giduser = last_gid + 1;
             gs.push({
                 id: last_gid + 1,
-                title: user
+                content: user
             });
-            console.log(gs);
             setGroups(gs);
         }
         const is: Items[] = items;
-        is.push({
-            id: is.length,
+        const item: Items = {
+            id: event.id,
             group: giduser,
-            title: event.type,
-            start_time: new Date(event.timeStart),
-            end_time: new Date(event.timeEnd)
-        })
+            content: event.type,
+            start: new Date(event.timeStart),
+            end: new Date(event.timeEnd)
+        };
+        for (const item1 of is) {
+            if (item1.id == item.id) return;
+        }
+        is.push(item)
         setItems(is);
-        console.log(is);
     }
 
     useEffect(() => {

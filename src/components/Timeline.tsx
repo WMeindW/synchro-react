@@ -1,36 +1,53 @@
-import Timeline from 'react-calendar-timeline';
-import 'react-calendar-timeline/lib/Timeline.css';
+import {useEffect, useRef} from 'react';
+import {Timeline as VisTimeline} from 'vis-timeline/standalone';
+import 'vis-timeline/styles/vis-timeline-graph2d.min.css';
 
 interface Group {
-    id: number
-    title: string
+    id: number;
+    content: string;  // Vis.js expects "content" instead of "title"
 }
 
-interface Items {
-    id: number,
-    group: number,
-    title: string,
-    start_time: Date,
-    end_time: Date
+interface Item {
+    id: number;
+    group: number;
+    content: string;  // Vis.js expects "content" instead of "title"
+    start: Date;
+    end: Date;
 }
 
 interface Props {
-    groups: Group[], // Specify the type or use `any[]` to represent an array
-    items: Items[]  // Specify the type or use `any[]`
+    groups: Group[];
+    items: Item[];
 }
 
-// Define default values for the `groups` and `items` parameters
-export default function CalendarTimeline({ groups = [], items = [] }: Props) {
+export default function CalendarTimeline({groups = [], items = []}: Props) {
+    const timelineRef = useRef<HTMLDivElement | null>(null);
+    const timelineInstanceRef = useRef<VisTimeline | null>(null);
 
-    return (
-        <div style={{ height: '600px' }}>
-            <Timeline
-                groups={groups}
-                items={items}
-                defaultTimeStart={new Date(new Date().setHours(0, 0, 0, 0))} // Start of today
-                defaultTimeEnd={new Date(new Date().setHours(23, 59, 59, 999))} // End of today
-                sidebarWidth={150}
-            />
-        </div>
-    );
-};
+    useEffect(() => {
+        if (timelineRef.current) {
+            const options = {
+                start: new Date(new Date().setHours(0, 0, 0, 0)),  // Start of today
+                end: new Date(new Date().setHours(23, 59, 59, 999)),  // End of today
+                width: '100%',
+                height: '600px',
+                stack: true,
+                margin: {
+                    item: 10,
+                },
+            };
+
+            // Initialize the Vis.js Timeline
+            timelineInstanceRef.current = new VisTimeline(timelineRef.current, items, groups, options);
+        }
+
+        return () => {
+            // Clean up the timeline instance when the component unmounts
+            if (timelineInstanceRef.current) {
+                timelineInstanceRef.current.destroy();
+            }
+        };
+    }, [groups, items]);
+
+    return <div ref={timelineRef}/>;
+}
