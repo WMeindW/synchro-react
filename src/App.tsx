@@ -2,11 +2,6 @@ import CalendarTimeline from "./components/Timeline.tsx";
 import CreateForm from "./components/CreateForm.tsx";
 import {useEffect, useState} from "react";
 
-interface Group {
-    id: number
-    title: string
-}
-
 interface Event {
     timeStart: string,
     timeEnd: string
@@ -14,17 +9,24 @@ interface Event {
     type: string
 }
 
+interface Group {
+    id: number
+    title: string
+}
+
 interface Items {
     id: number,
     group: number,
     title: string,
-    start_time: string,
-    end_time: string
+    start_time: Date,
+    end_time: Date
 }
 
 export default function App() {
-    const [groups, setGroups] = useState([]);
-    const [items, setItems] = useState([]);
+    const gs: Group[] = []
+    const is: Items[] = []
+    const [groups, setGroups] = useState(gs);
+    const [items, setItems] = useState(is);
 
     async function queryEvents(): Promise<Event[]> {
         try {
@@ -39,10 +41,41 @@ export default function App() {
         }
     }
 
+    function processEvents(event: Event) {
+        const user = event.username;
+        let giduser = null;
+        let last_gid = -1;
+        for (const group of groups) {
+            if (group.title == user)
+                giduser = group.id;
+            last_gid = group.id;
+        }
+        if (giduser == null) {
+            const gs: Group[] = [];
+            giduser = last_gid + 1;
+            gs.push({
+                id: last_gid + 1,
+                title: user
+            });
+            console.log(gs);
+            setGroups(gs);
+        }
+        const is: Items[] = items;
+        is.push({
+            id: is.length,
+            group: giduser,
+            title: event.type,
+            start_time: new Date(event.timeStart),
+            end_time: new Date(event.timeEnd)
+        })
+        setItems(is);
+        console.log(is);
+    }
+
     useEffect(() => {
         queryEvents().then((events) => {
             for (const event of events["events"]) {
-                console.log(event.timeStart)
+                processEvents(event);
             }
         })
     });

@@ -1,9 +1,22 @@
 import Timeline from 'react-calendar-timeline';
 import 'react-calendar-timeline/lib/Timeline.css';
 
+interface Group {
+    id: number
+    title: string
+}
+
+interface Items {
+    id: number,
+    group: number,
+    title: string,
+    start_time: Date,
+    end_time: Date
+}
+
 interface Props {
-    groups: never[], // Specify the type or use `any[]` to represent an array
-    items: never[]  // Specify the type or use `any[]`
+    groups: Group[], // Specify the type or use `any[]` to represent an array
+    items: Items[]  // Specify the type or use `any[]`
 }
 
 // Define default values for the `groups` and `items` parameters
