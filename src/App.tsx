@@ -41,7 +41,9 @@ export default function App() {
 
     useEffect(() => {
         queryEvents().then((events) => {
-            console.log(events);
+            for (const event of events["events"]) {
+                console.log(event.timeStart)
+            }
         })
     });
     return (
