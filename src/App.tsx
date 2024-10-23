@@ -75,6 +75,7 @@ export default function App() {
 
     useEffect(() => {
         queryEvents().then((events) => {
+            // @ts-ignore
             processEvents(events["events"]);
         })
     }, []);
