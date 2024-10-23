@@ -41,45 +41,41 @@ export default function App() {
         }
     }
 
-    function processEvents(event: Event) {
-        const user = event.username;
-        let giduser = null;
-        let last_gid = -1;
-        for (const group of groups) {
-            if (group.content == user)
-                giduser = group.id;
-            last_gid = group.id;
+    function processEvents(events: Event[]) {
+        const gs: Group[] = []
+        const is: Items[] = []
+        for (const event of events) {
+            let giduser = -1;
+            groups.forEach((group) => (gs.push(group)))
+            items.forEach((item) => (is.push(item)))
+            for (const group of gs) {
+                if (group.content === event.username) {
+                    giduser = group.id;
+                }
+            }
+            if (giduser === -1) {
+                giduser = gs.length;
+                gs.push({
+                    id: gs.length,
+                    content: event.username
+                })
+            }
+            is.push({
+                id: event.id,
+                group: giduser,
+                content: event.type,
+                start: new Date(event.timeStart),
+                end: new Date(event.timeEnd)
+            })
         }
-        if (giduser == null) {
-            const gs: Group[] = groups;
-            giduser = last_gid + 1;
-            gs.push({
-                id: last_gid + 1,
-                content: user
-            });
-            console.log(gs)
-            setGroups(gs);
-        }
-        const is: Items[] = items;
-        const item: Items = {
-            id: event.id,
-            group: giduser,
-            content: event.type,
-            start: new Date(event.timeStart),
-            end: new Date(event.timeEnd)
-        };
-        for (const item1 of is) {
-            if (item1.id == item.id) return;
-        }
-        is.push(item)
+        console.log(is);
+        setGroups(gs);
         setItems(is);
     }
 
     useEffect(() => {
         queryEvents().then((events) => {
-            for (const event of events["events"]) {
-                processEvents(event);
-            }
+            processEvents(events["events"]);
         })
     }, []);
     return (
