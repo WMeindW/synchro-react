@@ -51,12 +51,13 @@ export default function App() {
             last_gid = group.id;
         }
         if (giduser == null) {
-            const gs: Group[] = [];
+            const gs: Group[] = groups;
             giduser = last_gid + 1;
             gs.push({
                 id: last_gid + 1,
                 content: user
             });
+            console.log(gs)
             setGroups(gs);
         }
         const is: Items[] = items;
@@ -80,7 +81,7 @@ export default function App() {
                 processEvents(event);
             }
         })
-    });
+    }, []);
     return (
         <>
             <div>
