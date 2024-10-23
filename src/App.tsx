@@ -34,8 +34,7 @@ export default function App() {
             const response = await fetch("http://localhost:8083/user/query-event", {
                 method: "GET"
             });
-            const data = await response.json();
-            return data;
+            return await response.json();
         } catch (error) {
             console.error("Error fetching events:", error);
             return [];
