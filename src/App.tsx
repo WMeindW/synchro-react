@@ -87,6 +87,7 @@ export default function App() {
             <div style={{height: '600px'}}>
                 <CalendarTimeline groups={groups} items={items}/>
             </div>
+            <div><a href="/synchro/api/auth/logout">Logout</a></div>
         </>
     );
 };
