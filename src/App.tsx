@@ -31,7 +31,7 @@ export default function App() {
 
     async function queryEvents(): Promise<Event[]> {
         try {
-            const response = await fetch("/synchro/api/user/query-event", {
+            const response = await fetch("http://localhost:8083/user/query-event", {
                 method: "GET"
             });
             return await response.json();

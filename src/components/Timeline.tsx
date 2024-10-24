@@ -39,6 +39,15 @@ export default function CalendarTimeline({groups = [], items = []}: Props) {
 
             // Initialize the Vis.js Timeline
             timelineInstanceRef.current = new VisTimeline(timelineRef.current, items, groups, options);
+            // Event listener for 'select' event (triggered when an item is clicked)
+            timelineInstanceRef.current.on('select', function (properties) {
+                const selectedItemId = properties.items[0];  // Get the ID of the selected item
+                const selectedItem = items.find(item => item.id === selectedItemId);
+
+                if (selectedItem) {
+                    console.log("Selected Item Data:", selectedItem);  // Log selected item data
+                }
+            });
         }
 
         return () => {
