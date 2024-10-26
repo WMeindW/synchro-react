@@ -16,11 +16,12 @@ interface Item {
 }
 
 interface Props {
+    eventClick : (event: Item) => void;
     groups: Group[];
     items: Item[];
 }
 
-export default function CalendarTimeline({groups = [], items = []}: Props) {
+export default function CalendarTimeline({groups = [], items = [], eventClick}: Props) {
     const timelineRef = useRef<HTMLDivElement | null>(null);
     const timelineInstanceRef = useRef<VisTimeline | null>(null);
 
@@ -45,7 +46,7 @@ export default function CalendarTimeline({groups = [], items = []}: Props) {
                 const selectedItem = items.find(item => item.id === selectedItemId);
 
                 if (selectedItem) {
-                    console.log("Selected Item Data:", selectedItem);  // Log selected item data
+                    eventClick(selectedItem);
                 }
             });
         }

@@ -1,12 +1,20 @@
 import React, {useState} from "react";
 
-export default function EditForm() {
+interface Props {
+    submitForm: () => void
+    type: string
+    username: string
+    start: string
+    end: string
+}
+
+export default function EditForm(props: Props) {
     // State to store form data
     const [formData, setFormData] = useState({
-        type: "",
-        username: "",
-        start: "",
-        end: ""
+        type: props.type,
+        username: props.username,
+        start: props.start,
+        end: props.end
     });
 
     // Handle input changes and update state
@@ -37,6 +45,7 @@ export default function EditForm() {
             .then((response) => response.json())
             .then((data) => console.log("Success:", data))
             .catch((error) => console.error("Error:", error));
+        props.submitForm();
     };
 
     return (

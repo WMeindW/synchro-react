@@ -17,7 +17,7 @@ interface Group {
     content: string
 }
 
-interface Items {
+interface Item {
     id: number,
     group: number,
     content: string,
@@ -27,9 +27,10 @@ interface Items {
 
 export default function App() {
     const gs: Group[] = []
-    const is: Items[] = []
+    const is: Item[] = []
     const [groups, setGroups] = useState(gs);
     const [items, setItems] = useState(is);
+    const [editForm, setEditForm] = useState(<div></div>);
 
     async function queryEvents(): Promise<Event[]> {
         try {
@@ -45,7 +46,7 @@ export default function App() {
 
     function processEvents(events: Event[]) {
         const gs: Group[] = []
-        const is: Items[] = []
+        const is: Item[] = []
         for (const event of events) {
             let giduser = -1;
             groups.forEach((group) => (gs.push(group)))
@@ -74,6 +75,20 @@ export default function App() {
         setItems(is);
     }
 
+    function showEditEvent(item: Item) {
+        let username = "";
+        groups.forEach((group) => {
+            if (group.id === item.group) username = group.content
+        })
+        console.log(item.end.toISOString())
+        setEditForm(<EditForm submitForm={hideEditForm} end={item.end.toISOString().substring(0,16)} start={item.start.toISOString().substring(0,16)}
+                              type={item.content} username={username}/>);
+    }
+
+    function hideEditForm() {
+        setEditForm(<div></div>);
+    }
+
     useEffect(() => {
         queryEvents().then((events) => {
             // @ts-ignore
@@ -86,10 +101,10 @@ export default function App() {
                 <CreateForm/>
             </div>
             <div>
-                <CalendarTimeline groups={groups} items={items}/>
+                <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}/>
             </div>
             <div>
-                <EditForm/>
+                {editForm}
             </div>
             <div>
                 <Logout/>
