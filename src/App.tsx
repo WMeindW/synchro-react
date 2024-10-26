@@ -1,6 +1,8 @@
 import CalendarTimeline from "./components/Timeline.tsx";
 import CreateForm from "./components/CreateForm.tsx";
 import {useEffect, useState} from "react";
+import Logout from "./components/Logout.tsx";
+import EditForm from "./components/EditForm.tsx";
 
 interface Event {
     id: number
@@ -68,7 +70,6 @@ export default function App() {
                 end: new Date(event.timeEnd)
             })
         }
-        console.log(is);
         setGroups(gs);
         setItems(is);
     }
@@ -84,10 +85,15 @@ export default function App() {
             <div>
                 <CreateForm/>
             </div>
-            <div style={{height: '600px'}}>
+            <div>
                 <CalendarTimeline groups={groups} items={items}/>
             </div>
-            <div><a href="/synchro/api/auth/logout">Logout</a></div>
+            <div>
+                <EditForm/>
+            </div>
+            <div>
+                <Logout/>
+            </div>
         </>
     );
 };

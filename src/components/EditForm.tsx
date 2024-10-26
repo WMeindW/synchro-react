@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export default function CreateForm() {
+export default function EditForm() {
     // State to store form data
     const [formData, setFormData] = useState({
         type: "",
@@ -27,7 +27,7 @@ export default function CreateForm() {
         console.log(jsonData); // You can send this data to a server or log it
 
 
-        fetch("http://localhost:8083/user/create-event", {
+        fetch("http://localhost:8083/admin/edit-event", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -41,7 +41,7 @@ export default function CreateForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>Create Event</label>
+            <label>Edit Event</label>
             <input name="type" type="text" placeholder="Type" value={formData.type} onChange={handleChange}/>
             <input name="username" type="text" placeholder="Username" value={formData.username}
                    onChange={handleChange}/>
