@@ -82,7 +82,7 @@ export default function App() {
         })
         console.log(item.end.toISOString())
         setEditForm(<EditForm submitForm={hideEditForm} end={item.end.toISOString().substring(0,16)} start={item.start.toISOString().substring(0,16)}
-                              type={item.content} username={username}/>);
+                              type={item.content} username={username} id={item.id}/>);
     }
 
     function hideEditForm() {

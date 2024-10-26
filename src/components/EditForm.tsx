@@ -2,6 +2,7 @@ import React, {useState} from "react";
 
 interface Props {
     submitForm: () => void
+    id: number
     type: string
     username: string
     start: string
@@ -11,6 +12,7 @@ interface Props {
 export default function EditForm(props: Props) {
     // State to store form data
     const [formData, setFormData] = useState({
+        id: props.id,
         type: props.type,
         username: props.username,
         start: props.start,
@@ -35,7 +37,7 @@ export default function EditForm(props: Props) {
         console.log(jsonData); // You can send this data to a server or log it
 
 
-        fetch("http://localhost:8083/admin/edit-event", {
+        fetch("http://localhost:8083/user/edit-event", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -51,6 +53,7 @@ export default function EditForm(props: Props) {
     return (
         <form onSubmit={handleSubmit}>
             <label>Edit Event</label>
+            <input name="id" type="hidden" value={formData.id} onChange={handleChange}/>
             <input name="type" type="text" placeholder="Type" value={formData.type} onChange={handleChange}/>
             <input name="username" type="text" placeholder="Username" value={formData.username}
                    onChange={handleChange}/>
