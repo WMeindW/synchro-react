@@ -81,8 +81,8 @@ export default function App() {
         groups.forEach((group) => {
             if (group.id === item.group) username = group.content
         })
-        console.log(item.end.toISOString().substring(0,16))
-        setEditForm(<EditForm submitForm={hideEditForm} end={moment(item.end).format("YYYY-MM-DDTHH:mm")} start={moment(item.start).format("YYYY-MM-DDTHH:mm")}
+        setEditForm(<EditForm key={item.id} submitForm={hideEditForm} end={moment(item.end).format("YYYY-MM-DDTHH:mm")}
+                              start={moment(item.start).format("YYYY-MM-DDTHH:mm")}
                               type={item.content} username={username} id={item.id}/>);
     }
 
