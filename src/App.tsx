@@ -3,6 +3,7 @@ import CreateForm from "./components/CreateForm.tsx";
 import {useEffect, useState} from "react";
 import Logout from "./components/Logout.tsx";
 import EditForm from "./components/EditForm.tsx";
+import moment from 'moment'; // Import Moment.js
 
 interface Event {
     id: number
@@ -67,8 +68,8 @@ export default function App() {
                 id: event.id,
                 group: giduser,
                 content: event.type,
-                start: new Date(event.timeStart),
-                end: new Date(event.timeEnd)
+                start: moment(event.timeStart).toDate(),
+                end: moment(event.timeEnd).toDate()
             })
         }
         setGroups(gs);
@@ -80,8 +81,8 @@ export default function App() {
         groups.forEach((group) => {
             if (group.id === item.group) username = group.content
         })
-        console.log(item.end.toISOString())
-        setEditForm(<EditForm submitForm={hideEditForm} end={item.end.toISOString().substring(0,16)} start={item.start.toISOString().substring(0,16)}
+        console.log(item.end.toISOString().substring(0,16))
+        setEditForm(<EditForm submitForm={hideEditForm} end={moment(item.end).format("YYYY-MM-DDTHH:mm")} start={moment(item.start).format("YYYY-MM-DDTHH:mm")}
                               type={item.content} username={username} id={item.id}/>);
     }
 
