@@ -37,7 +37,7 @@ export default function EditForm(props: Props) {
         console.log(jsonData); // You can send this data to a server or log it
 
 
-        fetch("http://localhost:8083/user/edit-event", {
+        fetch("/synchro/api/user/edit-event", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

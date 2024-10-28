@@ -35,7 +35,7 @@ export default function App() {
 
     async function queryEvents(): Promise<Event[]> {
         try {
-            const response = await fetch("http://localhost:8083/user/query-event", {
+            const response = await fetch("/synchro/api/user/query-event", {
                 method: "GET"
             });
             return await response.json();
@@ -91,6 +91,7 @@ export default function App() {
     }
 
     useEffect(() => {
+        console.log("querying")
         queryEvents().then((events) => {
             // @ts-ignore
             processEvents(events["events"]);

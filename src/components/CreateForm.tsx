@@ -27,7 +27,7 @@ export default function CreateForm() {
         console.log(jsonData); // You can send this data to a server or log it
 
 
-        fetch("http://localhost:8083/user/create-event", {
+        fetch("/synchro/api/user/create-event", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
