@@ -50,6 +50,27 @@ export default function EditForm(props: Props) {
         props.submitForm();
     };
 
+    const handleDelete = (e: React.FormEvent) => {
+        e.preventDefault(); // Prevent the default form submission
+
+        // Convert the form data to JSON
+        const jsonData = JSON.stringify(formData);
+        console.log(jsonData); // You can send this data to a server or log it
+
+
+        fetch("/synchro/api/user/delete-event", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: jsonData
+        })
+            .then((response) => response.json())
+            .then((data) => console.log("Success:", data))
+            .catch((error) => console.error("Error:", error));
+        props.submitForm();
+    };
+
     return (
         <form onSubmit={handleSubmit}>
             <label>Edit Event</label>
@@ -60,6 +81,7 @@ export default function EditForm(props: Props) {
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
             <input name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>
             <button type="submit">Submit</button>
+            <button type="button" onClick={handleDelete}>Delete</button>
         </form>
     );
 }

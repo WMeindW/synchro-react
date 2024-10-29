@@ -100,7 +100,7 @@ export default function App() {
     return (
         <>
             <div>
-                <CreateForm/>
+                <CreateForm submitForm={hideEditForm}/>
             </div>
             <div>
                 <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}/>

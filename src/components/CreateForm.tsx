@@ -1,6 +1,10 @@
 import React, {useState} from "react";
 
-export default function CreateForm() {
+interface Props {
+    submitForm: () => void
+}
+
+export default function CreateForm(props: Props) {
     // State to store form data
     const [formData, setFormData] = useState({
         type: "",
@@ -37,6 +41,7 @@ export default function CreateForm() {
             .then((response) => response.json())
             .then((data) => console.log("Success:", data))
             .catch((error) => console.error("Error:", error));
+        props.submitForm(); // Call the parent component's submitForm function to update the list of events'
     };
 
     return (
