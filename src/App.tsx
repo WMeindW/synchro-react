@@ -1,6 +1,9 @@
 import CalendarTimeline from "./components/Timeline.tsx";
 import CreateForm from "./components/CreateForm.tsx";
 import {useEffect, useState} from "react";
+import Logout from "./components/Logout.tsx";
+import EditForm from "./components/EditForm.tsx";
+import moment from 'moment'; // Import Moment.js
 
 interface Event {
     id: number
@@ -15,7 +18,7 @@ interface Group {
     content: string
 }
 
-interface Items {
+interface Item {
     id: number,
     group: number,
     content: string,
@@ -25,13 +28,14 @@ interface Items {
 
 export default function App() {
     const gs: Group[] = []
-    const is: Items[] = []
+    const is: Item[] = []
     const [groups, setGroups] = useState(gs);
     const [items, setItems] = useState(is);
+    const [editForm, setEditForm] = useState(<div></div>);
 
     async function queryEvents(): Promise<Event[]> {
         try {
-            const response = await fetch("http://localhost:8083/user/query-event", {
+            const response = await fetch("/synchro/api/user/query-event", {
                 method: "GET"
             });
             return await response.json();
@@ -43,7 +47,7 @@ export default function App() {
 
     function processEvents(events: Event[]) {
         const gs: Group[] = []
-        const is: Items[] = []
+        const is: Item[] = []
         for (const event of events) {
             let giduser = -1;
             groups.forEach((group) => (gs.push(group)))
@@ -64,16 +68,30 @@ export default function App() {
                 id: event.id,
                 group: giduser,
                 content: event.type,
-                start: new Date(event.timeStart),
-                end: new Date(event.timeEnd)
+                start: moment(event.timeStart).toDate(),
+                end: moment(event.timeEnd).toDate()
             })
         }
-        console.log(is);
         setGroups(gs);
         setItems(is);
     }
 
+    function showEditEvent(item: Item) {
+        let username = "";
+        groups.forEach((group) => {
+            if (group.id === item.group) username = group.content
+        })
+        setEditForm(<EditForm key={item.id} submitForm={hideEditForm} end={moment(item.end).format("YYYY-MM-DDTHH:mm")}
+                              start={moment(item.start).format("YYYY-MM-DDTHH:mm")}
+                              type={item.content} username={username} id={item.id}/>);
+    }
+
+    function hideEditForm() {
+        setEditForm(<div></div>);
+    }
+
     useEffect(() => {
+        console.log("querying")
         queryEvents().then((events) => {
             // @ts-ignore
             processEvents(events["events"]);
@@ -82,12 +100,17 @@ export default function App() {
     return (
         <>
             <div>
-                <CreateForm/>
+                <CreateForm submitForm={hideEditForm}/>
             </div>
-            <div style={{height: '600px'}}>
-                <CalendarTimeline groups={groups} items={items}/>
+            <div>
+                <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}/>
             </div>
-            <div><a href="/synchro/api/auth/logout">Logout</a></div>
+            <div>
+                {editForm}
+            </div>
+            <div>
+                <Logout/>
+            </div>
         </>
     );
 };

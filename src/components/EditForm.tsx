@@ -2,15 +2,21 @@ import React, {useState} from "react";
 
 interface Props {
     submitForm: () => void
+    id: number
+    type: string
+    username: string
+    start: string
+    end: string
 }
 
-export default function CreateForm(props: Props) {
+export default function EditForm(props: Props) {
     // State to store form data
     const [formData, setFormData] = useState({
-        type: "",
-        username: "",
-        start: "",
-        end: ""
+        id: props.id,
+        type: props.type,
+        username: props.username,
+        start: props.start,
+        end: props.end
     });
 
     // Handle input changes and update state
@@ -31,7 +37,7 @@ export default function CreateForm(props: Props) {
         console.log(jsonData); // You can send this data to a server or log it
 
 
-        fetch("/synchro/api/user/create-event", {
+        fetch("/synchro/api/user/edit-event", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -41,18 +47,41 @@ export default function CreateForm(props: Props) {
             .then((response) => response.json())
             .then((data) => console.log("Success:", data))
             .catch((error) => console.error("Error:", error));
-        props.submitForm(); // Call the parent component's submitForm function to update the list of events'
+        props.submitForm();
+    };
+
+    const handleDelete = (e: React.FormEvent) => {
+        e.preventDefault(); // Prevent the default form submission
+
+        // Convert the form data to JSON
+        const jsonData = JSON.stringify(formData);
+        console.log(jsonData); // You can send this data to a server or log it
+
+
+        fetch("/synchro/api/user/delete-event", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: jsonData
+        })
+            .then((response) => response.json())
+            .then((data) => console.log("Success:", data))
+            .catch((error) => console.error("Error:", error));
+        props.submitForm();
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>Create Event</label>
+            <label>Edit Event</label>
+            <input name="id" type="hidden" value={formData.id} onChange={handleChange}/>
             <input name="type" type="text" placeholder="Type" value={formData.type} onChange={handleChange}/>
             <input name="username" type="text" placeholder="Username" value={formData.username}
                    onChange={handleChange}/>
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
             <input name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>
             <button type="submit">Submit</button>
+            <button type="button" onClick={handleDelete}>Delete</button>
         </form>
     );
 }
