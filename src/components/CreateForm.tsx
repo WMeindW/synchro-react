@@ -31,7 +31,7 @@ export default function CreateForm(props: Props) {
         console.log(jsonData); // You can send this data to a server or log it
 
 
-        fetch("/synchro/api/user/create-event", {
+        fetch("http://localhost:8083/user/create-event", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -3,7 +3,8 @@ import CreateForm from "./components/CreateForm.tsx";
 import {useEffect, useState} from "react";
 import Logout from "./components/Logout.tsx";
 import EditForm from "./components/EditForm.tsx";
-import moment from 'moment'; // Import Moment.js
+import moment from 'moment';
+import AttendanceForm from "./components/AttendanceForm.tsx"; // Import Moment.js
 
 interface Event {
     id: number
@@ -35,7 +36,7 @@ export default function App() {
 
     async function queryEvents(): Promise<Event[]> {
         try {
-            const response = await fetch("/synchro/api/user/query-event", {
+            const response = await fetch("http://localhost:8083/user/query-event", {
                 method: "GET"
             });
             return await response.json();
@@ -99,6 +100,9 @@ export default function App() {
     }, []);
     return (
         <>
+            <div>
+                <AttendanceForm/>
+            </div>
             <div>
                 <CreateForm submitForm={hideEditForm}/>
             </div>
