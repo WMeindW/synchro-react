@@ -53,13 +53,7 @@ export default function AttendanceForm() {
             .then((response) => response.json())
             .then((data) => console.log("Success:", data))
             .catch((error) => console.error("Error:", error));
-
-        queryAttendance().then((response) => {
-            if (response == "false")
-                setCheckedIn({checkedIn: false})
-            else if ((response == "true"))
-                setCheckedIn({checkedIn: true})
-        })
+        setCheckedIn({checkedIn:!checkedIn.checkedIn})
     };
     const handleChecks = (ischecked:boolean): string => {
         if (ischecked)

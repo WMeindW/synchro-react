@@ -55,8 +55,6 @@ export default function EditForm(props: Props) {
 
         // Convert the form data to JSON
         const jsonData = JSON.stringify(formData);
-        console.log(jsonData); // You can send this data to a server or log it
-
 
         fetch("http://localhost:8083/user/delete-event", {
             method: "POST",
