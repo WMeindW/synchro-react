@@ -28,8 +28,6 @@ export default function CreateForm(props: Props) {
 
         // Convert the form data to JSON
         const jsonData = JSON.stringify(formData);
-        console.log(jsonData); // You can send this data to a server or log it
-
 
         fetch("http://localhost:8083/user/create-event", {
             method: "POST",
@@ -41,7 +39,8 @@ export default function CreateForm(props: Props) {
             .then((response) => response.json())
             .then((data) => console.log("Success:", data))
             .catch((error) => console.error("Error:", error));
-        props.submitForm(); // Call the parent component's submitForm function to update the list of events'
+        props.submitForm();
+
     };
 
     return (
