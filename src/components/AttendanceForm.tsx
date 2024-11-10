@@ -2,14 +2,21 @@ import React, {useEffect, useState} from "react";
 
 export default function AttendanceForm() {
     // State to store form data
+    const getUsernameFromCookie = () => {
+        let usernameCookie = "";
+        for (const c of document.cookie.split(";")) {
+            if (c.split("=")[0] == "username")
+                usernameCookie = c.split("=")[1];
+        }
+        return usernameCookie;
+    }
     const [formData, setFormData] = useState({
-        username: "admin_user"
+        username: getUsernameFromCookie()
     });
 
     const [checkedIn, setCheckedIn] = useState({
         checkedIn: false
     });
-
     // Handle input changes and update state
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
@@ -32,7 +39,6 @@ export default function AttendanceForm() {
     }
 
     useEffect(() => {
-        console.log("querying")
         queryAttendance().then((response) => {
             if (response == "false")
                 setCheckedIn({checkedIn: false})
