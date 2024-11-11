@@ -29,14 +29,19 @@ export default function CreateUserForm() {
             },
             body: jsonData
         })
-            .then((response) => response.text())
-            .then((data) => setLink(data))
-            .catch((error) => console.error("Error:", error));
+            .then(response => response.json())
+            .then(data => {
+                setLink(data["token"])
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Error creating user.');
+            });
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>Create User</label>
+            <label>Create User</label><br/><br/>
 
             <label htmlFor="username">Username:</label>
             <input type="text" id="username" onChange={handleChange} name="username" required/><br/><br/>
@@ -54,7 +59,7 @@ export default function CreateUserForm() {
             <input type="text" id="role" name="role" onChange={handleChange} required/><br/><br/>
 
             <label>
-                <textarea id="link">{link}</textarea>
+                <textarea id="link" value={link}></textarea>
             </label>
 
             <button type="submit">Create User</button>
