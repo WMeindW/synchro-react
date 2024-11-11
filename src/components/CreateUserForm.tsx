@@ -37,8 +37,15 @@ export default function CreateUserForm() {
     return (
         <form onSubmit={handleSubmit}>
             <label>Create User</label>
+
             <label htmlFor="username">Username:</label>
             <input type="text" id="username" onChange={handleChange} name="username" required/><br/><br/>
+
+            <label htmlFor="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" onChange={handleChange} required/><br/><br/>
+
+            <label htmlFor="email">Email:</label>
+            <input type="email" id="email" name="email" onChange={handleChange} required/><br/><br/>
 
             <label htmlFor="password">Password:</label>
             <input type="password" id="password" name="password" onChange={handleChange} required/><br/><br/>
