@@ -2,6 +2,8 @@ import React, {ReactElement, useEffect, useState} from "react";
 
 interface User {
     id: string
+    email: string
+    phone: string
     username: string
     role: string
     enabled: string
@@ -31,7 +33,7 @@ export default function UserList() {
         console.log(users);
         if (users)
             users.forEach(user => {
-                children.push(React.createElement("div", {key: user.id}, user.username + " " + user.enabled + " " + user.id))
+                children.push(React.createElement("div", {key: user.id}, user.username + " " + user.email + " " + user.phone + " " + user.enabled + " " + user.id))
             })
         setUsers({...users, users: children});
 
