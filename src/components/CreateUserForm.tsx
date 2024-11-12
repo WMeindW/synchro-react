@@ -59,7 +59,7 @@ export default function CreateUserForm() {
             <input type="text" id="role" name="role" onChange={handleChange} required/><br/><br/>
 
             <label>
-                <textarea id="link" value={link}></textarea>
+                <textarea id="link" value={link} readOnly={true}></textarea>
             </label>
 
             <button type="submit">Create User</button>
