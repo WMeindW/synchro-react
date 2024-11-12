@@ -5,7 +5,8 @@ import EditForm from "./components/EditForm.tsx";
 import moment from 'moment';
 import AttendanceForm from "./components/AttendanceForm.tsx";
 import Events from "./components/Events.tsx";
-import CreateUserForm from "./components/CreateUserForm.tsx"; // Import Moment.js
+import CreateUserForm from "./components/CreateUserForm.tsx";
+import UserList from "./components/UserList.tsx"; // Import Moment.js
 
 interface Item {
     id: number,
@@ -44,6 +45,9 @@ export default function App() {
             </div>
             <div>
                 <CreateUserForm/>
+            </div>
+            <div>
+                <UserList/>
             </div>
             <div>
                 <Logout/>
