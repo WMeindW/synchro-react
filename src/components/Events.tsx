@@ -1,6 +1,7 @@
 import CalendarTimeline from "./Timeline.tsx";
 import {useEffect, useState} from "react";
 import moment from "moment/moment";
+import EditForm from "./EditForm.tsx";
 
 interface Event {
     id: number
@@ -23,15 +24,20 @@ interface Item {
     end: Date
 }
 
-interface Props {
-    eventClick: (event: Item, username: string) => void;
-}
 
-export default function Events(props: Props) {
+
+export default function Events() {
     const gs: Group[] = []
     const is: Item[] = []
     const [groups, setGroups] = useState(gs);
     const [items, setItems] = useState(is);
+
+    const [editForm, setEditForm] = useState(<div></div>);
+
+
+    function hideEditForm() {
+        setEditForm(<div></div>);
+    }
 
     async function queryEvents(): Promise<Event[]> {
         try {
@@ -81,7 +87,9 @@ export default function Events(props: Props) {
         groups.forEach((group) => {
             if (group.id === item.group) username = group.content
         })
-        props.eventClick(item, username);
+        setEditForm(<EditForm key={item.id} submitForm={hideEditForm} end={moment(item.end).format("YYYY-MM-DDTHH:mm")}
+                              start={moment(item.start).format("YYYY-MM-DDTHH:mm")}
+                              type={item.content} username={username} id={item.id}/>);
     }
 
     useEffect(() => {
@@ -92,7 +100,10 @@ export default function Events(props: Props) {
         })
     }, []);
 
-    return <div>
-        <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}/>
-    </div>
+    return <>
+        <div>
+            <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}/>
+        </div>
+        <div>{editForm}</div>
+    </>
 }

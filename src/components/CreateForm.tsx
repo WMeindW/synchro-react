@@ -1,10 +1,6 @@
 import React, {useState} from "react";
 
-interface Props {
-    submitForm: () => void
-}
-
-export default function CreateForm(props: Props) {
+export default function CreateForm() {
     // State to store form data
     const [formData, setFormData] = useState({
         type: "",
@@ -39,8 +35,6 @@ export default function CreateForm(props: Props) {
             .then((response) => response.json())
             .then((data) => console.log("Success:", data))
             .catch((error) => console.error("Error:", error));
-        props.submitForm();
-
     };
 
     return (

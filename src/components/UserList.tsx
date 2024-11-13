@@ -28,12 +28,20 @@ export default function UserList() {
         }
     }
 
+    const userClick = (e:React.MouseEvent<HTMLDivElement>) => {
+        console.log(e.currentTarget.textContent);
+    }
+
     function processUsers(users: User[]) {
         let children: ReactElement[] = [];
         console.log(users);
         if (users)
             users.forEach(user => {
-                children.push(React.createElement("div", {key: user.id}, user.username + " " + user.email + " " + user.phone + " " + user.enabled + " " + user.id))
+                children.push(React.createElement("div", {
+                    onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => userClick(e),
+                    key: user.id,
+                    style: {border: "1px solid black", padding: "20px", margin: "10px"}
+                }, user.username + " " + user.email + " " + user.phone + " " + user.enabled + " " + user.id))
             })
         setUsers({...users, users: children});
 
