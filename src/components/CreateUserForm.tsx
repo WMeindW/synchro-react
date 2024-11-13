@@ -4,7 +4,9 @@ export default function CreateUserForm() {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
-        role: ""
+        role: "",
+        email:"",
+        phone:""
     });
 
     const [link, setLink] = useState("");
