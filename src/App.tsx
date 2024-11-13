@@ -3,7 +3,7 @@ import Logout from "./components/Logout.tsx";
 import AttendanceForm from "./components/AttendanceForm.tsx";
 import Events from "./components/Events.tsx";
 import CreateUserForm from "./components/CreateUserForm.tsx";
-import UserList from "./components/UserList.tsx"; // Import Moment.js
+import UserManagement from "./components/UserManagement.tsx";
 
 export default function App() {
 
@@ -22,7 +22,7 @@ export default function App() {
                 <CreateUserForm/>
             </div>
             <div>
-                <UserList/>
+                <UserManagement/>
             </div>
             <div>
                 <Logout/>

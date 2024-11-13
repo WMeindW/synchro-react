@@ -13,7 +13,11 @@ interface UserList {
     users: User[]
 }
 
-export default function UserList() {
+interface Props {
+    userClick: (user: User) => void;
+}
+
+export default function UserList(props: Props) {
     const [users, setUsers] = useState({users: [<div key={0}></div>]});
 
     async function queryUsers(): Promise<UserList[]> {
@@ -28,17 +32,13 @@ export default function UserList() {
         }
     }
 
-    const userClick = (e:React.MouseEvent<HTMLDivElement>) => {
-        console.log(e.currentTarget.textContent);
-    }
-
     function processUsers(users: User[]) {
         let children: ReactElement[] = [];
         console.log(users);
         if (users)
             users.forEach(user => {
                 children.push(React.createElement("div", {
-                    onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => userClick(e),
+                    onClick: () => props.userClick(user),
                     key: user.id,
                     style: {border: "1px solid black", padding: "20px", margin: "10px"}
                 }, user.username + " " + user.email + " " + user.phone + " " + user.enabled + " " + user.id))
