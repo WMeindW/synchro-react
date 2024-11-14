@@ -15,7 +15,6 @@ export default function UserManagement() {
     const [editForm, setEditForm] = useState(<div></div>);
 
     const showEditForm = (user: User) => {
-        console.log(user);
         setEditForm(<UserEditForm user={user}/>)
     }
     return <div>
