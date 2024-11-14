@@ -74,7 +74,6 @@ export default function UserEditForm(props: Props) {
             .then(data => console.log(data))
             .catch((error) => {
                 console.error('Error:', error);
-                alert('Error creating user.');
             });
     }
 
