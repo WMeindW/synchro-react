@@ -93,8 +93,8 @@ export default function UserEditForm(props: Props) {
         <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required/><br/><br/>
 
         <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange}
-               required/><br/><br/>
+        <input type="password" id="password" name="password" value={formData.password}
+               onChange={handleChange}/><br/><br/>
 
         <label htmlFor="role">Role:</label>
         <input type="text" id="role" name="role" value={formData.role} onChange={handleChange} required/><br/><br/>
