@@ -4,6 +4,7 @@ import AttendanceForm from "./components/AttendanceForm.tsx";
 import Events from "./components/Events.tsx";
 import CreateUserForm from "./components/CreateUserForm.tsx";
 import UserManagement from "./components/UserManagement.tsx";
+import MotdFrame from "./components/MotdFrame.tsx";
 
 export default function App() {
 
@@ -23,6 +24,9 @@ export default function App() {
             </div>
             <div>
                 <UserManagement/>
+            </div>
+            <div>
+                <MotdFrame/>
             </div>
             <div>
                 <Logout/>
