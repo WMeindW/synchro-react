@@ -22,6 +22,6 @@ export default function MotdFrame() {
         })
     }, []);
     return <div>Motd:
-        <div dangerouslySetInnerHTML={motd}></div>
+        <div style={{border: "1px solid black", padding: "20px", margin: "10px"}} dangerouslySetInnerHTML={motd}></div>
     </div>
 }
