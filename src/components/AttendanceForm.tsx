@@ -5,8 +5,10 @@ export default function AttendanceForm() {
     const getUsernameFromCookie = () => {
         let usernameCookie = "";
         for (const c of document.cookie.split(";")) {
-            if (c.split("=")[0] == "username")
+            if (c.split("=")[0] == "username") {
                 usernameCookie = c.split("=")[1];
+                console.log("username: " + usernameCookie + " = " + c.toString());
+            }
         }
         return usernameCookie;
     }
@@ -49,6 +51,7 @@ export default function AttendanceForm() {
     // Handle form submission
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault(); // Prevent the default form submission
+        console.log("Cookie: " + document.cookie)
         fetch("http://localhost:8083/user/check-attendance", {
             method: "POST",
             headers: {
