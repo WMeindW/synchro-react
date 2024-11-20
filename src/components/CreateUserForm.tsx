@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {SynchroConfig} from "../config/SynchroConfig.ts"
 
 export default function CreateUserForm() {
     const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ export default function CreateUserForm() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault(); // Prevent the default form submission
         const jsonData = JSON.stringify(formData);
-        fetch("http://localhost:8083/admin/create-user", {
+        fetch(SynchroConfig.apiUrl + "admin/create-user", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

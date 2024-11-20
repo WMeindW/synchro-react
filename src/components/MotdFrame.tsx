@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
+import {SynchroConfig} from "../config/SynchroConfig.ts"
 
 export default function MotdFrame() {
     const [motd, setMotd] = useState({__html: ""});
 
     async function queryMotd(): Promise<string> {
         try {
-            const response = await fetch("http://localhost:8083/user/query-motd", {
+            const response = await fetch(SynchroConfig.apiUrl + "user/query-motd", {
                 method: "GET"
             });
             return await response.text();

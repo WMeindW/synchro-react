@@ -1,4 +1,5 @@
 import React, {ReactElement, useEffect, useState} from "react";
+import {SynchroConfig} from "../config/SynchroConfig.ts"
 
 interface User {
     id: string
@@ -22,7 +23,7 @@ export default function UserList(props: Props) {
 
     async function queryUsers(): Promise<UserList[]> {
         try {
-            const response = await fetch("http://localhost:8083/admin/query-user", {
+            const response = await fetch(SynchroConfig.apiUrl + "admin/query-user", {
                 method: "GET"
             });
             return await response.json();

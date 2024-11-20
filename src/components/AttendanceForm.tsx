@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {SynchroConfig} from "../config/SynchroConfig.ts"
 
 export default function AttendanceForm() {
     // State to store form data
@@ -30,7 +31,7 @@ export default function AttendanceForm() {
 
     async function queryAttendance() {
         try {
-            const response = await fetch("http://localhost:8083/user/query-attendance?username=" + formData.username, {
+            const response = await fetch(SynchroConfig.apiUrl + "user/query-attendance?username=" + formData.username, {
                 method: "GET",
             });
             return await response.text();
@@ -52,7 +53,7 @@ export default function AttendanceForm() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault(); // Prevent the default form submission
         console.log("Cookie: " + document.cookie)
-        fetch("http://localhost:8083/user/check-attendance", {
+        fetch(SynchroConfig.apiUrl + "user/check-attendance", {
             method: "POST",
             headers: {
                 "Content-Type": "text/html"

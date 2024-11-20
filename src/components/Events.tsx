@@ -2,6 +2,7 @@ import CalendarTimeline from "./Timeline.tsx";
 import {useEffect, useState} from "react";
 import moment from "moment/moment";
 import EditForm from "./EditForm.tsx";
+import {SynchroConfig} from "../config/SynchroConfig.ts"
 
 interface Event {
     id: number
@@ -41,7 +42,7 @@ export default function Events() {
 
     async function queryEvents(): Promise<Event[]> {
         try {
-            const response = await fetch("http://localhost:8083/user/query-event", {
+            const response = await fetch(SynchroConfig.apiUrl + "user/query-event", {
                 method: "GET"
             });
             return await response.json();

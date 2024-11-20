@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {SynchroConfig} from "../config/SynchroConfig.ts"
 
 interface User {
     id: string
@@ -45,7 +46,7 @@ export default function UserEditForm(props: Props) {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault(); // Prevent the default form submission
         const jsonData = JSON.stringify(formData);
-        fetch("http://localhost:8083/admin/edit-user", {
+        fetch(SynchroConfig.apiUrl + "admin/edit-user", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -63,7 +64,7 @@ export default function UserEditForm(props: Props) {
     const handleDelete = (e: React.FormEvent) => {
         e.preventDefault(); // Prevent the default form submission
         const jsonData = JSON.stringify({id: formData.id, username: formData.username});
-        fetch("http://localhost:8083/admin/delete-user", {
+        fetch(SynchroConfig.apiUrl + "admin/delete-user", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

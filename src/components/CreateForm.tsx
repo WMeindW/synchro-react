@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {SynchroConfig} from "../config/SynchroConfig.ts"
 
 export default function CreateForm() {
     // State to store form data
@@ -25,7 +26,7 @@ export default function CreateForm() {
         // Convert the form data to JSON
         const jsonData = JSON.stringify(formData);
 
-        fetch("http://localhost:8083/user/create-event", {
+        fetch(SynchroConfig.apiUrl + "ser/create-event", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
