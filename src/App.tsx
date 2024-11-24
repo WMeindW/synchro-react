@@ -5,6 +5,7 @@ import Events from "./components/Events.tsx";
 import CreateUserForm from "./components/CreateUserForm.tsx";
 import UserManagement from "./components/UserManagement.tsx";
 import MotdFrame from "./components/MotdFrame.tsx";
+import CreateMotd from "./components/CreateMotd.tsx";
 
 export default function App() {
 
@@ -27,6 +28,9 @@ export default function App() {
             </div>
             <div>
                 <MotdFrame/>
+            </div>
+            <div>
+                <CreateMotd/>
             </div>
             <div>
                 <Logout/>
