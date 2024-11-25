@@ -1,12 +1,19 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts";
 
-export default function CreateMotd() {
+interface Props {
+    motd: string;
+}
+
+export default function CreateMotd(props: Props) {
     const [renderedMotd, setRenderedMotd] = useState({__html: ""});
     const [formData, setFormData] = useState({
-        motd: ""
+        motd: props.motd
     });
-
+    useEffect(() => {
+        setFormData({...formData,motd: props.motd})
+        queryMotd({motd:props.motd}).then((response) => setRenderedMotd({...formData, __html: response}))
+    }, [props.motd]);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -33,7 +40,19 @@ export default function CreateMotd() {
         }
     }
 
-    return <div>
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault(); // Prevent the default form submission
+        const jsonData = JSON.stringify(formData);
+        fetch(SynchroConfig.apiUrl + "admin/save-motd", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: jsonData
+        }).then(r => console.log(r.json()))
+    };
+
+    return <form onSubmit={handleSubmit}>
         <div style={{
             width: "100%",
             minHeight: "50px",
@@ -44,7 +63,7 @@ export default function CreateMotd() {
         }}
              dangerouslySetInnerHTML={renderedMotd}></div>
 
-        <input name={"motd"} onChange={handleChange} value={formData.motd} type={"textarea"}
+        <input required name={"motd"} onChange={handleChange} value={formData.motd} type={"textarea"}
                style={{
                    width: "100%",
                    minHeight: "50px",
@@ -54,5 +73,6 @@ export default function CreateMotd() {
                    marginBottom: "10px"
                }}
                placeholder={"Motd..."}></input>
-    </div>
+        <button type="submit">Save Motd</button>
+    </form>
 }
