@@ -12,11 +12,12 @@ export default function CreateMotd() {
             ...formData,
             motd: e.target.value
         });
-        queryMotd().then((response) => setRenderedMotd({...formData, __html: response}))
+        setRenderedMotd({...formData, __html: e.target.value})
+        queryMotd({motd: e.target.value}).then((response) => setRenderedMotd({...formData, __html: response}))
     };
 
-    async function queryMotd(): Promise<string> {
-        const jsonData = JSON.stringify(formData);
+    async function queryMotd(motd: { motd: string }): Promise<string> {
+        const jsonData = JSON.stringify(motd);
         try {
             const response = await fetch(SynchroConfig.apiUrl + "admin/test-motd", {
                 method: "POST",
