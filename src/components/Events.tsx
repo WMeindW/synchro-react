@@ -31,6 +31,8 @@ export default function Events() {
     const is: Item[] = []
     const [groups, setGroups] = useState(gs);
     const [items, setItems] = useState(is);
+    const [button, setButton] = useState("Show Attendance");
+    const [attendance, setAttendance] = useState(false);
 
     const [editForm, setEditForm] = useState(<div></div>);
 
@@ -51,13 +53,42 @@ export default function Events() {
         }
     }
 
+    async function queryAttendance(): Promise<Event[]> {
+        try {
+            const response = await fetch(SynchroConfig.apiUrl + "admin/query-attendance", {
+                method: "GET"
+            });
+            return await response.json();
+        } catch (error) {
+            console.error("Error fetching events:", error);
+            return [];
+        }
+    }
+
+    function switchView() {
+        console.log("querying");
+        if (attendance) {
+            queryEvents().then((events) => {
+                // @ts-ignore
+                processEvents(events["events"]);
+            })
+            setButton("Show Attendance");
+        } else {
+            queryAttendance().then((events) => {
+                // @ts-ignore
+                processEvents(events["events"]);
+            })
+            setButton("Show Events");
+        }
+        setAttendance(!attendance);
+        hideEditForm();
+    }
+
     function processEvents(events: Event[]) {
         const gs: Group[] = []
         const is: Item[] = []
         for (const event of events) {
             let giduser = -1;
-            groups.forEach((group) => (gs.push(group)))
-            items.forEach((item) => (is.push(item)))
             for (const group of gs) {
                 if (group.content === event.username) {
                     giduser = group.id;
@@ -102,7 +133,7 @@ export default function Events() {
 
     return <>
         <div>
-            <button>Show Attendance</button>
+            <button onClick={switchView}>{button}</button>
             <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}/>
         </div>
         <div>{editForm}</div>
