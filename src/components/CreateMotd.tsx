@@ -10,10 +10,12 @@ export default function CreateMotd(props: Props) {
     const [formData, setFormData] = useState({
         motd: props.motd
     });
+
     useEffect(() => {
-        setFormData({...formData,motd: props.motd})
-        queryMotd({motd:props.motd}).then((response) => setRenderedMotd({...formData, __html: response}))
+        setFormData({...formData, motd: props.motd})
+        queryMotd({motd: props.motd}).then((response) => setRenderedMotd({...formData, __html: response}))
     }, [props.motd]);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,

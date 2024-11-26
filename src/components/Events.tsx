@@ -26,7 +26,6 @@ interface Item {
 }
 
 
-
 export default function Events() {
     const gs: Group[] = []
     const is: Item[] = []
@@ -103,6 +102,7 @@ export default function Events() {
 
     return <>
         <div>
+            <button>Show Attendance</button>
             <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}/>
         </div>
         <div>{editForm}</div>
