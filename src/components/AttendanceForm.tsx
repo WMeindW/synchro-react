@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
+import {SynchroService} from "../service/SynchroService.ts";
 
 export default function AttendanceForm() {
     // State to store form data
@@ -72,13 +73,9 @@ export default function AttendanceForm() {
         return "Check-In"
     }
     return (
-        <form id={"5"} onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <label>Attendance</label>
-            <select name="username" value={formData.username} id={"5"} onChange={handleChange}>
-                <option value="volvo">Volvo</option>
-                <option value={formData.username}>{formData.username}</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+            <select dangerouslySetInnerHTML={{__html:SynchroService.parseUsers()}} name="username" value={formData.username} id={"5"} onChange={handleChange}>
             </select>
             <button type="submit">{handleChecks(checkedIn.checkedIn)}</button>
         </form>

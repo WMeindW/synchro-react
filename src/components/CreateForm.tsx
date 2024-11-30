@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
+import {SynchroService} from "../service/SynchroService.ts";
 
 export default function CreateForm() {
     // State to store form data
@@ -11,7 +12,7 @@ export default function CreateForm() {
     });
 
     // Handle input changes and update state
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target;
         setFormData({
             ...formData,
@@ -42,8 +43,9 @@ export default function CreateForm() {
         <form onSubmit={handleSubmit}>
             <label>Create Event</label>
             <input name="type" type="text" placeholder="Type" value={formData.type} onChange={handleChange}/>
-            <input name="username" type="text" placeholder="Username" value={formData.username}
-                   onChange={handleChange}/>
+            <select dangerouslySetInnerHTML={{__html: SynchroService.parseUsers()}} name="username"
+                    value={formData.username} id={"5"} onChange={handleChange}>
+            </select>
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
             <input name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>
             <button type="submit">Submit</button>
