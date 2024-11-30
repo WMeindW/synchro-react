@@ -74,7 +74,7 @@ export default function AttendanceForm() {
     return (
         <form onSubmit={handleSubmit}>
             <label>Attendance</label>
-            <input name="username" type="text" placeholder={"Username"} value={formData.username}
+            <input name="username" type="" placeholder={"Username"} value={formData.username}
                    onChange={handleChange}/>
             <button type="submit">{handleChecks(checkedIn.checkedIn)}</button>
         </form>
