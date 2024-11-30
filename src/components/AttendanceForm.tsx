@@ -21,7 +21,7 @@ export default function AttendanceForm() {
         checkedIn: false
     });
     // Handle input changes and update state
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target;
         setFormData({
             ...formData,
@@ -72,10 +72,14 @@ export default function AttendanceForm() {
         return "Check-In"
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form id={"5"} onSubmit={handleSubmit}>
             <label>Attendance</label>
-            <input name="username" type="" placeholder={"Username"} value={formData.username}
-                   onChange={handleChange}/>
+            <select name="username" value={formData.username} id={"5"} onChange={handleChange}>
+                <option value="volvo">Volvo</option>
+                <option value={formData.username}>{formData.username}</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
             <button type="submit">{handleChecks(checkedIn.checkedIn)}</button>
         </form>
     );
