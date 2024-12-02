@@ -76,10 +76,10 @@ export default function EditForm(props: Props) {
             <label>Edit Event</label>
             <input name="id" type="hidden" value={formData.id} onChange={handleChange}/>
             <select dangerouslySetInnerHTML={{__html: SynchroService.parseShiftTypes()}} name="type"
-                    value={formData.type} id={"5"} onChange={handleChange}>
+                    value={formData.type} onChange={handleChange}>
             </select>
             <select dangerouslySetInnerHTML={{__html: SynchroService.parseUsers()}} name="username"
-                    value={formData.username} id={"5"} onChange={handleChange}>
+                    value={formData.username} onChange={handleChange}>
             </select>
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
             <input name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>

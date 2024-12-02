@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
+import {SynchroService} from "../service/SynchroService.ts";
 
 export default function CreateUserForm() {
     const [formData, setFormData] = useState({
@@ -13,7 +14,7 @@ export default function CreateUserForm() {
     const [link, setLink] = useState("");
 
     // Handle input changes and update state
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target;
         setFormData({
             ...formData,
@@ -59,7 +60,9 @@ export default function CreateUserForm() {
             <input type="password" id="password" name="password" onChange={handleChange} required/><br/><br/>
 
             <label htmlFor="role">Role:</label>
-            <input type="text" id="role" name="role" onChange={handleChange} required/><br/><br/>
+            <select dangerouslySetInnerHTML={{__html: SynchroService.parseUserTypes()}} name="role"
+                    id="role" onChange={handleChange}>
+            </select>
 
             <label>
                 <textarea id="link" value={link} readOnly={true}></textarea>

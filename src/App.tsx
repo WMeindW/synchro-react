@@ -11,6 +11,7 @@ import {SynchroConfig} from "./config/SynchroConfig.ts";
 interface Info {
     users: [];
     shiftTypes: [];
+    userTypes: [];
 }
 
 export default function App() {
@@ -22,14 +23,16 @@ export default function App() {
             return await response.json();
         } catch (error) {
             console.error("Error fetching users:", error);
-            return {users: [], shiftTypes: []};
+            return {userTypes: [], users: [], shiftTypes: []};
         }
     }
 
     useEffect(() => {
+        console.log("Fetching info...")
         queryOptions().then((response) => {
             window.localStorage.setItem("users", JSON.stringify(response.users))
             window.localStorage.setItem("shiftTypes", JSON.stringify(response.shiftTypes))
+            window.localStorage.setItem("userTypes", JSON.stringify(response.userTypes))
         })
     }, []);
 

@@ -9,7 +9,6 @@ export default function AttendanceForm() {
         for (const c of document.cookie.split(";")) {
             if (c.split("=")[0] == "username") {
                 usernameCookie = c.split("=")[1];
-                console.log("username: " + usernameCookie + " = " + c.toString());
             }
         }
         return usernameCookie;
@@ -75,7 +74,7 @@ export default function AttendanceForm() {
     return (
         <form onSubmit={handleSubmit}>
             <label>Attendance</label>
-            <select dangerouslySetInnerHTML={{__html:SynchroService.parseUsers()}} name="username" value={formData.username} id={"5"} onChange={handleChange}>
+            <select dangerouslySetInnerHTML={{__html:SynchroService.parseUsers()}} name="username" value={formData.username} onChange={handleChange}>
             </select>
             <button type="submit">{handleChecks(checkedIn.checkedIn)}</button>
         </form>

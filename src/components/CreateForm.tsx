@@ -44,7 +44,7 @@ export default function CreateForm() {
             <label>Create Event</label>
             <input name="type" type="text" placeholder="Type" value={formData.type} onChange={handleChange}/>
             <select dangerouslySetInnerHTML={{__html: SynchroService.parseUsers()}} name="username"
-                    value={formData.username} id={"5"} onChange={handleChange}>
+                    value={formData.username} onChange={handleChange}>
             </select>
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
             <input name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>

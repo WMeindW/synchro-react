@@ -16,4 +16,13 @@ export class SynchroService {
         }
         return html;
     }
+
+    public static parseUserTypes() {
+        let types:[] = JSON.parse(<string>window.localStorage.getItem('userTypes'));
+        let html = "";
+        for (const u of types) {
+            html += `<option value="${u}">${u}</option>`;
+        }
+        return html;
+    }
 }
