@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
+import {SynchroService} from "../service/SynchroService.ts";
 
 interface User {
     id: string
@@ -34,7 +35,7 @@ export default function UserEditForm(props: Props) {
         })
     }, [props.user]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target;
         setFormData({
             ...formData,
@@ -98,8 +99,9 @@ export default function UserEditForm(props: Props) {
                onChange={handleChange}/><br/><br/>
 
         <label htmlFor="role">Role:</label>
-        <input type="text" id="role" name="role" value={formData.role} onChange={handleChange} required/><br/><br/>
-
+        <select dangerouslySetInnerHTML={{__html: SynchroService.parseUserTypes()}} name="role"
+                id="role" onChange={handleChange}>
+        </select>
         <button type="submit">Edit</button>
         <button type="button" onClick={handleDelete}>Delete</button>
 

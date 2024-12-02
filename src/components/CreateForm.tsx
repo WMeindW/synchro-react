@@ -42,7 +42,9 @@ export default function CreateForm() {
     return (
         <form onSubmit={handleSubmit}>
             <label>Create Event</label>
-            <input name="type" type="text" placeholder="Type" value={formData.type} onChange={handleChange}/>
+            <select dangerouslySetInnerHTML={{__html: SynchroService.parseShiftTypes()}} name="type"
+                    value={formData.type} onChange={handleChange}>
+            </select>
             <select dangerouslySetInnerHTML={{__html: SynchroService.parseUsers()}} name="username"
                     value={formData.username} onChange={handleChange}>
             </select>
