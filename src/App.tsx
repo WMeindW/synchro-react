@@ -7,6 +7,7 @@ import UserManagement from "./components/UserManagement.tsx";
 import MotdFrame from "./components/MotdFrame.tsx";
 import {useEffect, useState} from "react";
 import {SynchroConfig} from "./config/SynchroConfig.ts";
+import BarChartDemo from "./components/BarChart.tsx";
 
 interface Info {
     users: [];
@@ -25,7 +26,7 @@ export default function App() {
             return await response.json();
         } catch (error) {
             console.error("Error fetching users:", error);
-            return {userTypes: [], users: [], shiftTypes: []};
+            return {userTypes: JSON.parse(localStorage.getItem("userTypes") as string), users: JSON.parse(localStorage.getItem("users") as string), shiftTypes: JSON.parse(localStorage.getItem("shiftTypes") as string)};
         }
     }
 
@@ -57,6 +58,9 @@ export default function App() {
                 </div>
                 <div>
                     <Logout/>
+                </div>
+                <div>
+                    <BarChartDemo/>
                 </div>
             </div>)
         })
