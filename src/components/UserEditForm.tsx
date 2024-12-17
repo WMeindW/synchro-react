@@ -99,7 +99,7 @@ export default function UserEditForm(props: Props) {
                onChange={handleChange}/><br/><br/>
 
         <label htmlFor="role">Role:</label>
-        <select dangerouslySetInnerHTML={{__html: SynchroService.parseUserTypes()}} name="role"
+        <select value={formData.role} dangerouslySetInnerHTML={{__html: SynchroService.parseUserTypes()}} name="role"
                 id="role" onChange={handleChange}>
         </select>
         <button type="submit">Edit</button>

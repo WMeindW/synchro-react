@@ -1,4 +1,4 @@
-import { Bar } from 'react-chartjs-2';
+import {Bar} from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -8,23 +8,41 @@ import {
     Legend,
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import {useEffect, useState} from "react";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, ChartDataLabels);
+export default function BarChartDemo() {
+    const [advertised, setAdvertised] = useState([0]);
+    const [calculated, setCalculated] = useState([0]);
+    const [usernames, setUsernames] = useState([""]);
 
-const generateRandomData = () => Array.from({ length: 50 }, () => Math.floor(Math.random() * 100));
 
-const BarChartDemo = () => {
+    async function fetchData() {
+        return {
+            advertised: [12, 19, 3, 5, 2, 3, 10],
+            calculated: [2, 5, 2, 3, 1, 2, 7],
+            usernames: ["John Doe", "Jane Doe", "Alice Doe", "Bob Doe", "Charlie Doe", "David Doe", "Emily Doe"],
+        }
+    }
+
+    ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, ChartDataLabels);
+    useEffect(() => {
+        fetchData().then((result) => {
+            setAdvertised(result["advertised"]);
+            setCalculated(result["calculated"]);
+            setUsernames(result["usernames"]);
+        })
+    }, []);
     const data = {
-        labels: Array.from({ length: 50 }, (_, i) => `Value ${i + 1}`),
+        labels: usernames,
         datasets: [
             {
-                label: 'Dataset 1',
-                data: generateRandomData(),
+                label: 'Attended hours',
+                data: advertised,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
             {
-                label: 'Dataset 2',
-                data: generateRandomData(),
+                label: 'Calculated hours',
+                data: calculated,
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
             },
         ],
@@ -49,7 +67,5 @@ const BarChartDemo = () => {
     };
 
     // @ts-ignore
-    return <Bar data={data} options={options} />;
+    return <Bar data={data} options={options}/>;
 };
-
-export default BarChartDemo;
