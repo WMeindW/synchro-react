@@ -17,7 +17,7 @@ export default function BarChartDemo() {
     const [usernames, setUsernames] = useState([""]);
 
     function handleData(data: { values: []; }) {
-        let values = data["values"];
+        let values = data["values"].filter((value) => (value["calculatedValue"] != 0.0));
         setUsernames(values.map((value) => value["username"]))
         setAdvertised(values.map((value) => value["advertisedValue"]))
         setCalculated(values.map((value) => value["calculatedValue"]))
