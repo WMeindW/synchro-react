@@ -9,27 +9,37 @@ import {
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {useEffect, useState} from "react";
+import {SynchroConfig} from "../config/SynchroConfig.ts";
 
 export default function BarChartDemo() {
     const [advertised, setAdvertised] = useState([0]);
     const [calculated, setCalculated] = useState([0]);
     const [usernames, setUsernames] = useState([""]);
 
+    function handleData(data: { values: []; }) {
+        let values = data["values"];
+        setUsernames(values.map((value) => value["username"]))
+        setAdvertised(values.map((value) => value["advertisedValue"]))
+        setCalculated(values.map((value) => value["calculatedValue"]))
+    }
 
     async function fetchData() {
-        return {
-            advertised: [12, 19, 3, 5, 2, 3, 10],
-            calculated: [2, 5, 2, 3, 1, 2, 7],
-            usernames: ["John Doe", "Jane Doe", "Alice Doe", "Bob Doe", "Charlie Doe", "David Doe", "Emily Doe"],
+        const date = new Date();
+        try {
+            const response = await fetch(SynchroConfig.apiUrl + "admin/query-summary?month=" + date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(), {
+                method: "GET"
+            });
+            return await response.json();
+        } catch (error) {
+            console.error("Error fetching users:", error);
+            return {advertised: [], calculated: [], usernames: []};
         }
     }
 
     ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, ChartDataLabels);
     useEffect(() => {
         fetchData().then((result) => {
-            setAdvertised(result["advertised"]);
-            setCalculated(result["calculated"]);
-            setUsernames(result["usernames"]);
+            handleData(result);
         })
     }, []);
     const data = {
