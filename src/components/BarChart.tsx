@@ -26,7 +26,7 @@ export default function BarChartDemo() {
     async function fetchData() {
         const date = new Date();
         try {
-            const response = await fetch(SynchroConfig.apiUrl + "admin/query-summary?month=" + date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(), {
+            const response = await fetch(SynchroConfig.apiUrl + "admin/query-summary?month=" + date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(), {
                 method: "GET"
             });
             return await response.json();
