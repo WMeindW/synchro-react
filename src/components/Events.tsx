@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import moment from "moment/moment";
 import EditForm from "./EditForm.tsx";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
+import {Client} from "../service/Client.ts";
 
 interface Event {
     id: number
@@ -42,27 +43,11 @@ export default function Events() {
     }
 
     async function queryEvents(): Promise<Event[]> {
-        try {
-            const response = await fetch(SynchroConfig.apiUrl + "user/query-event", {
-                method: "GET"
-            });
-            return await response.json();
-        } catch (error) {
-            console.error("Error fetching events:", error);
-            return [];
-        }
+        return await Client.getJson(SynchroConfig.apiUrl + "user/query-event");
     }
 
     async function queryAttendance(): Promise<Event[]> {
-        try {
-            const response = await fetch(SynchroConfig.apiUrl + "admin/query-attendance", {
-                method: "GET"
-            });
-            return await response.json();
-        } catch (error) {
-            console.error("Error fetching events:", error);
-            return [];
-        }
+        return await Client.getJson(SynchroConfig.apiUrl + "admin/query-attendance");
     }
 
     function switchView() {

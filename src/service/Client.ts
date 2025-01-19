@@ -1,5 +1,5 @@
 export class Client {
-    public static async getJson(url: string) {
+    public static async getJson(url: string): Promise<any> {
         try {
             const response = await fetch(url, {
                 method: "GET"
@@ -11,7 +11,7 @@ export class Client {
         }
     }
 
-    public static async getText(url: string) {
+    public static async getText(url: string): Promise<string> {
         try {
             const response = await fetch(url, {
                 method: "GET"

@@ -11,6 +11,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {useEffect, useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts";
 import moment from 'moment';
+import {Client} from "../service/Client.ts";
 
 export default function BarChartDemo() {
     const [advertised, setAdvertised] = useState([0]);
@@ -26,16 +27,7 @@ export default function BarChartDemo() {
 
     async function fetchData() {
         const date = moment().format('YYYY-MM-DD'); // Customize format as needed
-        try {
-            const response = await fetch(SynchroConfig.apiUrl + "admin/query-summary?month=" + date.toString(), {
-                        method: "GET"
-                    }
-                )
-            return await response.json();
-        } catch (error) {
-            console.error("Error fetching users:", error);
-            return {advertised: [], calculated: [], usernames: []};
-        }
+            return await Client.getJson(SynchroConfig.apiUrl + "admin/query-summary?month=" + date.toString());
     }
 
     ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, ChartDataLabels);

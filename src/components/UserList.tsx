@@ -1,5 +1,6 @@
 import React, {ReactElement, useEffect, useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
+import {Client} from "../service/Client.ts";
 
 interface User {
     id: string
@@ -22,15 +23,8 @@ export default function UserList(props: Props) {
     const [users, setUsers] = useState({users: [<div key={0}></div>]});
 
     async function queryUsers(): Promise<UserList[]> {
-        try {
-            const response = await fetch(SynchroConfig.apiUrl + "admin/query-user", {
-                method: "GET"
-            });
-            return await response.json();
-        } catch (error) {
-            console.error("Error fetching users:", error);
-            return [];
-        }
+        return await Client.getJson(SynchroConfig.apiUrl + "admin/query-user");
+
     }
 
     function processUsers(users: User[]) {
