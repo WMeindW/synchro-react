@@ -8,6 +8,8 @@ import MotdFrame from "./components/MotdFrame.tsx";
 import {useEffect, useState} from "react";
 import {SynchroConfig} from "./config/SynchroConfig.ts";
 import BarChartDemo from "./components/BarChart.tsx";
+import {Client} from "./service/Client.ts";
+import Dialog from "./components/Dialog.tsx";
 
 interface Info {
     users: [];
@@ -26,7 +28,11 @@ export default function App() {
             return await response.json();
         } catch (error) {
             console.error("Error fetching users:", error);
-            return {userTypes: JSON.parse(localStorage.getItem("userTypes") as string), users: JSON.parse(localStorage.getItem("users") as string), shiftTypes: JSON.parse(localStorage.getItem("shiftTypes") as string)};
+            return {
+                userTypes: JSON.parse(localStorage.getItem("userTypes") as string),
+                users: JSON.parse(localStorage.getItem("users") as string),
+                shiftTypes: JSON.parse(localStorage.getItem("shiftTypes") as string)
+            };
         }
     }
 
@@ -38,6 +44,9 @@ export default function App() {
             window.localStorage.setItem("userTypes", JSON.stringify(response.userTypes))
         }).then(() => {
             setDashboard(<div>
+                <div>
+                    <Dialog ref={Client.dialog}></Dialog>
+                </div>
                 <div>
                     <AttendanceForm/>
                 </div>

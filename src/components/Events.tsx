@@ -113,8 +113,9 @@ export default function Events() {
     useEffect(() => {
         console.log("querying")
         queryEvents().then((events) => {
-            // @ts-ignore
-            processEvents(events["events"]);
+            if (events)
+                // @ts-ignore
+                processEvents(events["events"]);
         })
     }, []);
 

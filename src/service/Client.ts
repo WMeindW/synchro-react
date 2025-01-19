@@ -1,12 +1,23 @@
+import {createRef} from "react";
+import Dialog from "../components/Dialog.tsx";
+
 export class Client {
+    public static dialog = createRef<Dialog>();
+
+    private static openDialog() {
+        if (this.dialog.current)
+            this.dialog.current.open();
+    }
+
     public static async getJson(url: string): Promise<any> {
         try {
             const response = await fetch(url, {
                 method: "GET"
             });
-            if (response.status != 200)
-                return await response.json();
+            if (response.status != 200) this.openDialog();
+            return await response.json();
         } catch (error) {
+            this.openDialog();
             return null;
         }
     }
@@ -16,8 +27,10 @@ export class Client {
             const response = await fetch(url, {
                 method: "GET"
             });
+            if (response.status != 200) this.openDialog();
             return await response.text();
         } catch (error) {
+            this.openDialog();
             return "";
         }
     }
