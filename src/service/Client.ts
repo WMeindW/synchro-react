@@ -4,10 +4,9 @@ export class Client {
             const response = await fetch(url, {
                 method: "GET"
             });
-            if (response.status != 200) alert("Error fetching: " + url);
-            return await response.json();
+            if (response.status != 200)
+                return await response.json();
         } catch (error) {
-            alert("Error fetching: " + url);
             return null;
         }
     }
@@ -19,7 +18,6 @@ export class Client {
             });
             return await response.text();
         } catch (error) {
-            alert("Error fetching: " + url);
             return "";
         }
     }

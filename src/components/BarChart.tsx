@@ -27,13 +27,14 @@ export default function BarChartDemo() {
 
     async function fetchData() {
         const date = moment().format('YYYY-MM-DD'); // Customize format as needed
-            return await Client.getJson(SynchroConfig.apiUrl + "admin/query-summary?month=" + date.toString());
+        return await Client.getJson(SynchroConfig.apiUrl + "admin/query-summary?month=" + date.toString());
     }
 
     ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, ChartDataLabels);
     useEffect(() => {
         fetchData().then((result) => {
-            handleData(result);
+            if (result != null)
+                handleData(result);
         })
     }, []);
     const data = {

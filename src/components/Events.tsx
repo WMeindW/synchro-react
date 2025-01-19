@@ -54,14 +54,16 @@ export default function Events() {
         console.log("querying");
         if (attendance) {
             queryEvents().then((events) => {
-                // @ts-ignore
-                processEvents(events["events"]);
+                if (events != null)
+                    // @ts-ignore
+                    processEvents(events["events"]);
             })
             setButton("Show Attendance");
         } else {
             queryAttendance().then((events) => {
-                // @ts-ignore
-                processEvents(events["events"]);
+                if (events != null)
+                    // @ts-ignore
+                    processEvents(events["events"]);
             })
             setButton("Show Events");
         }

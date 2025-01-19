@@ -45,8 +45,9 @@ export default function UserList(props: Props) {
     useEffect(() => {
         console.log("querying users...");
         queryUsers().then((usersList) => {
-            // @ts-ignore
-            processUsers(usersList["userList"])
+            if (usersList != null)
+                // @ts-ignore
+                processUsers(usersList["userList"])
         })
     }, []);
     return <div><br/>{users.users}<br/></div>
