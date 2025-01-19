@@ -10,6 +10,7 @@ import {
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {useEffect, useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts";
+import moment from 'moment';
 
 export default function BarChartDemo() {
     const [advertised, setAdvertised] = useState([0]);
@@ -24,11 +25,12 @@ export default function BarChartDemo() {
     }
 
     async function fetchData() {
-        const date = new Date();
+        const date = moment().format('YYYY-MM-DD'); // Customize format as needed
         try {
-            const response = await fetch(SynchroConfig.apiUrl + "admin/query-summary?month=" + date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(), {
-                method: "GET"
-            });
+            const response = await fetch(SynchroConfig.apiUrl + "admin/query-summary?month=" + date.toString(), {
+                        method: "GET"
+                    }
+                )
             return await response.json();
         } catch (error) {
             console.error("Error fetching users:", error);
