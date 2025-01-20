@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
-import {SynchroService} from "../service/SynchroService.ts";
+import {Parser} from "../service/Parser.ts";
 import {Client} from "../service/Client.ts";
 
 export default function AttendanceForm() {
@@ -53,9 +53,10 @@ export default function AttendanceForm() {
             },
             body: formData.username
         })
-            .then((response) => response.json())
-            .then((data) => console.log("Success:", data))
-            .catch((error) => console.error("Error:", error));
+            .then((response) => {
+                if (response.status != 200) Client.openDialog("Error checking attendance!")
+            })
+            .catch(() => Client.openDialog("Error checking attendance!"));
         setCheckedIn({checkedIn: !checkedIn.checkedIn})
     };
 
@@ -67,7 +68,7 @@ export default function AttendanceForm() {
     return (
         <form onSubmit={handleSubmit}>
             <label>Attendance</label>
-            <select dangerouslySetInnerHTML={{__html: SynchroService.parseUsers()}} name="username"
+            <select dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} name="username"
                     value={formData.username} onChange={handleChange}>
             </select>
             <button type="submit">{handleChecks(checkedIn.checkedIn)}</button>

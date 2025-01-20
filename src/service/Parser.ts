@@ -1,4 +1,4 @@
-export class SynchroService {
+export class Parser {
     public static parseUsers() {
         let users: [] = JSON.parse(<string>window.localStorage.getItem('users'));
         let html = "";

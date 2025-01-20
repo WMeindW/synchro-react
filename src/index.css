@@ -1,3 +1,7 @@
+body{
+    margin: 0;
+    padding: 0;
+}
 .dialog-container {
     display: flex;
     justify-content: center;
@@ -16,4 +20,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
+    z-index: 1;
 }

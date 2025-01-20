@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts";
+import {Client} from "../service/Client.ts";
 
 interface Props {
     motd: string;
@@ -37,7 +38,7 @@ export default function CreateMotd(props: Props) {
             });
             return await response.text();
         } catch (error) {
-            console.error("Error fetching motd:", error);
+            Client.openDialog("Error testing motd!")
             return "";
         }
     }
@@ -51,7 +52,9 @@ export default function CreateMotd(props: Props) {
                 "Content-Type": "application/json"
             },
             body: jsonData
-        }).then(r => console.log(r.json()))
+        }).then((response) => {
+            if (response.status != 200) Client.openDialog("Error saving motd!")
+        }).catch(() => Client.openDialog("Error saving motd!"));
     };
 
     return <form onSubmit={handleSubmit}>

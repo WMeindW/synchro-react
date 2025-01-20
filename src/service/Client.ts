@@ -4,9 +4,9 @@ import Dialog from "../components/Dialog.tsx";
 export class Client {
     public static dialog = createRef<Dialog>();
 
-    private static openDialog() {
+    public static openDialog(message: string) {
         if (this.dialog.current)
-            this.dialog.current.open();
+            this.dialog.current.open(message);
     }
 
     public static async getJson(url: string): Promise<any> {
@@ -14,10 +14,10 @@ export class Client {
             const response = await fetch(url, {
                 method: "GET"
             });
-            if (response.status != 200) this.openDialog();
+            if (response.status != 200) this.openDialog("Error fetching data!");
             return await response.json();
         } catch (error) {
-            this.openDialog();
+            this.openDialog("Error fetching data!");
             return null;
         }
     }
@@ -27,10 +27,10 @@ export class Client {
             const response = await fetch(url, {
                 method: "GET"
             });
-            if (response.status != 200) this.openDialog();
+            if (response.status != 200) this.openDialog("Error fetching data!");
             return await response.text();
         } catch (error) {
-            this.openDialog();
+            this.openDialog("Error fetching data!");
             return "";
         }
     }

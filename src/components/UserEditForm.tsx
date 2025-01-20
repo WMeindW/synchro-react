@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
-import {SynchroService} from "../service/SynchroService.ts";
+import {Parser} from "../service/Parser.ts";
+import {Client} from "../service/Client.ts";
 
 interface User {
     id: string
@@ -54,12 +55,10 @@ export default function UserEditForm(props: Props) {
             },
             body: jsonData
         })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Error creating user.');
-            });
+            .then(response => {
+                if (response.status != 200) Client.openDialog("Error editing user!")
+            })
+            .catch(() => Client.openDialog("Error editing user!"));
     };
 
     const handleDelete = (e: React.FormEvent) => {
@@ -72,10 +71,11 @@ export default function UserEditForm(props: Props) {
             },
             body: jsonData
         })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch((error) => {
-                console.error('Error:', error);
+            .then(response => {
+                if (response.status != 200) Client.openDialog("Error deleting user!")
+            })
+            .catch(() => {
+                Client.openDialog("Error deleting user!")
             });
     }
 
@@ -99,7 +99,7 @@ export default function UserEditForm(props: Props) {
                onChange={handleChange}/><br/><br/>
 
         <label htmlFor="role">Role:</label>
-        <select value={formData.role} dangerouslySetInnerHTML={{__html: SynchroService.parseUserTypes()}} name="role"
+        <select value={formData.role} dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
                 id="role" onChange={handleChange}>
         </select>
         <button type="submit">Edit</button>

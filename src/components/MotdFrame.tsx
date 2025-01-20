@@ -7,9 +7,7 @@ export default function MotdFrame() {
     const [motd, setMotd] = useState({__html: ""});
 
     async function queryMotd(): Promise<string> {
-
-            return await Client.getText(SynchroConfig.apiUrl + "user/query-motd");
-
+        return await Client.getText(SynchroConfig.apiUrl + "user/query-motd");
     }
 
     useEffect(() => {

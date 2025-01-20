@@ -1,14 +1,15 @@
 import React, {useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
-import {SynchroService} from "../service/SynchroService.ts";
+import {Parser} from "../service/Parser.ts";
+import {Client} from "../service/Client.ts";
 
 export default function CreateUserForm() {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
         role: "",
-        email:"",
-        phone:""
+        email: "",
+        phone: ""
     });
 
     const [link, setLink] = useState("");
@@ -33,13 +34,16 @@ export default function CreateUserForm() {
             },
             body: jsonData
         })
-            .then(response => response.json())
+            .then(response => {
+                if (response.status != 200) Client.openDialog("Error creating user!")
+                return response.json();
+            })
             .then(data => {
                 setLink(data["token"])
             })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Error creating user.');
+            .catch(() => {
+                Client.openDialog("Error creating user!")
+
             });
     };
 
@@ -60,7 +64,7 @@ export default function CreateUserForm() {
             <input type="password" id="password" name="password" onChange={handleChange} required/><br/><br/>
 
             <label htmlFor="role">Role:</label>
-            <select dangerouslySetInnerHTML={{__html: SynchroService.parseUserTypes()}} name="role"
+            <select dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
                     id="role" onChange={handleChange}>
             </select>
 

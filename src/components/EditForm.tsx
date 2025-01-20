@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
-import {SynchroService} from "../service/SynchroService.ts";
+import {Parser} from "../service/Parser.ts";
+import {Client} from "../service/Client.ts";
 
 interface Props {
     submitForm: () => void
@@ -46,9 +47,10 @@ export default function EditForm(props: Props) {
             },
             body: jsonData
         })
-            .then((response) => response.json())
-            .then((data) => console.log("Success:", data))
-            .catch((error) => console.error("Error:", error));
+            .then((response) => {
+                if (response.status != 200) Client.openDialog("Error editing event!")
+            })
+            .catch(() => Client.openDialog("Error editing event!"));
         props.submitForm();
     };
 
@@ -65,9 +67,11 @@ export default function EditForm(props: Props) {
             },
             body: jsonData
         })
-            .then((response) => response.json())
-            .then((data) => console.log("Success:", data))
-            .catch((error) => console.error("Error:", error));
+            .then((response) => {
+                if (response.status != 200) Client.openDialog("Error deleting event!")
+            })
+            .catch(() => Client.openDialog("Error deleting event!")
+            );
         props.submitForm();
     };
 
@@ -75,10 +79,10 @@ export default function EditForm(props: Props) {
         <form onSubmit={handleSubmit}>
             <label>Edit Event</label>
             <input name="id" type="hidden" value={formData.id} onChange={handleChange}/>
-            <select dangerouslySetInnerHTML={{__html: SynchroService.parseShiftTypes()}} name="type"
+            <select dangerouslySetInnerHTML={{__html: Parser.parseShiftTypes()}} name="type"
                     value={formData.type} onChange={handleChange}>
             </select>
-            <select dangerouslySetInnerHTML={{__html: SynchroService.parseUsers()}} name="username"
+            <select dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} name="username"
                     value={formData.username} onChange={handleChange}>
             </select>
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>

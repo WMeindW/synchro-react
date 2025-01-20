@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
-import {SynchroService} from "../service/SynchroService.ts";
+import {Parser} from "../service/Parser.ts";
+import {Client} from "../service/Client.ts";
 
 export default function CreateForm() {
     // State to store form data
@@ -34,18 +35,19 @@ export default function CreateForm() {
             },
             body: jsonData
         })
-            .then((response) => response.json())
-            .then((data) => console.log("Success:", data))
-            .catch((error) => console.error("Error:", error));
+            .then((response) => {
+                if (response.status != 200) Client.openDialog("Error creating event!")
+            })
+            .catch(() => Client.openDialog("Error creating event!"));
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <label>Create Event</label>
-            <select dangerouslySetInnerHTML={{__html: SynchroService.parseShiftTypes()}} name="type"
+            <select dangerouslySetInnerHTML={{__html: Parser.parseShiftTypes()}} name="type"
                     value={formData.type} onChange={handleChange}>
             </select>
-            <select dangerouslySetInnerHTML={{__html: SynchroService.parseUsers()}} name="username"
+            <select dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} name="username"
                     value={formData.username} onChange={handleChange}>
             </select>
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>

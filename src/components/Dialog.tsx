@@ -1,19 +1,20 @@
 import {Component} from "react";
 
-export default class Dialog extends Component<any, { opened: boolean }> {
+export default class Dialog extends Component<any, { opened: boolean, message: string }> {
     constructor(props: any) {
         super(props);
         this.state = {
-            opened: false, // Manage `opened` in state
+            opened: false,
+            message: ""
         };
     }
 
-    public open(): void {
-        this.setState({ opened: true }); // Update state to trigger re-render
+    public open(message: string): void {
+        this.setState({opened: true, message: message}); // Update state to trigger re-render
     }
 
     public close(): void {
-        this.setState({ opened: false }); // Update state to trigger re-render
+        this.setState({opened: false, message: ""}); // Update state to trigger re-render
     }
 
     render() {
@@ -21,7 +22,7 @@ export default class Dialog extends Component<any, { opened: boolean }> {
             return (
                 <div className="dialog-container">
                     <div className="dialog">
-                        This is a dialog!
+                        {this.state.message}
                         <button onClick={() => this.close()}>Close</button>
                     </div>
                 </div>
