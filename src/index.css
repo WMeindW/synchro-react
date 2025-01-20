@@ -5,6 +5,8 @@ body {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
+    background-color: #1F7A8C;
+    color: #BFDBF7;
 }
 
 #root {
@@ -13,6 +15,29 @@ body {
     height: 100vh;
 }
 
+
+.loading {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #BFDBF7, #1F7A8C, #043C5E);
+    background-size: 400% 400%;
+    animation: gradientShift 2s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
 .dialog-container {
     display: flex;
     justify-content: center;
@@ -33,4 +58,66 @@ body {
     align-items: center;
     background-color: white;
     z-index: 1;
+}
+
+.button {
+    display: inline-block;
+    border: 1px solid #4f4f4f;
+    border-radius: 4px;
+    transition: all 0.2s ease-in;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    background-color: #043C5E;
+    color: #BFDBF7;
+}
+
+.button:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.25);
+    top: 100%;
+    width: 140%;
+    height: 180%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+
+.button:after {
+    content: "";
+    position: absolute;
+    left: 55%;
+    transform: translateX(-50%) scaleY(1) scaleX(1.45);
+    top: 180%;
+    width: 160%;
+    height: 190%;
+    background-color: #DFD5A5;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+    z-index: -1;
+}
+
+.button:hover {
+    border: 1px solid #DFD5A5;
+    color: #043C5E;
+}
+
+.button:hover:before {
+    top: -35%;
+    color: #043C5E;
+    background-color: #DFD5A5;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.button:hover:after {
+    top: -45%;
+    color: #043C5E;
+    background-color: #DFD5A5;
+    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }

@@ -18,7 +18,7 @@ interface Info {
 }
 
 export default function App() {
-    const [dashboard, setDashboard] = useState(<div></div>);
+    const [dashboard, setDashboard] = useState(<div className={"loading"}>Loading...</div>);
 
     async function queryOptions(): Promise<Info> {
         try {
@@ -35,7 +35,35 @@ export default function App() {
             };
         }
     }
-
+    let stuff = <>
+        <div>
+            <Dialog ref={Client.dialog}></Dialog>
+        </div>
+        <div>
+            <AttendanceForm/>
+        </div>
+        <div>
+            <CreateForm/>
+        </div>
+        <div>
+            <Events/>
+        </div>
+        <div>
+            <CreateUserForm/>
+        </div>
+        <div>
+            <UserManagement/>
+        </div>
+        <div>
+            <MotdFrame/>
+        </div>
+        <div>
+            <Logout/>
+        </div>
+        <div>
+            <BarChartDemo/>
+        </div>
+    </>
     useEffect(() => {
         console.log("Fetching info...")
         queryOptions().then((response) => {
@@ -45,31 +73,7 @@ export default function App() {
         }).then(() => {
             setDashboard(<div>
                 <div>
-                    <Dialog ref={Client.dialog}></Dialog>
-                </div>
-                <div>
                     <AttendanceForm/>
-                </div>
-                <div>
-                    <CreateForm/>
-                </div>
-                <div>
-                    <Events/>
-                </div>
-                <div>
-                    <CreateUserForm/>
-                </div>
-                <div>
-                    <UserManagement/>
-                </div>
-                <div>
-                    <MotdFrame/>
-                </div>
-                <div>
-                    <Logout/>
-                </div>
-                <div>
-                    <BarChartDemo/>
                 </div>
             </div>)
         })

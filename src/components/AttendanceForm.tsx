@@ -71,7 +71,7 @@ export default function AttendanceForm() {
             <select dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} name="username"
                     value={formData.username} onChange={handleChange}>
             </select>
-            <button type="submit">{handleChecks(checkedIn.checkedIn)}</button>
+            <button className={"button"} type="submit">{handleChecks(checkedIn.checkedIn)}</button>
         </form>
     );
 }
