@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
 import {Parser} from "../service/Parser.ts";
 import {Client} from "../service/Client.ts";
-import moment from "moment/moment";
 
 export default function AttendanceForm() {
     // State to store form data
