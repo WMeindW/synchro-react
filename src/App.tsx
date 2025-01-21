@@ -39,30 +39,6 @@ export default function App() {
         <div>
             <Dialog ref={Client.dialog}></Dialog>
         </div>
-        <div>
-            <AttendanceForm/>
-        </div>
-        <div>
-            <CreateForm/>
-        </div>
-        <div>
-            <Events/>
-        </div>
-        <div>
-            <CreateUserForm/>
-        </div>
-        <div>
-            <UserManagement/>
-        </div>
-        <div>
-            <MotdFrame/>
-        </div>
-        <div>
-            <Logout/>
-        </div>
-        <div>
-            <BarChartDemo/>
-        </div>
     </>
     useEffect(() => {
         console.log("Fetching info...")
@@ -74,6 +50,27 @@ export default function App() {
             setDashboard(<div>
                 <div>
                     <AttendanceForm/>
+                </div>
+                <div>
+                    <CreateForm/>
+                </div>
+                <div>
+                    <Events/>
+                </div>
+                <div>
+                    <CreateUserForm/>
+                </div>
+                <div>
+                    <UserManagement/>
+                </div>
+                <div>
+                    <MotdFrame/>
+                </div>
+                <div>
+                    <Logout/>
+                </div>
+                <div>
+                    <BarChartDemo/>
                 </div>
             </div>)
         })
