@@ -70,7 +70,7 @@ body {
 }
 
 button {
-    border: 1px solid #4f4f4f;
+    border: 1px solid #3da4bb;
     border-radius: 4px;
     transition: all 0.2s ease-in;
     position: relative;
@@ -146,7 +146,7 @@ select {
     color: #BFDBF7;
     width: 8em;
     height: 26px;
-    border: 1px solid #4f4f4f;
+    border: 1px solid #3da4bb;
     border-radius: 4px;
 }
 
@@ -161,5 +161,73 @@ select:hover {
     color: #043C5E;
 }
 
+
+select::-webkit-scrollbar {
+    width: 10px;
+    height: 2px;
+}
+
+select::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+}
+
+select::-webkit-scrollbar-thumb {
+    background: #043c5e;
+    border: 0 none #ffffff;
+    border-radius: 50px;
+}
+
+select::-webkit-scrollbar-track {
+    background: #3da4bb;
+    border: 0 none #ffffff;
+    border-radius: 50px;
+}
+
+select::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 2px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #043c5e;
+    border: 0 none #ffffff;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bfd3f7;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #bfd3f7;
+}
+
+::-webkit-scrollbar-track {
+    background: #3da4bb;
+    border: 0 none #ffffff;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-track:hover {
+    background: #043c5e;
+}
+
+::-webkit-scrollbar-track:active {
+    background: #043c5e;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
 
 
