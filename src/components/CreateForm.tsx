@@ -3,6 +3,7 @@ import {SynchroConfig} from "../config/SynchroConfig.ts"
 import {Parser} from "../service/Parser.ts";
 import {Client} from "../service/Client.ts";
 
+
 export default function CreateForm() {
     // State to store form data
     const [formData, setFormData] = useState({
@@ -42,8 +43,7 @@ export default function CreateForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Create Event</label>
+        <form className={"container"} onSubmit={handleSubmit}>
             <select dangerouslySetInnerHTML={{__html: Parser.parseShiftTypes()}} name="type"
                     value={formData.type} onChange={handleChange}>
             </select>
@@ -52,6 +52,7 @@ export default function CreateForm() {
             </select>
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
             <input name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>
+
             <button type="submit">Submit</button>
         </form>
     );

@@ -35,9 +35,31 @@ export default function App() {
             };
         }
     }
+
     let stuff = <>
         <div>
             <Dialog ref={Client.dialog}></Dialog>
+            <div>
+                <AttendanceForm/>
+            </div>
+            <div>
+                <Events/>
+            </div>
+            <div>
+                <CreateUserForm/>
+            </div>
+            <div>
+                <UserManagement/>
+            </div>
+            <div>
+                <MotdFrame/>
+            </div>
+            <div>
+                <Logout/>
+            </div>
+            <div>
+                <BarChartDemo/>
+            </div>
         </div>
     </>
     useEffect(() => {
@@ -49,28 +71,7 @@ export default function App() {
         }).then(() => {
             setDashboard(<div>
                 <div>
-                    <AttendanceForm/>
-                </div>
-                <div>
                     <CreateForm/>
-                </div>
-                <div>
-                    <Events/>
-                </div>
-                <div>
-                    <CreateUserForm/>
-                </div>
-                <div>
-                    <UserManagement/>
-                </div>
-                <div>
-                    <MotdFrame/>
-                </div>
-                <div>
-                    <Logout/>
-                </div>
-                <div>
-                    <BarChartDemo/>
                 </div>
             </div>)
         })
