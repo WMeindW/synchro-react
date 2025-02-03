@@ -40,9 +40,6 @@ export default function App() {
         <div>
             <Dialog ref={Client.dialog}></Dialog>
             <div>
-                <AttendanceForm/>
-            </div>
-            <div>
                 <Events/>
             </div>
             <div>
@@ -70,6 +67,9 @@ export default function App() {
             window.localStorage.setItem("userTypes", JSON.stringify(response.userTypes))
         }).then(() => {
             setDashboard(<div>
+                <div>
+                    <AttendanceForm/>
+                </div>
                 <div>
                     <CreateForm/>
                 </div>

@@ -63,7 +63,7 @@ body {
 
 .container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 2em;
     margin-left: 4em;
