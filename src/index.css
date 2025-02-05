@@ -132,6 +132,7 @@ button:after {
 button:hover {
     border: 1px solid #DFD5A5;
     color: #043C5E;
+    box-shadow: 0 0 5px #BFDBF7;
 }
 
 button:hover:before {
@@ -167,7 +168,8 @@ select {
 
 select:hover {
     border: 1px solid #DFD5A5;
-    color: #DFD5A5;;
+    color: #DFD5A5;
+    box-shadow: 0 0 5px #BFDBF7;
 }
 
 .clock {
@@ -221,6 +223,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 input[type="datetime-local"]:hover {
     border: 1px solid #DFD5A5;
     color: #DFD5A5;;
+    box-shadow: 0 0 5px #BFDBF7;
 }
 
 ::-webkit-scrollbar {
