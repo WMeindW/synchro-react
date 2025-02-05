@@ -38,22 +38,19 @@ export default function App() {
 
     let stuff = <>
         <div>
-            <div>
-                <Events/>
-            </div>
-            <div>
+            <div className="container">
                 <CreateUserForm/>
             </div>
-            <div>
+            <div className="container">
                 <UserManagement/>
             </div>
-            <div>
+            <div className="container">
                 <MotdFrame/>
             </div>
-            <div>
+            <div className="container">
                 <Logout/>
             </div>
-            <div>
+            <div className="container">
                 <BarChartDemo/>
             </div>
         </div>
@@ -72,6 +69,9 @@ export default function App() {
                 </div>
                 <div className="container">
                     <CreateForm/>
+                </div>
+                <div className="container">
+                    <Events/>
                 </div>
             </div>)
         })
