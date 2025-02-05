@@ -43,7 +43,7 @@ export default function CreateForm() {
     };
 
     return (
-        <form className={"container"} onSubmit={handleSubmit}>
+        <form className={"container-form"} onSubmit={handleSubmit}>
             <select dangerouslySetInnerHTML={{__html: Parser.parseShiftTypes()}} name="type"
                     value={formData.type} onChange={handleChange}>
             </select>

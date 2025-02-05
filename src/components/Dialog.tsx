@@ -22,7 +22,8 @@ export default class Dialog extends Component<any, { opened: boolean, message: s
             return (
                 <div className="dialog-container">
                     <div className="dialog">
-                        {this.state.message}
+                        <div className="dialog-message">{this.state.message}</div>
+
                         <button onClick={() => this.close()}>Close</button>
                     </div>
                 </div>

@@ -38,7 +38,6 @@ export default function App() {
 
     let stuff = <>
         <div>
-            <Dialog ref={Client.dialog}></Dialog>
             <div>
                 <Events/>
             </div>
@@ -67,10 +66,11 @@ export default function App() {
             window.localStorage.setItem("userTypes", JSON.stringify(response.userTypes))
         }).then(() => {
             setDashboard(<div>
-                <div>
+                <Dialog ref={Client.dialog}></Dialog>
+                <div className="container">
                     <AttendanceForm/>
                 </div>
-                <div>
+                <div className="container">
                     <CreateForm/>
                 </div>
             </div>)
