@@ -16,7 +16,7 @@ body {
 }
 
 header {
-    width: 100%;
+    width: 100vw;
     background-color: #043c5e;
     color: #BFDBF7;
     display: flex;
