@@ -39,6 +39,9 @@ export default function App() {
     let stuff = <>
         <div>
             <div className="container">
+                <Events/>
+            </div>
+            <div className="container">
                 <CreateUserForm/>
             </div>
             <div className="container">
@@ -71,7 +74,7 @@ export default function App() {
                     <CreateForm/>
                 </div>
                 <div className="container">
-                    <Events/>
+                    <CreateUserForm/>
                 </div>
             </div>)
         })

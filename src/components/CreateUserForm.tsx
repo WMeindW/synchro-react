@@ -48,25 +48,17 @@ export default function CreateUserForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Create User</label><br/><br/>
-
-            <label htmlFor="username">Username:</label>
+        <form className={"container-form"} onSubmit={handleSubmit}>
             <input type="text" id="username" onChange={handleChange} name="username" required/><br/><br/>
 
-            <label htmlFor="phone">Phone:</label>
             <input type="tel" id="phone" name="phone" onChange={handleChange} required/><br/><br/>
 
-            <label htmlFor="email">Email:</label>
             <input type="email" id="email" name="email" onChange={handleChange} required/><br/><br/>
 
-            <label htmlFor="password">Password:</label>
             <input type="password" id="password" name="password" onChange={handleChange} required/><br/><br/>
 
-            <label htmlFor="role">Role:</label>
             <select dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
-                    id="role" onChange={handleChange}>
-            </select>
+                    id="role" onChange={handleChange}/>
 
             <label>
                 <textarea id="link" value={link} readOnly={true}></textarea>
