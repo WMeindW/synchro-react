@@ -226,6 +226,82 @@ input[type="datetime-local"]:hover {
     box-shadow: 0 0 5px #BFDBF7;
 }
 
+input[type="text"] {
+    text-align: center;
+    cursor: pointer;
+    background-color: #043C5E;
+    color: #BFDBF7;
+    width: 12em;
+    height: 26px;
+    border: 1px solid #3da4bb;
+    border-radius: 4px;
+}
+
+input[type="text"]:hover {
+    border: 1px solid #DFD5A5;
+    color: #DFD5A5;;
+    box-shadow: 0 0 5px #BFDBF7;
+}
+
+input::placeholder {
+    color: #BFDBF7;;
+}
+
+input:hover::placeholder {
+    color: #DFD5A5;
+}
+
+input[type="email"] {
+    text-align: center;
+    cursor: pointer;
+    background-color: #043C5E;
+    color: #BFDBF7;
+    width: 12em;
+    height: 26px;
+    border: 1px solid #3da4bb;
+    border-radius: 4px;
+}
+
+input[type="email"]:hover {
+    border: 1px solid #DFD5A5;
+    color: #DFD5A5;;
+    box-shadow: 0 0 5px #BFDBF7;
+}
+
+input[type="tel"] {
+    text-align: center;
+    cursor: pointer;
+    background-color: #043C5E;
+    color: #BFDBF7;
+    width: 12em;
+    height: 26px;
+    border: 1px solid #3da4bb;
+    border-radius: 4px;
+}
+
+input[type="tel"]:hover {
+    border: 1px solid #DFD5A5;
+    color: #DFD5A5;;
+    box-shadow: 0 0 5px #BFDBF7;
+}
+
+input[type="password"] {
+    text-align: center;
+    cursor: pointer;
+    background-color: #043C5E;
+    color: #BFDBF7;
+    width: 12em;
+    height: 26px;
+    border: 1px solid #3da4bb;
+    border-radius: 4px;
+}
+
+input[type="password"]:hover {
+    border: 1px solid #DFD5A5;
+    color: #DFD5A5;;
+    box-shadow: 0 0 5px #BFDBF7;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
     height: 2px;
