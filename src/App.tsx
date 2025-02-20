@@ -10,6 +10,7 @@ import {SynchroConfig} from "./config/SynchroConfig.ts";
 import BarChartDemo from "./components/BarChart.tsx";
 import {Client} from "./service/Client.ts";
 import Dialog from "./components/Dialog.tsx";
+import Router from "./Router.tsx";
 
 interface Info {
     users: [];
@@ -39,10 +40,16 @@ export default function App() {
     let stuff = <>
         <div>
             <div className="container">
-                <Events/>
+                <AttendanceForm/>
+            </div>
+            <div className="container">
+                <CreateForm/>
             </div>
             <div className="container">
                 <CreateUserForm/>
+            </div>
+            <div className="container">
+                <Events/>
             </div>
             <div className="container">
                 <UserManagement/>
@@ -67,15 +74,7 @@ export default function App() {
         }).then(() => {
             setDashboard(<div>
                 <Dialog ref={Client.dialog}></Dialog>
-                <div className="container">
-                    <AttendanceForm/>
-                </div>
-                <div className="container">
-                    <CreateForm/>
-                </div>
-                <div className="container">
-                    <CreateUserForm/>
-                </div>
+                <Router/>
             </div>)
         })
     }, []);
