@@ -7,19 +7,31 @@ import Summary from "./routes/Summary.tsx";
 
 export default function Router() {
     const [page, setPage] = useState(<Home key={"Home"}/>);
-    useEffect(() => {
+    const [url, setUrl] = useState(parseUrl(window.location.href))
 
-    }, []);
+    function parseUrl(url: string) {
+        if (url.includes("#")) {
+            const urlParts = url.split("#");
+            return urlParts[1];
+        }
+        return "home";
+
+    }
+
+    useEffect(() => {
+        window.location.href = window.location.href.split("#")[0] + url;
+    }, [url]);
 
     const redirect = (name: string) => {
-        if (name === "Home")
+        if (name.toLowerCase() === "home")
             setPage(<Home key={"Home"}/>);
-        else if (name === "Users")
+        else if (name.toLowerCase() === "users")
             setPage(<Users key={"Users"}/>);
-        else if (name === "Events")
+        else if (name.toLowerCase() === "events")
             setPage(<Events key={"Events"}/>);
-        else if (name === "Summary")
+        else if (name.toLowerCase() === "summary")
             setPage(<Summary key={"Summary"}/>);
+        setUrl(name.toLowerCase)
     }
     return (<>
         <Menu pageState={page.key as string} onClick={redirect}/>
