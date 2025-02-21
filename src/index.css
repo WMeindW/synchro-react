@@ -25,7 +25,7 @@ header {
     align-items: center;
 }
 
-.header-container {
+.header-field {
     margin-left: 1em;
     color: #3da4bb;
     display: flex;
@@ -35,7 +35,7 @@ header {
     cursor: pointer;
 }
 
-.header-container:hover {
+.header-field:hover {
     color: #BFDBF7;
 }
 
@@ -113,7 +113,7 @@ header {
 }
 
 button {
-    border: 1px solid #3da4bb;
+    border: 1px solid #DFD5A5;
     border-radius: 4px;
     transition: all 0.2s ease-in;
     position: relative;

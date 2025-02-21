@@ -14,10 +14,10 @@ export default function Menu(props: Props) {
         for (let page of pages) {
             if (page == props.pageState)
                 children.push(<div key={i} onClick={() => props.onClick(page)}
-                                   className={"header-container active"}>{page}</div>)
+                                   className={"header-field active"}>{page}</div>)
             else
                 children.push(<div key={i} onClick={() => props.onClick(page)}
-                                   className={"header-container"}>{page}</div>)
+                                   className={"header-field"}>{page}</div>)
             i++;
         }
         setPageState(<header key={0}>{children}</header>)
