@@ -18,7 +18,6 @@ export default function Router() {
 
     }
 
-
     useEffect(() => {
         console.log(window.location.href);
         if (window.location.href.split("#").length > 0)
