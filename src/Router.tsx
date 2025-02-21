@@ -18,9 +18,18 @@ export default function Router() {
 
     }
 
+
     useEffect(() => {
-        window.location.href = window.location.href.split("#")[0] + url;
+        console.log(window.location.href);
+        if (window.location.href.split("#").length > 0)
+            window.location.href = window.location.href.split("#")[0] + "#" + url;
+        else
+            window.location.href = window.location.href + "#" + url;
     }, [url]);
+
+    useEffect(() => {
+        redirect(url);
+    }, []);
 
     const redirect = (name: string) => {
         if (name.toLowerCase() === "home")
@@ -31,7 +40,7 @@ export default function Router() {
             setPage(<Events key={"Events"}/>);
         else if (name.toLowerCase() === "summary")
             setPage(<Summary key={"Summary"}/>);
-        setUrl(name.toLowerCase)
+        setUrl(name.toLowerCase())
     }
     return (<>
         <Menu pageState={page.key as string} onClick={redirect}/>

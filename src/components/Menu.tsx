@@ -21,7 +21,6 @@ export default function Menu(props: Props) {
             i++;
         }
         setPageState(<header key={0}>{children}</header>)
-        console.log(pageState)
     }, [props.pageState]);
     return (<>{pageState}</>);
 }
