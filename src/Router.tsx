@@ -7,39 +7,26 @@ import Summary from "./routes/Summary.tsx";
 
 export default function Router() {
     const [page, setPage] = useState(<Home key={"Home"}/>);
-    const [url, setUrl] = useState(parseUrl(window.location.href))
-
-    function parseUrl(url: string) {
-        if (url.includes("#")) {
-            const urlParts = url.split("#");
-            return urlParts[1];
-        }
-        return "home";
-
-    }
 
     useEffect(() => {
-        console.log(window.location.href);
-        if (window.location.href.split("#").length > 0)
-            window.location.href = window.location.href.split("#")[0] + "#" + url;
-        else
-            window.location.href = window.location.href + "#" + url;
-    }, [url]);
-
-    useEffect(() => {
-        redirect(url);
+        redirect(window.location.hash.substring(1));
+        window.addEventListener("hashchange", () => redirect(window.location.hash.substring(1)));
     }, []);
 
     const redirect = (name: string) => {
-        if (name.toLowerCase() === "home")
+        if (name === "Home")
             setPage(<Home key={"Home"}/>);
-        else if (name.toLowerCase() === "users")
+        else if (name === "Users")
             setPage(<Users key={"Users"}/>);
-        else if (name.toLowerCase() === "events")
+        else if (name === "Events")
             setPage(<Events key={"Events"}/>);
-        else if (name.toLowerCase() === "summary")
+        else if (name === "Summary")
             setPage(<Summary key={"Summary"}/>);
-        setUrl(name.toLowerCase())
+        else {
+            setPage(<Home key={"Home"}/>);
+            name = "Home";
+        }
+        window.location.hash = name;
     }
     return (<>
         <Menu pageState={page.key as string} onClick={redirect}/>
