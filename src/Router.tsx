@@ -23,8 +23,8 @@ export default function Router() {
         else if (name === "Summary")
             setPage(<Summary key={"Summary"}/>);
         else {
-            setPage(<Home key={"Home"}/>);
-            name = "Home";
+            // @ts-ignore
+            name = page.key.toString();
         }
         window.location.hash = name;
     }
