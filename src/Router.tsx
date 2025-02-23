@@ -14,6 +14,7 @@ export default function Router() {
     }, []);
 
     const redirect = (name: string) => {
+        name = name.trim();
         if (name === "Home")
             setPage(<Home key={"Home"}/>);
         else if (name === "Users")
