@@ -5,23 +5,15 @@ import {Client} from "../service/Client.ts";
 
 export default function AttendanceForm() {
     // State to store form data
-    const getUsernameFromCookie = () => {
-        let usernameCookie = "";
-        for (const c of document.cookie.split(";")) {
-            if (c.split("=")[0] == "username") {
-                usernameCookie = c.split("=")[1];
-            }
-        }
-        return usernameCookie;
-    }
+
     const [formData, setFormData] = useState({
-        username: getUsernameFromCookie()
+        username: Parser.getUsernameFromCookie()
     });
 
     const [checkedIn, setCheckedIn] = useState({
         checkedIn: false
     });
-    // Handle input changes and update state
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target;
         setFormData({
@@ -35,6 +27,7 @@ export default function AttendanceForm() {
     }
 
     useEffect(() => {
+        console.log("username: " + Parser.getUsernameFromCookie())
         queryAttendance().then((response) => {
             if (response == "false")
                 setCheckedIn({checkedIn: false})
@@ -42,7 +35,7 @@ export default function AttendanceForm() {
                 setCheckedIn({checkedIn: true})
         })
     }, []);
-    // Handle form submission
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("username: " + formData.username)
@@ -67,7 +60,8 @@ export default function AttendanceForm() {
     }
     return (
         <form className={"container-form"} onSubmit={handleSubmit}>
-            <svg className={"attendance-clock"} width="2em" height="2em" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className={"attendance-clock"} width="2em" height="2em" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
                     fill="#3E5879"/>

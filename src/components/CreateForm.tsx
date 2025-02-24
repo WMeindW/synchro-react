@@ -53,7 +53,7 @@ export default function CreateForm() {
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
             <input name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>
             <div className={"break"}></div>
-            <button type="submit">Submit</button>
+            <button type="submit">Create Event</button>
         </form>
     );
 }

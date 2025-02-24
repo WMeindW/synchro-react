@@ -26,14 +26,13 @@ export default function App() {
             const response = await fetch(SynchroConfig.apiUrl + "user/query-info", {
                 method: "GET"
             });
-            return await response.json();
+            const res = await response;
+            if (res.status != 200)
+                return {users: [], shiftTypes: [], userTypes: []}
+            return res.json();
         } catch (error) {
             console.error("Error fetching users:", error);
-            return {
-                userTypes: JSON.parse(localStorage.getItem("userTypes") as string),
-                users: JSON.parse(localStorage.getItem("users") as string),
-                shiftTypes: JSON.parse(localStorage.getItem("shiftTypes") as string)
-            };
+            return {users: [], shiftTypes: [], userTypes: []}
         }
     }
 

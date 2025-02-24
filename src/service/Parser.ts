@@ -3,8 +3,13 @@ export class Parser {
         let users: [] = JSON.parse(<string>window.localStorage.getItem('users'));
         let html = "";
         if (users)
-            for (const u of users) {
-                html += `<option value="${u}">${u}</option>`;
+            if (users.length > 0)
+                for (const u of users) {
+                    html += `<option value="${u}">${u}</option>`;
+                }
+            else {
+                html += `<option value="${this.getUsernameFromCookie()}">${this.getUsernameFromCookie()}</option>`;
+                console.log("html: " + html)
             }
         return html;
     }
@@ -27,5 +32,15 @@ export class Parser {
                 html += `<option value="${u}">${u}</option>`;
             }
         return html;
+    }
+
+    public static getUsernameFromCookie() {
+        let usernameCookie = "";
+        for (const c of document.cookie.split(";")) {
+            if (c.split("=")[0] == "username") {
+                usernameCookie = c.split("=")[1];
+            }
+        }
+        return usernameCookie;
     }
 }

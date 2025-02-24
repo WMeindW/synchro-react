@@ -151,8 +151,6 @@ input:focus {
 .attendance-clock {
     box-shadow: 0 0 5px #3E5879;
     border-radius: 50%;
-    margin: 0;
-    padding: 0;
 }
 
 button {
