@@ -12,7 +12,7 @@ export default function CreateUserForm() {
         phone: ""
     });
 
-    const [link, setLink] = useState("");
+    const [link, setLink] = useState("Generated sign-up link...");
 
     // Handle input changes and update state
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -53,18 +53,17 @@ export default function CreateUserForm() {
 
             <input placeholder={"Phone"} type="tel" id="phone" name="phone" onChange={handleChange} required/><br/><br/>
 
-            <input placeholder={"Email"} type="email" id="email" name="email" onChange={handleChange} required/><br/><br/>
+            <input placeholder={"Email"} type="email" id="email" name="email" onChange={handleChange}
+                   required/><br/><br/>
 
-            <input placeholder={"Password"} type="password" id="password" name="password" onChange={handleChange} required/><br/><br/>
+            <input placeholder={"Password"} type="password" id="password" name="password" onChange={handleChange}
+                   required/><br/><br/>
 
             <select dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
                     id="role" onChange={handleChange}/>
 
-            <label>
-                <textarea placeholder={"Generated link"} id="link" value={link} readOnly={true}></textarea>
-            </label>
-
             <button type="submit">Create User</button>
+            <a href={link} id="link">{link}</a>
         </form>
     );
 }

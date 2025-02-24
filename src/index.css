@@ -261,7 +261,7 @@ input[type="datetime-local"] {
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-    border-color: #BFDBF7;
+    cursor: pointer;
 }
 
 input[type="datetime-local"]:hover {
@@ -330,6 +330,20 @@ input[type="password"] {
 
 input[type="password"]:hover {
     color: #F5EFE7;;
+}
+
+a {
+    text-align: center;
+    background-color: #3E5879;
+    color: #D8C4B6;
+    width: 12em;
+    height: 26px;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: small;
 }
 
 ::-webkit-scrollbar {
