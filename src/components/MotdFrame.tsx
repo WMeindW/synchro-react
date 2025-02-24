@@ -4,7 +4,9 @@ import CreateMotd from "./CreateMotd.tsx";
 import {Client} from "../service/Client.ts";
 
 export default function MotdFrame() {
-    const [motd, setMotd] = useState({__html: ""});
+    const [motd, setMotd] = useState({
+        __html: ""
+    });
 
     async function queryMotd(): Promise<string> {
         return await Client.getText(SynchroConfig.apiUrl + "user/query-motd");
@@ -16,8 +18,9 @@ export default function MotdFrame() {
             setMotd({...motd, __html: result})
         })
     }, []);
-    return <div>Motd:
-        <div style={{border: "1px solid black", padding: "20px", margin: "10px"}} dangerouslySetInnerHTML={motd}></div>
+    return <div>
+        <div className={"motd-container"} dangerouslySetInnerHTML={motd}></div>
+        <hr/>
         <CreateMotd motd={motd.__html}/>
     </div>
 }

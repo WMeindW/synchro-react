@@ -153,6 +153,19 @@ input:focus {
     border-radius: 50%;
 }
 
+.motd-container {
+    width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 5px #3E5879;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 0.5em;
+}
+
 button {
     box-shadow: 0 0 5px #3E5879;
     border: none;

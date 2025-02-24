@@ -7,14 +7,39 @@ interface Props {
 }
 
 export default function CreateMotd(props: Props) {
-    const [renderedMotd, setRenderedMotd] = useState({__html: ""});
+    const [renderedMotd, setRenderedMotd] = useState({__html: "<div>\n" +
+            "    <div>\n" +
+            "        <h1>Welcome to Our Server!</h1>\n" +
+            "    </div>\n" +
+            "\n" +
+            "    <div>\n" +
+            "        <h2>Today's Announcement</h2>\n" +
+            "        <p>We have some exciting updates coming soon. Stay tuned!</p>\n" +
+            "    </div>\n" +
+            "\n" +
+            "    <div>\n" +
+            "        <h3>Important Notice</h3>\n" +
+            "        <p>Maintenance is scheduled for this weekend. Expect some downtime.</p>\n" +
+            "    </div>\n" +
+            "\n" +
+            "    <div>\n" +
+            "        <h2>Image of the Day</h2>\n" +
+            "        <img src=\"\" alt=\"MOTD Image\">\n" +
+            "    </div>\n" +
+            "\n" +
+            "    <div>\n" +
+            "        <h2>Stay Connected</h2>\n" +
+            "        <p>Join our community and stay updated with the latest news.</p>\n" +
+            "        <img src=\"\" alt=\"Community Logo\">\n" +
+            "    </div>\n" +
+            "</div>"});
     const [formData, setFormData] = useState({
         motd: props.motd
     });
 
     useEffect(() => {
         setFormData({...formData, motd: props.motd})
-        queryMotd({motd: props.motd}).then((response) => setRenderedMotd({...formData, __html: response}))
+        //queryMotd({motd: props.motd}).then((response) => setRenderedMotd({...formData, __html: response}))
     }, [props.motd]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

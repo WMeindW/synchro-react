@@ -1,6 +1,5 @@
 import AttendanceForm from "../components/AttendanceForm.tsx";
-import CreateForm from "../components/CreateForm.tsx";
-import CreateUserForm from "../components/CreateUserForm.tsx";
+import MotdFrame from "../components/MotdFrame.tsx";
 
 export default function Home() {
     return (<div>
@@ -9,11 +8,8 @@ export default function Home() {
         </div>
         <hr/>
         <div className="container">
-            <CreateForm/>
+            <MotdFrame/>
         </div>
         <hr/>
-        <div className="container">
-            <CreateUserForm/>
-        </div>
     </div>);
 }
