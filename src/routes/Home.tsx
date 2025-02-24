@@ -7,9 +7,11 @@ export default function Home() {
         <div className="container">
             <AttendanceForm/>
         </div>
+        <hr/>
         <div className="container">
             <CreateForm/>
         </div>
+        <hr/>
         <div className="container">
             <CreateUserForm/>
         </div>

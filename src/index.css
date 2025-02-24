@@ -5,7 +5,7 @@ body {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
-    background-color: white;
+    background-color: #f6f2e0;
     color: #D8C4B6;
 }
 
@@ -86,7 +86,7 @@ header {
     top: 75px;
     justify-content: center;
     align-items: center;
-    background-color: #043C5E;
+    background-color: #3E5879;
     z-index: 1;
 }
 
@@ -97,19 +97,38 @@ header {
 }
 
 .container {
-    border-top: 1px solid #043c5e;
-    margin-top: 1em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #3E5879;
+    margin: 10px 10vw;
 }
 
 .container-form {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    column-gap: 2em;
+    column-gap: 1em;
     row-gap: 0.5em;
     margin-left: 4em;
     padding-top: 1em;
+    padding-bottom: 1em;
     flex-wrap: wrap;
+}
+
+input {
+    box-shadow: 0 0 5px #3E5879;
+}
+
+input:focus {
+    appearance: none;
+    outline: none;
+    cursor: text;
 }
 
 button {
@@ -179,7 +198,7 @@ button:hover:after {
 select {
     appearance: none;
     outline: none;
-    box-shadow: none;
+    box-shadow: 0 0 5px #3E5879;
     text-align: center;
     transition: all 0.2s ease-in;
     position: relative;
@@ -251,7 +270,6 @@ input[type="datetime-local"]:hover {
 
 input[type="text"] {
     text-align: center;
-    cursor: pointer;
     background-color: #3E5879;
     color: #D8C4B6;
     width: 12em;
@@ -274,7 +292,6 @@ input:hover::placeholder {
 
 input[type="email"] {
     text-align: center;
-    cursor: pointer;
     background-color: #3E5879;
     color: #D8C4B6;
     width: 12em;
@@ -289,7 +306,6 @@ input[type="email"]:hover {
 
 input[type="tel"] {
     text-align: center;
-    cursor: pointer;
     background-color: #3E5879;
     color: #D8C4B6;
     width: 12em;
@@ -304,7 +320,6 @@ input[type="tel"]:hover {
 
 input[type="password"] {
     text-align: center;
-    cursor: pointer;
     background-color: #3E5879;
     color: #D8C4B6;
     width: 12em;
