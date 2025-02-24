@@ -49,19 +49,19 @@ export default function CreateUserForm() {
 
     return (
         <form className={"container-form"} onSubmit={handleSubmit}>
-            <input placeholder={"Username"} type="text" id="username" onChange={handleChange} name="username" required/><br/><br/>
+            <input placeholder={"Username"} type="text" id="username" onChange={handleChange} name="username" required/>
 
-            <input placeholder={"Phone"} type="tel" id="phone" name="phone" onChange={handleChange} required/><br/><br/>
+            <input placeholder={"Phone"} type="tel" id="phone" name="phone" onChange={handleChange} required/>
 
             <input placeholder={"Email"} type="email" id="email" name="email" onChange={handleChange}
-                   required/><br/><br/>
+                   required/>
 
             <input placeholder={"Password"} type="password" id="password" name="password" onChange={handleChange}
-                   required/><br/><br/>
+                   required/>
 
             <select dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
                     id="role" onChange={handleChange}/>
-
+            <div className={"break"}></div>
             <button type="submit">Create User</button>
             <a style={{display: link == "" ? "none" : "flex"}} href={link} id="link">{link}</a>
         </form>

@@ -126,6 +126,7 @@ hr {
     column-gap: 1em;
     row-gap: 0.5em;
     margin-left: 4em;
+    margin-right: 2em;
     padding-top: 1em;
     padding-bottom: 1em;
     flex-wrap: wrap;
@@ -139,6 +140,12 @@ input:focus {
     appearance: none;
     outline: none;
     cursor: text;
+}
+
+.break {
+    flex-basis: 100%;
+    width: 0;
+    height: 0;
 }
 
 button {
