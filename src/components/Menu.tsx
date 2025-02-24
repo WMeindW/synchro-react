@@ -20,7 +20,7 @@ export default function Menu(props: Props) {
                                    className={"header-field"}>{page}</div>)
             i++;
         }
-        setPageState(<header key={0}>{children}</header>)
+        setPageState(<header key={0}><img className={"icon"} src={"icon.svg"} alt={"icon"}/>{children}</header>)
     }, [props.pageState]);
     return (<>{pageState}</>);
 }

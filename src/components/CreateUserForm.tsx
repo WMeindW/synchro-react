@@ -12,7 +12,7 @@ export default function CreateUserForm() {
         phone: ""
     });
 
-    const [link, setLink] = useState("Generated sign-up link...");
+    const [link, setLink] = useState("");
 
     // Handle input changes and update state
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -63,7 +63,7 @@ export default function CreateUserForm() {
                     id="role" onChange={handleChange}/>
 
             <button type="submit">Create User</button>
-            <a href={link} id="link">{link}</a>
+            <a style={{display: link == "" ? "none" : "flex"}} href={link} id="link">{link}</a>
         </form>
     );
 }
