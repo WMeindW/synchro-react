@@ -115,8 +115,9 @@ header {
 hr {
     border: none;
     height: 1px;
+    width: 60vw;
     background-color: #3E5879;
-    margin: 10px 10vw;
+    margin: 10px auto;
 }
 
 .container-form {
@@ -125,7 +126,7 @@ hr {
     align-items: center;
     column-gap: 1em;
     row-gap: 0.5em;
-    margin-left: 4em;
+    margin-left: 2em;
     margin-right: 2em;
     padding-top: 1em;
     padding-bottom: 1em;
@@ -154,15 +155,17 @@ input:focus {
 }
 
 .motd-container {
-    width: 90vw;
+    margin: 1em auto;
+    width: calc(100% - 8em);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 1em auto;
+
 }
 
 .motd-fields-container {
+    text-wrap: wrap;
     width: 100%;
     text-align: center;
     overflow: hidden;
@@ -175,6 +178,7 @@ input:focus {
 }
 
 .rendered-motd-container {
+    text-wrap: wrap;
     display: flex;
     justify-content: center;
     align-items: center;
