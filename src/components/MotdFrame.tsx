@@ -47,7 +47,6 @@ export default function MotdFrame() {
     }, []);
     return <>
         <div className={"motd-fields-container"} dangerouslySetInnerHTML={motd}></div>
-        <hr/>
         <CreateMotd motd={motd.__html}/>
     </>
 }
