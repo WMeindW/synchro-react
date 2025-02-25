@@ -7,7 +7,7 @@ export default function Home() {
             <AttendanceForm/>
         </div>
         <hr/>
-        <div className="container">
+        <div className="motd-container">
             <MotdFrame/>
         </div>
         <hr/>

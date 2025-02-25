@@ -7,7 +7,8 @@ interface Props {
 }
 
 export default function CreateMotd(props: Props) {
-    const [renderedMotd, setRenderedMotd] = useState({__html: "<div>\n" +
+    const [renderedMotd, setRenderedMotd] = useState({
+        __html: "<div>\n" +
             "    <div>\n" +
             "        <h1>Welcome to Our Server!</h1>\n" +
             "    </div>\n" +
@@ -32,7 +33,8 @@ export default function CreateMotd(props: Props) {
             "        <p>Join our community and stay updated with the latest news.</p>\n" +
             "        <img src=\"\" alt=\"Community Logo\">\n" +
             "    </div>\n" +
-            "</div>"});
+            "</div>"
+    });
     const [formData, setFormData] = useState({
         motd: props.motd
     });
@@ -82,27 +84,10 @@ export default function CreateMotd(props: Props) {
         }).catch(() => Client.openDialog("Error saving motd!"));
     };
 
-    return <form onSubmit={handleSubmit}>
-        <div style={{
-            width: "100%",
-            minHeight: "50px",
-            padding: "0",
-            margin: "0",
-            border: "1px solid black",
-            marginBottom: "10px"
-        }}
-             dangerouslySetInnerHTML={renderedMotd}></div>
-
-        <input required name={"motd"} onChange={handleChange} value={formData.motd} type={"textarea"}
-               style={{
-                   width: "100%",
-                   minHeight: "50px",
-                   padding: "0",
-                   margin: "0",
-                   border: "1px solid black",
-                   marginBottom: "10px"
-               }}
-               placeholder={"Motd..."}></input>
+    return <form className={"container-form"} onSubmit={handleSubmit}>
+        <div className={"rendered-motd-container"} dangerouslySetInnerHTML={renderedMotd}></div>
+        <input required name={"motd"} onChange={handleChange} value={formData.motd} type={"text"}
+               placeholder={"Paste motd here"}></input>
         <button type="submit">Save Motd</button>
     </form>
 }
