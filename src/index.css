@@ -126,10 +126,7 @@ hr {
     align-items: center;
     column-gap: 1em;
     row-gap: 0.5em;
-    margin-left: 2em;
-    margin-right: 2em;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin: 1em 2em;
     flex-wrap: wrap;
 }
 

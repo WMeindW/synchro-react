@@ -79,26 +79,20 @@ export default function UserEditForm(props: Props) {
             });
     }
 
-    return <form onSubmit={handleSubmit}>
-        <label>Edit User</label><br/><br/>
+    return <form className={"container-form"} onSubmit={handleSubmit}>
         <input type="hidden" id="id" value={formData.id} onChange={handleChange} name="id"
                required/>
 
-        <label htmlFor="username">Username:</label>
         <input type="text" id="username" value={formData.username} onChange={handleChange} name="username"
                required/><br/><br/>
 
-        <label htmlFor="phone">Phone:</label>
         <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required/><br/><br/>
 
-        <label htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required/><br/><br/>
 
-        <label htmlFor="password">Password:</label>
         <input type="password" id="password" name="password" value={formData.password}
                onChange={handleChange}/><br/><br/>
 
-        <label htmlFor="role">Role:</label>
         <select value={formData.role} dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
                 id="role" onChange={handleChange}>
         </select>
