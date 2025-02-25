@@ -34,7 +34,7 @@ export default function UserList(props: Props) {
                 children.push(React.createElement("div", {
                     onClick: () => props.userClick(user),
                     key: user.id,
-                    style: {border: "1px solid black", padding: "20px", margin: "10px"}
+                    className: "user-card"
                 }, user.username + " " + user.email + " " + user.phone + " " + user.enabled + " " + user.id))
             })
         setUsers({...users, users: children});
@@ -134,5 +134,5 @@ export default function UserList(props: Props) {
         ];
         processUsers(users);
     }, []);
-    return <div className={"container-form"}>{users.users}</div>
+    return <div className={"user-list"}>{users.users}</div>
 }

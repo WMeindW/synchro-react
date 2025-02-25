@@ -79,25 +79,25 @@ export default function UserEditForm(props: Props) {
             });
     }
 
-    return <form className={"container-form"} onSubmit={handleSubmit}>
+    return <form className={"user-edit-form"} onSubmit={handleSubmit}>
         <input type="hidden" id="id" value={formData.id} onChange={handleChange} name="id"
                required/>
 
-        <input type="text" id="username" value={formData.username} onChange={handleChange} name="username"
-               required/><br/><br/>
+        <input placeholder={"Username"} type="text" id="username" value={formData.username} onChange={handleChange} name="username"
+               required/>
 
-        <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required/><br/><br/>
+        <input placeholder={"Phone"} type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required/>
 
-        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required/><br/><br/>
+        <input placeholder={"Email"} type="email" id="email" name="email" value={formData.email} onChange={handleChange} required/>
 
-        <input type="password" id="password" name="password" value={formData.password}
-               onChange={handleChange}/><br/><br/>
+        <input placeholder={"Password"} type="password" id="password" name="password" value={formData.password}
+               onChange={handleChange}/>
 
         <select value={formData.role} dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
                 id="role" onChange={handleChange}>
         </select>
         <button type="submit">Edit</button>
-        <button type="button" onClick={handleDelete}>Delete</button>
+        <button type="button" onClick={handleDelete}>{props.user.enabled == "true" ? "Delete" : "Disable"}</button>
 
     </form>
 }

@@ -189,6 +189,32 @@ input:focus {
     width: 50vw;
 }
 
+.user-list {
+    flex-direction: column !important;
+    align-items: flex-start;
+    width: 60vw;
+}
+
+.user-edit-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    column-gap: 0.5em;
+    row-gap: 0.5em;
+}
+
+.user-card {
+    background-color: #3E5879;
+    box-shadow: 0 0 5px #3E5879;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
 button {
     box-shadow: 0 0 5px #3E5879;
     border: none;

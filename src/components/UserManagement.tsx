@@ -17,7 +17,7 @@ export default function UserManagement() {
     const showEditForm = (user: User) => {
         setEditForm(<UserEditForm user={user}/>)
     }
-    return <div>
+    return <div className={"container-form"}>
         <UserList userClick={(user) => showEditForm(user)}/>
         {editForm}
     </div>
