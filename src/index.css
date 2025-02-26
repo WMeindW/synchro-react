@@ -28,7 +28,7 @@ header {
 }
 
 .icon {
-    margin-left: 1em;
+    margin-left: 2em;
     width: 2em;
     height: 2em;
 }
@@ -87,11 +87,12 @@ header {
 
 .dialog-container button {
     box-shadow: 0 0 3px #D8C4B6;
+    margin-right: 1em;
 }
 
 .dialog {
     position: absolute;
-    min-width: 30%;
+    min-width: 30vw;
     border: none;
     border-radius: 5px;
     display: flex;
