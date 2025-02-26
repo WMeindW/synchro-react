@@ -149,6 +149,8 @@ input:focus {
 .attendance-clock {
     box-shadow: 0 0 5px #3E5879;
     border-radius: 50%;
+    width: 2em;
+    height: 2em;
 }
 
 .motd-container {
