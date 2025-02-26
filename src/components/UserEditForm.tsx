@@ -97,7 +97,7 @@ export default function UserEditForm(props: Props) {
                 id="role" onChange={handleChange}>
         </select>
         <button type="submit">Edit</button>
-        <button type="button" onClick={handleDelete}>{props.user.enabled == "true" ? "Delete" : "Disable"}</button>
+        <button type="button" onClick={handleDelete}>{props.user.enabled == "true" ? "Delete" : "Deactivate"}</button>
 
     </form>
 }

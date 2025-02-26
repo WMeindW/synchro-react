@@ -48,7 +48,9 @@ export default function UserList(props: Props) {
                     <div className={"user-card-block"}>{user.username}</div>
                     <div className={"user-card-block"}>{user.email}</div>
                     <div className={"user-card-block"}>{user.phone}</div>
-                    <div className={"user-card-block"}>{user.enabled}</div>
+                    <div className={"user-card-block"} style={{display: user.enabled == "true" ? "flex" : "none", boxShadow: "0 0 3px red"}}>Not
+                        activated yet
+                    </div>
                 </>))
             })
         setUsers({...users, users: children});

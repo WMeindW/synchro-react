@@ -101,6 +101,7 @@ header {
     align-items: center;
     background-color: #3E5879;
     z-index: 1;
+    box-shadow: 0 0 2px red;
 }
 
 .dialog-message {
@@ -196,6 +197,8 @@ input:focus {
 
 .user-edit-form-container {
     gap: 2em !important;
+    align-items: center;
+    justify-content: center;
 }
 
 .user-card-block {
@@ -211,7 +214,7 @@ input:focus {
 .user-list {
     flex-direction: column !important;
     align-items: flex-start;
-    width: 45vw;
+    max-width: 45em;
     min-width: 15em;
 }
 
