@@ -1,13 +1,5 @@
-import CreateForm from "./components/CreateForm.tsx";
-import Logout from "./components/Logout.tsx";
-import AttendanceForm from "./components/AttendanceForm.tsx";
-import Events from "./components/Events.tsx";
-import CreateUserForm from "./components/CreateUserForm.tsx";
-import UserManagement from "./components/UserManagement.tsx";
-import MotdFrame from "./components/MotdFrame.tsx";
 import {useEffect, useState} from "react";
 import {SynchroConfig} from "./config/SynchroConfig.ts";
-import BarChartDemo from "./components/BarChart.tsx";
 import {Client} from "./service/Client.ts";
 import Dialog from "./components/Dialog.tsx";
 import Router from "./Router.tsx";
@@ -36,34 +28,6 @@ export default function App() {
         }
     }
 
-    let stuff = <>
-        <div>
-            <div className="container">
-                <AttendanceForm/>
-            </div>
-            <div className="container">
-                <CreateForm/>
-            </div>
-            <div className="container">
-                <CreateUserForm/>
-            </div>
-            <div className="container">
-                <Events/>
-            </div>
-            <div className="container">
-                <UserManagement/>
-            </div>
-            <div className="container">
-                <MotdFrame/>
-            </div>
-            <div className="container">
-                <Logout/>
-            </div>
-            <div className="container">
-                <BarChartDemo/>
-            </div>
-        </div>
-    </>
     useEffect(() => {
         console.log("Fetching info...")
         queryOptions().then((response) => {
