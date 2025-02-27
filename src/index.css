@@ -9,7 +9,8 @@ body {
     background-color: #f6f2e0;
     color: #D8C4B6;
     overflow-x: hidden;
-}
+    height: 100vh;
+    width: 100vw;}
 
 #root {
     display: flex;
@@ -19,7 +20,7 @@ body {
 }
 
 header {
-    width: 100vw;
+    width: 100%;
     background-color: #3E5879;
     display: flex;
     height: 3em;
@@ -155,6 +156,7 @@ input:focus {
     border-radius: 50%;
     width: 2em;
     height: 2em;
+    background-color: #D8C4B6;
 }
 
 .motd-container {
@@ -465,6 +467,13 @@ a {
     box-shadow: 0 0 5px #3E5879;
     text-wrap: wrap;
     max-width: 20em;
+}
+
+.timeline-form {
+    width: 90vw;
+    box-shadow: 0 0 2px #3E5879;
+    border-radius: 5px;
+    border: none;
 }
 
 ::-webkit-scrollbar {

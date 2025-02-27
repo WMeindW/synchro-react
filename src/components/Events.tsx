@@ -120,10 +120,10 @@ export default function Events() {
     }, []);
 
     return <div className={"container-form"}>
-        <div>
+        <div className={"timeline-form"}>
             <button onClick={switchView}>{button}</button>
             <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}/>
         </div>
-        <div>{editForm}</div>
+        {editForm}
     </div>
 }

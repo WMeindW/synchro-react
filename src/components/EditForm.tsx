@@ -76,8 +76,8 @@ export default function EditForm(props: Props) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Edit Event</label>
+        <form className={"container-form"} style={{marginLeft:0}} onSubmit={handleSubmit}>
+            <img className={"attendance-clock"}  alt={"edit icon"} src={"/edit.svg"}/>
             <input name="id" type="hidden" value={formData.id} onChange={handleChange}/>
             <select dangerouslySetInnerHTML={{__html: Parser.parseShiftTypes()}} name="type"
                     value={formData.type} onChange={handleChange}>
@@ -87,7 +87,7 @@ export default function EditForm(props: Props) {
             </select>
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
             <input name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>
-            <button type="submit">Submit</button>
+            <button type="submit">Edit Event</button>
             <button type="button" onClick={handleDelete}>Delete</button>
         </form>
     );
