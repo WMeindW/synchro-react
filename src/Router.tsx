@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import Home from "./routes/Home.tsx";
 import Menu from "./components/Menu.tsx";
 import Users from "./routes/Users.tsx";
-import Events from "./routes/Events.tsx";
+import EventsRoute from "./routes/EventsRoute.tsx";
 import Summary from "./routes/Summary.tsx";
 
 export default function Router() {
@@ -20,7 +20,7 @@ export default function Router() {
         else if (name === "Users")
             setPage(<Users key={"Users"}/>);
         else if (name === "Events")
-            setPage(<Events key={"Events"}/>);
+            setPage(<EventsRoute key={"Events"}/>);
         else if (name === "Summary")
             setPage(<Summary key={"Summary"}/>);
         else {

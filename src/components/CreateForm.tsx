@@ -5,7 +5,6 @@ import {Client} from "../service/Client.ts";
 
 
 export default function CreateForm() {
-    // State to store form data
     const [formData, setFormData] = useState({
         type: "",
         username: "",
@@ -13,7 +12,6 @@ export default function CreateForm() {
         end: ""
     });
 
-    // Handle input changes and update state
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target;
         setFormData({
@@ -22,11 +20,9 @@ export default function CreateForm() {
         });
     };
 
-    // Handle form submission
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
 
-        // Convert the form data to JSON
         const jsonData = JSON.stringify(formData);
 
         fetch(SynchroConfig.apiUrl + "user/create-event", {
@@ -52,7 +48,6 @@ export default function CreateForm() {
             </select>
             <input name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
             <input name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>
-            <div className={"break"}></div>
             <button type="submit">Create Event</button>
         </form>
     );
