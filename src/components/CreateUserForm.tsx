@@ -68,7 +68,7 @@ export default function CreateUserForm() {
             <select dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
                     id="role" onChange={handleChange}/>
             <button type="submit">Create User</button>
-            <a style={{display: link == "" ? "none" : "flex"}} href={link} id="link">{link}</a>
+            <a style={{display: link == "" ? "none" : "flex"}} href={link} id="link">Generated Link</a>
         </form>
     );
 }

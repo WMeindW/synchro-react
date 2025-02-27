@@ -455,9 +455,7 @@ a {
     text-align: center;
     background-color: #3E5879;
     color: #D8C4B6;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    height: 26px;
+    padding: 0.5em;
     border: none;
     border-radius: 4px;
     display: flex;
@@ -465,6 +463,8 @@ a {
     align-items: center;
     font-size: small;
     box-shadow: 0 0 5px #3E5879;
+    text-wrap: wrap;
+    max-width: 20em;
 }
 
 ::-webkit-scrollbar {
