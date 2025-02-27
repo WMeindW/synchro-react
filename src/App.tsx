@@ -35,7 +35,7 @@ export default function App() {
             window.localStorage.setItem("shiftTypes", JSON.stringify(response.shiftTypes))
             window.localStorage.setItem("userTypes", JSON.stringify(response.userTypes))
         }).then(() => {
-            setDashboard(<div>
+            setDashboard(<div className={"body"}>
                 <Dialog ref={Client.dialog}></Dialog>
                 <Router/>
             </div>)
