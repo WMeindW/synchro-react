@@ -46,7 +46,7 @@ export default function UserEditForm(props: Props) {
 
     // Handle form submission
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
         const jsonData = JSON.stringify(formData);
         fetch(SynchroConfig.apiUrl + "admin/edit-user", {
             method: "POST",

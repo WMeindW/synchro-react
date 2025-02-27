@@ -7,7 +7,7 @@ export default function CreateUserForm() {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
-        role: "",
+        role: "USER",
         email: "",
         phone: ""
     });
@@ -23,9 +23,8 @@ export default function CreateUserForm() {
         });
     };
 
-    // Handle form submission
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
         const jsonData = JSON.stringify(formData);
         fetch(SynchroConfig.apiUrl + "admin/create-user", {
             method: "POST",
@@ -65,7 +64,7 @@ export default function CreateUserForm() {
             <input placeholder={"Password"} type="password" id="password" name="password" onChange={handleChange}
                    required/>
 
-            <select dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
+            <select value={formData.role} dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
                     id="role" onChange={handleChange}/>
             <button type="submit">Create User</button>
             <a style={{display: link == "" ? "none" : "flex"}} href={link} id="link">Generated Link</a>
