@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {SynchroConfig} from "../config/SynchroConfig.ts";
 
 interface Props {
     pageState: string
@@ -20,7 +21,7 @@ export default function Menu(props: Props) {
                                    className={"header-field"}>{page}</div>)
             i++;
         }
-        setPageState(<header key={0}><img className={"icon"} src={"/icon.svg"} alt={"icon"}/>{children}</header>)
+        setPageState(<header key={0}><img className={"icon"} src={SynchroConfig.apiUrl + "icon.svg"} alt={"icon"}/>{children}</header>)
     }, [props.pageState]);
     return (<>{pageState}</>);
 }
