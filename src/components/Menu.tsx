@@ -21,7 +21,8 @@ export default function Menu(props: Props) {
                                    className={"header-field"}>{page}</div>)
             i++;
         }
-        setPageState(<header key={0}><img className={"icon"} src={SynchroConfig.apiUrl + "icon.svg"} alt={"icon"}/>{children}</header>)
+        setPageState(<header key={0}><img className={"icon"} src={SynchroConfig.hostUrl + "icon.svg"}
+                                          alt={"icon"}/>{children}</header>)
     }, [props.pageState]);
     return (<>{pageState}</>);
 }

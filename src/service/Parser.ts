@@ -36,8 +36,11 @@ export class Parser {
 
     public static getUsernameFromCookie() {
         let usernameCookie = "";
+        console.log("cookies: " + document.cookie)
         for (const c of document.cookie.split(";")) {
-            if (c.split("=")[0] == "username") {
+            console.log(c);
+            if (c.split("=")[0].trim() == "username") {
+                console.log("found cookie: " + c.split("=")[1])
                 usernameCookie = c.split("=")[1];
             }
         }

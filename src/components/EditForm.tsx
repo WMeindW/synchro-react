@@ -77,7 +77,7 @@ export default function EditForm(props: Props) {
 
     return (
         <form className={"container-form"} style={{marginLeft: 0}} onSubmit={handleSubmit}>
-            <img className={"attendance-clock"} alt={"edit icon"} src={SynchroConfig.apiUrl + "edit.svg"}/>
+            <img className={"attendance-clock"} alt={"edit icon"} src={SynchroConfig.hostUrl + "edit.svg"}/>
             <input name="id" type="hidden" value={formData.id} onChange={handleChange}/>
             <select dangerouslySetInnerHTML={{__html: Parser.parseShiftTypes()}} name="type"
                     value={formData.type} onChange={handleChange}>
