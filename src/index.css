@@ -526,4 +526,18 @@ a {
     background: transparent;
 }
 
+.vis-item {
+    background-color: #3E5879;
+    border: none !important;
+    box-shadow: 0 0 5px #3E5879;
+    border-radius: 5px;
+    color: #D8C4B6;
+    position: absolute;
+    z-index: 1
+}
 
+.vis-item.vis-selected {
+    background-color: #fff785;
+    border-color: #ffc200;
+    z-index: 2
+}

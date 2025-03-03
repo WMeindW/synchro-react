@@ -1,6 +1,5 @@
 import {useEffect, useRef} from 'react';
 import {Timeline as VisTimeline} from 'vis-timeline/standalone';
-import 'vis-timeline/styles/vis-timeline-graph2d.min.css';
 
 interface Group {
     id: number;
@@ -38,11 +37,9 @@ export default function CalendarTimeline({groups = [], items = [], eventClick}: 
                 },
             };
 
-            // Initialize the Vis.js Timeline
             timelineInstanceRef.current = new VisTimeline(timelineRef.current, items, groups, options);
-            // Event listener for 'select' event (triggered when an item is clicked)
             timelineInstanceRef.current.on('select', function (properties) {
-                const selectedItemId = properties.items[0];  // Get the ID of the selected item
+                const selectedItemId = properties.items[0];
                 const selectedItem = items.find(item => item.id === selectedItemId);
 
                 if (selectedItem) {
@@ -52,7 +49,6 @@ export default function CalendarTimeline({groups = [], items = [], eventClick}: 
         }
 
         return () => {
-            // Clean up the timeline instance when the component unmounts
             if (timelineInstanceRef.current) {
                 timelineInstanceRef.current.destroy();
             }
