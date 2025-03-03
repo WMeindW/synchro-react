@@ -482,6 +482,8 @@ a {
     box-shadow: 0 0 2px #3E5879;
     border-radius: 5px;
     border: none;
+    color: #3E5879 !important;
+    background-color: #D8C4B6;
 }
 
 ::-webkit-scrollbar {
@@ -533,11 +535,50 @@ a {
     border-radius: 5px;
     color: #D8C4B6;
     position: absolute;
+    text-align: center;
     z-index: 1
 }
 
 .vis-item.vis-selected {
-    background-color: #fff785;
-    border-color: #ffc200;
+    background-color: #F5EFE7;
+    color: #3E5879;
     z-index: 2
+}
+
+.vis-label {
+    color: #3E5879 !important;
+}
+
+.vis-background {
+    background-color: #D8C4B6;
+}
+
+.vis-text {
+    color: #3E5879 !important;
+}
+
+.vis-panel {
+    border-color: #3E5879 !important;
+}
+
+.vis-grid {
+    border-color: #3E5879 !important;
+}
+
+.vis-group {
+    border-color: #3E5879 !important;
+}
+
+.vis-group-level-0 {
+    border-color: #3E5879 !important;
+}
+
+.vis-current-time {
+    background-color: #3E5879 !important;
+    border: none !important;
+    width: 1px !important;
+}
+
+.vis-timeline {
+    border: none !important;
 }
