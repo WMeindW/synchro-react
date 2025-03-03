@@ -479,11 +479,14 @@ a {
 
 .timeline-form {
     width: 90vw;
-    box-shadow: 0 0 2px #3E5879;
     border-radius: 5px;
     border: none;
     color: #3E5879 !important;
-    background-color: #D8C4B6;
+    background-color: #f6f2e0;
+}
+
+.timeline-form button {
+    margin-bottom: 5px;
 }
 
 ::-webkit-scrollbar {
@@ -581,4 +584,6 @@ a {
 
 .vis-timeline {
     border: none !important;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #3E5879;
 }
