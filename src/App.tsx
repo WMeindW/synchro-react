@@ -3,6 +3,7 @@ import {SynchroConfig} from "./config/SynchroConfig.ts";
 import {Client} from "./service/Client.ts";
 import Dialog from "./components/Dialog.tsx";
 import Router from "./Router.tsx";
+import {Relogin} from "./service/Relogin.ts";
 
 interface Info {
     users: [];
@@ -39,6 +40,7 @@ export default function App() {
                 <Dialog ref={Client.dialog}></Dialog>
                 <Router/>
             </div>)
+            Relogin.runService();
         })
     }, []);
 
