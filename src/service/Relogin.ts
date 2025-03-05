@@ -1,20 +1,21 @@
 import {SynchroConfig} from "../config/SynchroConfig.ts";
 
 export class Relogin {
-    private static reloginAttempts: number = 0;
+    private static loginAttempts: number = 0;
 
     public static async runService() {
-        while (this.reloginAttempts <= 6) {
+        while (this.loginAttempts <= 6) {
             await this.delay(5000);
             try {
                 const response = await fetch(SynchroConfig.apiUrl + "auth/login.html", {
-                    method: "GET"
+                    method: "GET",
+                    redirect: "manual"
                 });
-                if (response.status == 200) this.reloginAttempts++;
+                if (response.status == 200) this.loginAttempts++;
             } catch (error) {
-                this.reloginAttempts++;
+                this.loginAttempts++;
             }
-            console.log("Attempts: " + this.reloginAttempts)
+            console.log("Attempts: " + this.loginAttempts)
         }
         alert("Relace vypršela!")
         window.location.href = SynchroConfig.apiUrl + "auth/login.html"
