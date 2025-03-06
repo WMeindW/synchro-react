@@ -1,4 +1,5 @@
 import {SynchroConfig} from "../config/SynchroConfig.ts";
+import {Client} from "./Client.ts";
 
 export class Relogin {
     private static loginAttempts: number = 0;
@@ -17,8 +18,7 @@ export class Relogin {
             }
             console.log("Attempts: " + this.loginAttempts)
         }
-        alert("Relace vypršela!")
-        window.location.href = SynchroConfig.apiUrl + "auth/login.html"
+        Client.openDialogCallback("Session expired, login again!", () => window.location.href = SynchroConfig.apiUrl + "auth/login.html");
     }
 
     private static async delay(ms: number) {

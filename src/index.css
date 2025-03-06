@@ -276,6 +276,10 @@ button {
     padding: 0;
 }
 
+button:active {
+    scale: 1.05;
+}
+
 button:before {
     content: "";
     position: absolute;
@@ -532,20 +536,20 @@ a {
 }
 
 .vis-item {
-    background-color: #3E5879;
+    background-color: #3E5879 !important;
     border: none !important;
-    box-shadow: 0 0 5px #3E5879;
-    border-radius: 5px;
-    color: #D8C4B6;
-    position: absolute;
-    text-align: center;
-    z-index: 1
+    box-shadow: 0 0 5px #3E5879 !important;
+    border-radius: 5px !important;
+    color: #D8C4B6 !important;
+    position: absolute !important;
+    text-align: center !important;
+    z-index: 1 !important;
 }
 
 .vis-item.vis-selected {
-    background-color: #F5EFE7;
-    color: #3E5879;
-    z-index: 2
+    background-color: #F5EFE7 !important;
+    color: #3E5879 !important;
+    z-index: 2 !important;
 }
 
 .vis-label {
@@ -553,7 +557,7 @@ a {
 }
 
 .vis-background {
-    background-color: #D8C4B6;
+    background-color: #D8C4B6 !important;
 }
 
 .vis-text {
@@ -584,6 +588,6 @@ a {
 
 .vis-timeline {
     border: none !important;
-    border-radius: 5px;
-    box-shadow: 0 0 3px #3E5879;
+    border-radius: 5px !important;
+    box-shadow: 0 0 3px #3E5879 !important;
 }

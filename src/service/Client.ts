@@ -9,6 +9,11 @@ export class Client {
             this.dialog.current.open(message);
     }
 
+    public static openDialogCallback(message: string, callback: Function) {
+        if (this.dialog.current)
+            this.dialog.current.openCallback(message, callback);
+    }
+
     public static async getJson(url: string): Promise<any> {
         try {
             const response = await fetch(url, {
