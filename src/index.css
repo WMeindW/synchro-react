@@ -219,6 +219,7 @@ input:focus {
     border-radius: 5px;
     min-height: 1em;
     padding: 0.5em;
+    background-color: #3E5879;
 }
 
 .user-list {
@@ -226,8 +227,14 @@ input:focus {
     align-items: flex-start;
     max-width: 45em;
     min-width: 15em;
+    overflow-y: auto;
+    max-height: 85vh;
+    padding: 0.5em;
 }
 
+.active-user {
+    background-color: #D8C4B6 !important;
+}
 .user-card-icon {
     margin-right: auto;
     margin-left: 1em;
@@ -537,11 +544,11 @@ a {
 }
 
 .vis-item {
-    background-color: #3E5879 !important;
+    background-color: #D8C4B6 !important;
     border: none !important;
-    box-shadow: 0 0 5px #3E5879 !important;
+    box-shadow: 0 0 5px #D8C4B6 !important;
     border-radius: 5px !important;
-    color: #D8C4B6 !important;
+    color: #3E5879 !important;
     position: absolute !important;
     text-align: center !important;
     z-index: 1 !important;
@@ -554,35 +561,35 @@ a {
 }
 
 .vis-label {
-    color: #3E5879 !important;
+    color: #D8C4B6 !important;
 }
 
 .vis-background {
-    background-color: #D8C4B6 !important;
+    background-color: #3E5879 !important;
 }
 
 .vis-text {
-    color: #3E5879 !important;
+    color: #D8C4B6 !important;
 }
 
 .vis-panel {
-    border-color: #3E5879 !important;
+    border-color: #D8C4B6 !important;
 }
 
 .vis-grid {
-    border-color: #3E5879 !important;
+    border-color: #D8C4B6 !important;
 }
 
 .vis-group {
-    border-color: #3E5879 !important;
+    border-color: #D8C4B6 !important;
 }
 
 .vis-group-level-0 {
-    border-color: #3E5879 !important;
+    border-color: #D8C4B6 !important;
 }
 
 .vis-current-time {
-    background-color: #3E5879 !important;
+    background-color: #D8C4B6 !important;
     border: none !important;
     width: 1px !important;
 }

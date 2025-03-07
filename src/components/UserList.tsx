@@ -21,6 +21,8 @@ interface Props {
 
 export default function UserList(props: Props) {
     const [users, setUsers] = useState({users: [<div key={0}></div>]});
+    const [activeUser, setActiveUser] = useState("-1");
+    const [userObjects, setUserObjects] = useState([]);
 
     async function queryUsers(): Promise<UserList[]> {
         return await Client.getJson(SynchroConfig.apiUrl + "admin/query-user");
@@ -31,10 +33,15 @@ export default function UserList(props: Props) {
         let children: ReactElement[] = [];
         if (users)
             users.forEach(user => {
+                const userClass = "user-card " + (activeUser == user.id ? "active-user" : "")
                 children.push(React.createElement("div", {
-                    onClick: () => props.userClick(user),
+                    onClick: () => {
+                        setActiveUser(user.id);
+                        console.log(user.id)
+                        props.userClick(user)
+                    },
                     key: user.id,
-                    className: "user-card"
+                    className: userClass
                 }, <>
                     <svg className={"attendance-clock user-card-icon"} version="1.1" id="Layer_1"
                          xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +55,8 @@ export default function UserList(props: Props) {
                     <div className={"user-card-block"}>{user.username}</div>
                     <div className={"user-card-block"}>{user.email}</div>
                     <div className={"user-card-block"}>{user.phone}</div>
-                    <div className={"user-card-block"} style={{display: user.enabled != "true" ? "flex" : "none", boxShadow: "0 0 3px red"}}>Not
+                    <div className={"user-card-block"}
+                         style={{display: user.enabled != "true" ? "flex" : "none", boxShadow: "0 0 3px red"}}>Not
                         activated yet
                     </div>
                 </>))
@@ -58,12 +66,20 @@ export default function UserList(props: Props) {
     }
 
     useEffect(() => {
+        processUsers(userObjects)
+        console.log("updated")
+    }, [activeUser]);
+
+    useEffect(() => {
 
         console.log("querying users...");
         queryUsers().then((usersList) => {
-            if (usersList != null)
+            if (usersList != null) {
+                // @ts-ignore
+                setUserObjects(usersList["userList"])
                 // @ts-ignore
                 processUsers(usersList["userList"])
+            }
         })
     }, []);
     return <div className={"user-list"}>{users.users}</div>
