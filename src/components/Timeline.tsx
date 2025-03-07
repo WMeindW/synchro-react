@@ -33,12 +33,11 @@ export default function CalendarTimeline({groups = [], items = [], eventClick, t
                 width: '100%',
                 height: '600px',
                 stack: true,
+                zoomable: false,
                 margin: {
                     item: 10,
                 },
             };
-            console.log("Timeline time: " + timelineTime.toDateString())
-            console.log("Actual time: " + timelineInstanceRef.current?.getCurrentTime())
             timelineInstanceRef.current = new VisTimeline(timelineRef.current, items, groups, options);
             timelineInstanceRef.current.setCurrentTime(timelineTime)
             timelineInstanceRef.current.on('select', function (properties) {
