@@ -15,20 +15,21 @@ interface Item {
 }
 
 interface Props {
-    eventClick : (event: Item) => void;
+    eventClick: (event: Item) => void;
     groups: Group[];
     items: Item[];
+    timelineTime: Date
 }
 
-export default function CalendarTimeline({groups = [], items = [], eventClick}: Props) {
+export default function CalendarTimeline({groups = [], items = [], eventClick, timelineTime}: Props) {
     const timelineRef = useRef<HTMLDivElement | null>(null);
     const timelineInstanceRef = useRef<VisTimeline | null>(null);
 
     useEffect(() => {
         if (timelineRef.current) {
             const options = {
-                start: new Date(new Date().setHours(0, 0, 0, 0)),  // Start of today
-                end: new Date(new Date().setHours(23, 59, 59, 999)),  // End of today
+                start: new Date(timelineTime.getTime() - 12 * 60 * 60 * 1000),  // Start of today
+                end: new Date(timelineTime.getTime() + 12 * 60 * 60 * 1000),  // End of today
                 width: '100%',
                 height: '600px',
                 stack: true,
@@ -36,8 +37,10 @@ export default function CalendarTimeline({groups = [], items = [], eventClick}: 
                     item: 10,
                 },
             };
-
+            console.log("Timeline time: " + timelineTime.toDateString())
+            console.log("Actual time: " + timelineInstanceRef.current?.getCurrentTime())
             timelineInstanceRef.current = new VisTimeline(timelineRef.current, items, groups, options);
+            timelineInstanceRef.current.setCurrentTime(timelineTime)
             timelineInstanceRef.current.on('select', function (properties) {
                 const selectedItemId = properties.items[0];
                 const selectedItem = items.find(item => item.id === selectedItemId);
@@ -53,7 +56,7 @@ export default function CalendarTimeline({groups = [], items = [], eventClick}: 
                 timelineInstanceRef.current.destroy();
             }
         };
-    }, [groups, items]);
+    }, [groups, items, timelineTime]);
 
     return <div ref={timelineRef}/>;
 }

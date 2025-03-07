@@ -34,6 +34,7 @@ export default function Events() {
     const [items, setItems] = useState(is);
     const [button, setButton] = useState("Show Attendance");
     const [attendance, setAttendance] = useState(false);
+    const [timelineTime, setTimelineTime] = useState(new Date());
 
     const [editForm, setEditForm] = useState(<div></div>);
 
@@ -122,7 +123,13 @@ export default function Events() {
     return <div className={"container-form"}>
         <div className={"timeline-form"}>
             <button onClick={switchView}>{button}</button>
-            <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}/>
+            <input type={"datetime-local"} value={moment(timelineTime).format("YYYY-MM-DDTHH:mm")} onChange={(event) => {
+                setTimelineTime(new Date(event.target.value))
+                console.log(timelineTime)
+                console.log(event.target.value)
+            }}/>
+            <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}
+                              timelineTime={timelineTime}/>
         </div>
         {editForm}
     </div>
