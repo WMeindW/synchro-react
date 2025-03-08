@@ -39,7 +39,6 @@ export default function CalendarTimeline({groups = [], items = [], eventClick, t
                 },
             };
             timelineInstanceRef.current = new VisTimeline(timelineRef.current, items, groups, options);
-            timelineInstanceRef.current.setCurrentTime(timelineTime)
             timelineInstanceRef.current.on('select', function (properties) {
                 const selectedItemId = properties.items[0];
                 const selectedItem = items.find(item => item.id === selectedItemId);

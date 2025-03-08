@@ -34,7 +34,9 @@ export default function Events() {
     const [items, setItems] = useState({items: is});
     const [button, setButton] = useState("Show Attendance");
     const [attendance, setAttendance] = useState(false);
-    const [timelineTime, setTimelineTime] = useState(new Date());
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    const [timelineTime, setTimelineTime] = useState(currentDate);
     const [pageNumber, setPageNumber] = useState(1);
     const [editForm, setEditForm] = useState(<div></div>);
     const pageSize = 19;
