@@ -28,8 +28,8 @@ export default function CalendarTimeline({groups = [], items = [], eventClick, t
     useEffect(() => {
         if (timelineRef.current) {
             const options = {
-                start: new Date(timelineTime.getTime() - 12 * 60 * 60 * 1000),  // Start of today
-                end: new Date(timelineTime.getTime() + 12 * 60 * 60 * 1000),  // End of today
+                start: new Date(timelineTime.getTime()),  // Start of today
+                end: new Date(timelineTime.getTime() + 24 * 60 * 60 * 1000),  // End of today
                 width: '100%',
                 height: '600px',
                 stack: true,
@@ -49,7 +49,6 @@ export default function CalendarTimeline({groups = [], items = [], eventClick, t
                 }
             });
         }
-
         return () => {
             if (timelineInstanceRef.current) {
                 timelineInstanceRef.current.destroy();

@@ -30,13 +30,14 @@ interface Item {
 export default function Events() {
     const gs: Group[] = []
     const is: Item[] = []
-    const [groups, setGroups] = useState(gs);
-    const [items, setItems] = useState(is);
+    const [groups, setGroups] = useState({groups: gs});
+    const [items, setItems] = useState({items: is});
     const [button, setButton] = useState("Show Attendance");
     const [attendance, setAttendance] = useState(false);
     const [timelineTime, setTimelineTime] = useState(new Date());
     const [pageNumber, setPageNumber] = useState(1);
     const [editForm, setEditForm] = useState(<div></div>);
+    const pageSize = 19;
 
 
     function hideEditForm() {
@@ -97,13 +98,13 @@ export default function Events() {
                 end: moment(event.timeEnd).toDate()
             })
         }
-        setGroups(gs);
-        setItems(is);
+        setGroups({...groups, groups: gs});
+        setItems({...items, items: is});
     }
 
     function showEditEvent(item: Item) {
         let username = "";
-        groups.forEach((group) => {
+        groups.groups.forEach((group) => {
             if (group.id === item.group) username = group.content
         })
         setEditForm(<EditForm key={item.id} submitForm={hideEditForm} end={moment(item.end).format("YYYY-MM-DDTHH:mm")}
@@ -114,23 +115,37 @@ export default function Events() {
     useEffect(() => {
         console.log("querying")
         queryEvents().then((events) => {
-            if (events)
+            if (events) {
                 // @ts-ignore
                 processEvents(events["events"]);
+            }
         })
     }, []);
+
 
     return <div className={"container-form"}>
         <div className={"timeline-form"}>
             <button onClick={switchView}>{button}</button>
-            <input type={"datetime-local"} value={moment(timelineTime).format("YYYY-MM-DDTHH:mm")}
+            <button onClick={() => {
+                if (pageNumber <= groups.groups.length / pageSize)
+                    setPageNumber(pageNumber + 1)
+            }}>+
+            </button>
+            <button onClick={() => {
+                if (pageNumber <= 1)
+                    setPageNumber(1)
+                else
+                    setPageNumber(pageNumber - 1)
+            }}>-
+            </button>
+            <input type={"date"} value={moment(timelineTime).format("YYYY-MM-DD")}
                    onChange={(event) => {
                        setTimelineTime(new Date(event.target.value))
-                       console.log(timelineTime)
-                       console.log(event.target.value)
                    }}/>
-            <CalendarTimeline groups={groups} items={items} eventClick={(item) => showEditEvent(item)}
-                              timelineTime={timelineTime}/>
+            <CalendarTimeline
+                groups={groups.groups.slice((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize)}
+                items={items.items} eventClick={(item) => showEditEvent(item)}
+                timelineTime={timelineTime}/>
         </div>
         {editForm}
     </div>
