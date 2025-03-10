@@ -30,10 +30,10 @@ interface Item {
 export default function Events() {
     const gs: Group[] = []
     const is: Item[] = []
-    const [groups, setGroups] = useState({groups: gs});
-    const [items, setItems] = useState({items: is});
+    const [groups, setGroups] = useState(gs);
+    const [labels, setLabels] = useState(gs);
+    const [items, setItems] = useState(is);
     const [button, setButton] = useState("Show Attendance");
-    const [attendance, setAttendance] = useState(false);
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
     const [timelineTime, setTimelineTime] = useState(currentDate);
@@ -55,8 +55,7 @@ export default function Events() {
     }
 
     function switchView() {
-        console.log("querying");
-        if (attendance) {
+        if (button == "Show Events") {
             queryEvents().then((events) => {
                 if (events != null)
                     // @ts-ignore
@@ -71,7 +70,6 @@ export default function Events() {
             })
             setButton("Show Events");
         }
-        setAttendance(!attendance);
         hideEditForm();
     }
 
@@ -100,13 +98,14 @@ export default function Events() {
                 end: moment(event.timeEnd).toDate()
             })
         }
-        setGroups({...groups, groups: gs});
-        setItems({...items, items: is});
+        setGroups(gs);
+        setItems(is);
+        setLabels(gs.slice((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize));
     }
 
     function showEditEvent(item: Item) {
         let username = "";
-        groups.groups.forEach((group) => {
+        groups.forEach((group) => {
             if (group.id === item.group) username = group.content
         })
         setEditForm(<EditForm key={item.id} submitForm={hideEditForm} end={moment(item.end).format("YYYY-MM-DDTHH:mm")}
@@ -115,7 +114,6 @@ export default function Events() {
     }
 
     useEffect(() => {
-        console.log("querying")
         queryEvents().then((events) => {
             if (events) {
                 // @ts-ignore
@@ -124,29 +122,32 @@ export default function Events() {
         })
     }, []);
 
+    useEffect(() => {
+        setLabels(groups.slice((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize))
+    }, [pageNumber]);
 
     return <div className={"container-form"}>
         <div className={"timeline-form"}>
             <button onClick={switchView}>{button}</button>
-            <button onClick={() => {
-                if (pageNumber <= groups.groups.length / pageSize)
-                    setPageNumber(pageNumber + 1)
-            }}>+
-            </button>
+            <input type={"date"} value={moment(timelineTime).format("YYYY-MM-DD")}
+                   onChange={(event) => {
+                       setTimelineTime(new Date(event.target.value))
+                   }}/>
             <button onClick={() => {
                 if (pageNumber <= 1)
                     setPageNumber(1)
                 else
                     setPageNumber(pageNumber - 1)
-            }}>-
+            }}>{"<"}
             </button>
-            <input type={"date"} value={moment(timelineTime).format("YYYY-MM-DD")}
-                   onChange={(event) => {
-                       setTimelineTime(new Date(event.target.value))
-                   }}/>
+            <button onClick={() => {
+                if (pageNumber <= groups.length / pageSize)
+                    setPageNumber(pageNumber + 1)
+            }}>{">"}
+            </button>
             <CalendarTimeline
-                groups={groups.groups.slice((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize)}
-                items={items.items} eventClick={(item) => showEditEvent(item)}
+                groups={labels}
+                items={items} eventClick={(item) => showEditEvent(item)}
                 timelineTime={timelineTime}/>
         </div>
         {editForm}
