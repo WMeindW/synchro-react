@@ -1,21 +1,21 @@
-import {useEffect, useRef} from 'react';
-import {Timeline as VisTimeline} from 'vis-timeline/standalone';
+import {useEffect, useRef, useState} from 'react';
+import {Timeline as VisTimeline, DataSet} from 'vis-timeline/standalone';
 
 interface Group {
     id: number;
-    content: string;  // Vis.js expects "content" instead of "title"
+    content: string;
 }
 
 interface Item {
     id: number;
     group: number;
-    content: string;  // Vis.js expects "content" instead of "title"
+    content: string;
     start: Date;
     end: Date;
 }
 
 interface Props {
-    eventClick: (event: Item) => void;
+    eventClick: (id: Item) => void;
     groups: Group[];
     items: Item[];
     timelineTime: Date
@@ -24,12 +24,13 @@ interface Props {
 export default function CalendarTimeline({groups = [], items = [], eventClick, timelineTime}: Props) {
     const timelineRef = useRef<HTMLDivElement | null>(null);
     const timelineInstanceRef = useRef<VisTimeline | null>(null);
-
+    const itemsDataSetRef = useRef(new DataSet<Item>(items));
+    const groupsDataSetRef = useRef(new DataSet<Group>(groups));
     useEffect(() => {
         if (timelineRef.current) {
             const options = {
-                start: new Date(timelineTime.getTime()),  // Start of today
-                end: new Date(timelineTime.getTime() + 24 * 60 * 60 * 1000),  // End of today
+                start: new Date(timelineTime.getTime()),
+                end: new Date(timelineTime.getTime() + 24 * 60 * 60 * 1000),
                 width: '100%',
                 height: '600px',
                 stack: true,
@@ -38,11 +39,10 @@ export default function CalendarTimeline({groups = [], items = [], eventClick, t
                     item: 10,
                 },
             };
-            timelineInstanceRef.current = new VisTimeline(timelineRef.current, items, groups, options);
+            timelineInstanceRef.current = new VisTimeline(timelineRef.current, itemsDataSetRef.current, groupsDataSetRef.current, options);
             timelineInstanceRef.current.on('select', function (properties) {
                 const selectedItemId = properties.items[0];
-                const selectedItem = items.find(item => item.id === selectedItemId);
-
+                const selectedItem = itemsDataSetRef.current.get().find(item => item.id === selectedItemId)
                 if (selectedItem) {
                     eventClick(selectedItem);
                 }
@@ -53,7 +53,19 @@ export default function CalendarTimeline({groups = [], items = [], eventClick, t
                 timelineInstanceRef.current.destroy();
             }
         };
-    }, [groups, items, timelineTime]);
+    }, []);
+    useEffect(() => {
+        if (timelineInstanceRef.current) {
+            timelineInstanceRef.current.setWindow(
+                new Date(timelineTime.getTime()),
+                new Date(timelineTime.getTime() + 24 * 60 * 60 * 1000)
+            );
+        }
+        itemsDataSetRef.current.remove(items)
+        groupsDataSetRef.current.remove(groups);
+        itemsDataSetRef.current.update(items);
+        groupsDataSetRef.current.update(groups);
+    }, [items, groups, timelineTime]);
 
     return <div ref={timelineRef}/>;
 }
