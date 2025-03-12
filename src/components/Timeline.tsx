@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import {Timeline as VisTimeline, DataSet} from 'vis-timeline/standalone';
 
 interface Group {
@@ -62,8 +62,8 @@ export default function CalendarTimeline({groups = [], items = [], eventClick, t
                 new Date(timelineTime.getTime() + 24 * 60 * 60 * 1000)
             );
         }
-        itemsDataSetRef.current.remove(items)
-        groupsDataSetRef.current.remove(groups);
+        itemsDataSetRef.current.clear();
+        groupsDataSetRef.current.clear();
         itemsDataSetRef.current.update(items);
         groupsDataSetRef.current.update(groups);
     }, [items, groups, timelineTime]);

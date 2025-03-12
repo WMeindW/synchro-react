@@ -98,6 +98,7 @@ export default function Events() {
                 end: moment(event.timeEnd).toDate()
             })
         }
+        console.log(gs)
         setGroups(gs);
         setItems(is);
         setLabels(gs.slice((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize));
@@ -141,10 +142,11 @@ export default function Events() {
             }}>{"<"}
             </button>
             <button onClick={() => {
-                if (pageNumber <= groups.length / pageSize)
+                if (pageNumber <= (Math.round(groups.length / pageSize)))
                     setPageNumber(pageNumber + 1)
             }}>{">"}
             </button>
+            {pageNumber}/{Math.round(groups.length/pageSize) + 1}
             <CalendarTimeline
                 groups={labels}
                 items={items} eventClick={(item) => showEditEvent(item)}

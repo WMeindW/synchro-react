@@ -113,13 +113,14 @@ export default function BarChart() {
         </button>
         <button onClick={() => {
             console.log(labelSize)
-            if (pageNumber <= labelSize / pageSize) {
+            if (pageNumber <= Math.round(labelSize / pageSize)) {
                 console.log("next page")
                 setPageNumber(pageNumber + 1)
             }
             console.log(pageNumber)
         }}>{">"}
         </button>
+        {pageNumber}/{Math.round(labelSize / pageSize) + 1}
         <Bar className={"timeline-form"} data={data} options={options}/>
     </div>);
 };
