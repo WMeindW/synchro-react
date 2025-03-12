@@ -16,9 +16,8 @@ export class Relogin {
             } catch (error) {
                 this.loginAttempts++;
             }
-            console.log("Attempts: " + this.loginAttempts)
         }
-        Client.openDialogCallback("Session expired, login again!", () => window.location.href = SynchroConfig.apiUrl + "auth/login.html");
+        //Client.openDialogCallback("Session expired, login again!", () => window.location.href = SynchroConfig.apiUrl + "auth/login.html");
     }
 
     private static async delay(ms: number) {
