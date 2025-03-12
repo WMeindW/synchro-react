@@ -35,6 +35,7 @@ export default function CalendarTimeline({groups = [], items = [], eventClick, t
                 height: '600px',
                 stack: true,
                 zoomable: false,
+                moveable: false,
                 margin: {
                     item: 10,
                 },
