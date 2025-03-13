@@ -109,7 +109,17 @@ export default function Events() {
 
     function showEditEvent(item: Item) {
         if (item.attendance) return;
-        setEditForm(<EditForm key={item.id} submitForm={hideEditForm} end={moment(item.end).format("YYYY-MM-DDTHH:mm")}
+        setEditForm(<EditForm key={item.id} submitForm={() => {
+            hideEditForm();
+            setTimeout(() =>
+                queryEvents().then((events) => {
+                    if (events) {
+                        // @ts-ignore
+                        processEvents(events["events"]);
+                        setPageNumber(1);
+                    }
+                }), 1000);
+        }} end={moment(item.end).format("YYYY-MM-DDTHH:mm")}
                               start={moment(item.start).format("YYYY-MM-DDTHH:mm")}
                               type={item.content} username={item.username} id={item.id}/>);
     }

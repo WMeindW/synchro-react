@@ -4,7 +4,7 @@ export class Parser {
         let html = "";
         if (users)
             if (users.length > 0){
-                html += `<option value="" selected disabled>Choose an option</option>`;
+                html += `<option value="" selected disabled>Choose</option>`;
                 for (const u of users) {
                     html += `<option value="${u}">${u}</option>`;
                 }
@@ -17,7 +17,7 @@ export class Parser {
     public static parseShiftTypes() {
         let types: [] = JSON.parse(<string>window.localStorage.getItem('shiftTypes'));
         let html = "";
-        html += `<option value="" selected disabled>Choose an option</option>`;
+        html += `<option value="" selected disabled>Choose</option>`;
         if (types)
             for (const u of types) {
                 html += `<option value="${u}">${u}</option>`;
@@ -28,7 +28,7 @@ export class Parser {
     public static parseUserTypes() {
         let types: [] = JSON.parse(<string>window.localStorage.getItem('userTypes'));
         let html = "";
-        html += `<option value="" selected disabled>Choose an option</option>`;
+        html += `<option value="" selected disabled>Choose</option>`;
         if (types)
             for (const u of types) {
                 html += `<option value="${u}">${u}</option>`;
