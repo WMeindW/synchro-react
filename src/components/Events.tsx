@@ -25,6 +25,7 @@ interface Item {
     start: Date,
     end: Date
     attendance: boolean
+    username: string
 }
 
 
@@ -97,7 +98,8 @@ export default function Events() {
                 content: event.type,
                 start: moment(event.timeStart).toDate(),
                 end: moment(event.timeEnd).toDate(),
-                attendance: attendance
+                attendance: attendance,
+                username: event.username
             })
         }
         setGroups(gs);
@@ -107,13 +109,9 @@ export default function Events() {
 
     function showEditEvent(item: Item) {
         if (item.attendance) return;
-        let username = "";
-        groups.forEach((group) => {
-            if (group.id === item.group) username = group.content
-        })
         setEditForm(<EditForm key={item.id} submitForm={hideEditForm} end={moment(item.end).format("YYYY-MM-DDTHH:mm")}
                               start={moment(item.start).format("YYYY-MM-DDTHH:mm")}
-                              type={item.content} username={username} id={item.id}/>);
+                              type={item.content} username={item.username} id={item.id}/>);
     }
 
     useEffect(() => {

@@ -61,7 +61,7 @@ export default function CreateMotd(props: Props) {
 
     return <form className={"container-form"} onSubmit={handleSubmit}>
         <div className={"rendered-motd-container"} dangerouslySetInnerHTML={renderedMotd}></div>
-        <input required name={"motd"} onChange={handleChange} value={formData.motd} type={"text"}
+        <input required={true} name={"motd"} onChange={handleChange} value={formData.motd} type={"text"}
                placeholder={"Paste motd here"}></input>
         <button type="submit">Save Motd</button>
     </form>

@@ -80,20 +80,20 @@ export default function UserEditForm(props: Props) {
     }
 
     return <form className={"user-edit-form"} onSubmit={handleSubmit}>
-        <input type="hidden" id="id" value={formData.id} onChange={handleChange} name="id"
-               required/>
+        <input required={true} type="hidden" id="id" value={formData.id} onChange={handleChange} name="id"
+               />
 
-        <input placeholder={"Username"} type="text" id="username" value={formData.username} onChange={handleChange} name="username"
-               required/>
+        <input required={true} placeholder={"Username"} type="text" id="username" value={formData.username} onChange={handleChange} name="username"
+               />
 
-        <input placeholder={"Phone"} type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required/>
+        <input required={true} placeholder={"Phone"} type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
 
-        <input placeholder={"Email"} type="email" id="email" name="email" value={formData.email} onChange={handleChange} required/>
+        <input required={true} placeholder={"Email"} type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
 
-        <input placeholder={"Password"} type="password" id="password" name="password" value={formData.password}
+        <input required={true} placeholder={"Password"} type="password" id="password" name="password" value={formData.password}
                onChange={handleChange}/>
 
-        <select value={formData.role} dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
+        <select required={true} value={formData.role} dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
                 id="role" onChange={handleChange}>
         </select>
         <button type="submit">Edit</button>
