@@ -44,7 +44,6 @@ export default function UserEditForm(props: Props) {
         });
     };
 
-    // Handle form submission
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const jsonData = JSON.stringify(formData);
@@ -62,7 +61,7 @@ export default function UserEditForm(props: Props) {
     };
 
     const handleDelete = (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
         const jsonData = JSON.stringify({id: formData.id, username: formData.username});
         fetch(SynchroConfig.apiUrl + "admin/delete-user", {
             method: "POST",

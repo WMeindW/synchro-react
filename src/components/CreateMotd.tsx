@@ -46,7 +46,7 @@ export default function CreateMotd(props: Props) {
     }
 
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
         const jsonData = JSON.stringify(formData);
         fetch(SynchroConfig.apiUrl + "admin/save-motd", {
             method: "POST",

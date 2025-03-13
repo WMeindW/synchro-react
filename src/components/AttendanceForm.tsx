@@ -25,7 +25,6 @@ export default function AttendanceForm() {
     }
 
     useEffect(() => {
-        console.log("username: " + Parser.getUsernameFromCookie())
         queryAttendance().then((response) => {
             if (response == "false")
                 setCheckedIn({checkedIn: false})
@@ -36,7 +35,6 @@ export default function AttendanceForm() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("username: " + formData.username)
         fetch(SynchroConfig.apiUrl + "user/check-attendance", {
             method: "POST",
             headers: {

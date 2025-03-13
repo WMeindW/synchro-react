@@ -14,7 +14,6 @@ export default function CreateUserForm() {
 
     const [link, setLink] = useState("");
 
-    // Handle input changes and update state
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target;
         setFormData({

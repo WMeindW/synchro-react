@@ -37,7 +37,6 @@ export default function UserList(props: Props) {
                 children.push(React.createElement("div", {
                     onClick: () => {
                         setActiveUser(user.id);
-                        console.log(user.id)
                         props.userClick(user)
                     },
                     key: user.id,
@@ -67,12 +66,9 @@ export default function UserList(props: Props) {
 
     useEffect(() => {
         processUsers(userObjects)
-        console.log("updated")
     }, [activeUser]);
 
     useEffect(() => {
-
-        console.log("querying users...");
         queryUsers().then((usersList) => {
             if (usersList != null) {
                 // @ts-ignore

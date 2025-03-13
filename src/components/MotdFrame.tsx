@@ -14,7 +14,6 @@ export default function MotdFrame() {
 
     useEffect(() => {
         queryMotd().then(result => {
-            console.log(result);
             setMotd({...motd, __html: result})
         })
     }, []);

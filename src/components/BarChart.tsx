@@ -105,19 +105,14 @@ export default function BarChart() {
             if (pageNumber <= 1)
                 setPageNumber(1)
             else {
-                console.log("previous page")
                 setPageNumber(pageNumber - 1)
             }
-            console.log(pageNumber)
         }}>{"<"}
         </button>
         <button onClick={() => {
-            console.log(labelSize)
             if (pageNumber <= Math.round(labelSize / pageSize)) {
-                console.log("next page")
                 setPageNumber(pageNumber + 1)
             }
-            console.log(pageNumber)
         }}>{">"}
         </button>
         {pageNumber}/{Math.round(labelSize / pageSize) + 1}

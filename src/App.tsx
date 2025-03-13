@@ -24,13 +24,11 @@ export default function App() {
                 return {users: [], shiftTypes: [], userTypes: []}
             return res.json();
         } catch (error) {
-            console.error("Error fetching users:", error);
             return {users: [], shiftTypes: [], userTypes: []}
         }
     }
 
     useEffect(() => {
-        console.log("Fetching info...")
         queryOptions().then((response) => {
             window.localStorage.setItem("users", JSON.stringify(response.users))
             window.localStorage.setItem("shiftTypes", JSON.stringify(response.shiftTypes))

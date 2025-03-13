@@ -13,7 +13,6 @@ interface Props {
 }
 
 export default function EditForm(props: Props) {
-    // State to store form data
     const [formData, setFormData] = useState({
         id: props.id,
         type: props.type,
@@ -22,7 +21,6 @@ export default function EditForm(props: Props) {
         end: props.end
     });
 
-    // Handle input changes and update state
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target;
         setFormData({
@@ -31,13 +29,10 @@ export default function EditForm(props: Props) {
         });
     };
 
-    // Handle form submission
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
 
-        // Convert the form data to JSON
         const jsonData = JSON.stringify(formData);
-        console.log(jsonData); // You can send this data to a server or log it
 
 
         fetch(SynchroConfig.apiUrl + "user/edit-event", {
@@ -55,9 +50,8 @@ export default function EditForm(props: Props) {
     };
 
     const handleDelete = (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
 
-        // Convert the form data to JSON
         const jsonData = JSON.stringify(formData);
 
         fetch(SynchroConfig.apiUrl + "user/delete-event", {
