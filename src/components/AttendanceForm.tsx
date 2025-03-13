@@ -4,8 +4,6 @@ import {Parser} from "../service/Parser.ts";
 import {Client} from "../service/Client.ts";
 
 export default function AttendanceForm() {
-    // State to store form data
-
     const [formData, setFormData] = useState({
         username: Parser.getUsernameFromCookie()
     });

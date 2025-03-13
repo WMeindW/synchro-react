@@ -24,6 +24,7 @@ interface Item {
     content: string,
     start: Date,
     end: Date
+    attendance: boolean
 }
 
 
@@ -59,21 +60,21 @@ export default function Events() {
             queryEvents().then((events) => {
                 if (events != null)
                     // @ts-ignore
-                    processEvents(events["events"]);
+                    processEvents(events["events"], false);
             })
             setButton("Show Attendance");
         } else {
             queryAttendance().then((events) => {
                 if (events != null)
                     // @ts-ignore
-                    processEvents(events["events"]);
+                    processEvents(events["events"], true);
             })
             setButton("Show Events");
         }
         hideEditForm();
     }
 
-    function processEvents(events: Event[]) {
+    function processEvents(events: Event[], attendance: boolean) {
         const gs: Group[] = []
         const is: Item[] = []
         for (const event of events) {
@@ -95,16 +96,17 @@ export default function Events() {
                 group: giduser,
                 content: event.type,
                 start: moment(event.timeStart).toDate(),
-                end: moment(event.timeEnd).toDate()
+                end: moment(event.timeEnd).toDate(),
+                attendance: attendance
             })
         }
-        console.log(gs)
         setGroups(gs);
         setItems(is);
         setLabels(gs.slice((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize));
     }
 
     function showEditEvent(item: Item) {
+        if (item.attendance) return;
         let username = "";
         groups.forEach((group) => {
             if (group.id === item.group) username = group.content
@@ -146,7 +148,7 @@ export default function Events() {
                     setPageNumber(pageNumber + 1)
             }}>{">"}
             </button>
-            {pageNumber}/{Math.round(groups.length/pageSize) + 1}
+            {pageNumber}/{Math.round(groups.length / pageSize) + 1}
             <CalendarTimeline
                 groups={labels}
                 items={items} eventClick={(item) => showEditEvent(item)}

@@ -12,6 +12,7 @@ interface Item {
     content: string;
     start: Date;
     end: Date;
+    attendance:boolean;
 }
 
 interface Props {
