@@ -72,8 +72,6 @@ export default function EditForm(props: Props) {
 
     return (
         <form autoComplete={"off"} className={"container-form"} style={{marginLeft: 0}} onSubmit={handleSubmit}>
-            <img className={"attendance-clock " + props.isAttendance ? "hidden" : ""} alt={"edit icon"}
-                 src={SynchroConfig.hostUrl + "edit.svg"}/>
             <input className={props.isAttendance ? "hidden" : ""} hidden={props.isAttendance} required={true} name="id"
                    type="hidden" value={formData.id}
                    onChange={handleChange}/>
