@@ -38,7 +38,7 @@ export default function App() {
                 <Dialog ref={Client.dialog}></Dialog>
                 <Router/>
             </div>)
-            //Relogin.runService();
+            Relogin.runService();
         })
     }, []);
 
