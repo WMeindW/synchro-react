@@ -222,6 +222,10 @@ input:focus {
     background-color: #3E5879;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .user-list {
     flex-direction: column !important;
     align-items: flex-start;
@@ -593,6 +597,7 @@ a {
     position: absolute !important;
     text-align: center !important;
     z-index: 1 !important;
+    cursor: pointer !important;
 }
 
 .vis-item.vis-selected {

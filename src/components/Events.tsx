@@ -57,6 +57,7 @@ export default function Events(props: { stateKey: number }) {
     }
 
     function switchView() {
+        hideEditForm();
         if (button == "Show Events") {
             queryEvents().then((events) => {
                 if (events != null)
@@ -72,7 +73,6 @@ export default function Events(props: { stateKey: number }) {
             })
             setButton("Show Events");
         }
-        hideEditForm();
     }
 
     function processEvents(events: Event[], attendance: boolean) {
@@ -105,23 +105,22 @@ export default function Events(props: { stateKey: number }) {
         setGroups(gs);
         setItems(is);
         setLabels(gs.slice((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize));
+        setPageNumber(1);
     }
 
     function showEditEvent(item: Item) {
-        if (item.attendance) return;
         setEditForm(<EditForm key={item.id} submitForm={() => {
             hideEditForm();
-            setTimeout(() =>
-                queryEvents().then((events) => {
-                    if (events) {
-                        // @ts-ignore
-                        processEvents(events["events"]);
-                        setPageNumber(1);
-                    }
-                }), 1000);
+            setTimeout(() => queryEvents().then((events) => {
+                if (events) {
+                    // @ts-ignore
+                    processEvents(events["events"]);
+                }
+            }), 1000);
         }} end={moment(item.end).format("YYYY-MM-DDTHH:mm")}
                               start={moment(item.start).format("YYYY-MM-DDTHH:mm")}
-                              type={item.content} username={item.username} id={item.id}/>);
+                              type={item.content} username={item.username} id={item.id}
+                              isAttendance={item.attendance}/>);
     }
 
     useEffect(() => {
@@ -129,7 +128,6 @@ export default function Events(props: { stateKey: number }) {
             if (events) {
                 // @ts-ignore
                 processEvents(events["events"]);
-                setPageNumber(1);
             }
         })
     }, [props.stateKey]);

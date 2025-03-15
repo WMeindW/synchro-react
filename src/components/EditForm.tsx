@@ -10,6 +10,7 @@ interface Props {
     username: string
     start: string
     end: string
+    isAttendance: boolean
 }
 
 export default function EditForm(props: Props) {
@@ -71,18 +72,25 @@ export default function EditForm(props: Props) {
 
     return (
         <form autoComplete={"off"} className={"container-form"} style={{marginLeft: 0}} onSubmit={handleSubmit}>
-            <img className={"attendance-clock"} alt={"edit icon"} src={SynchroConfig.hostUrl + "edit.svg"}/>
-            <input required={true} name="id" type="hidden" value={formData.id} onChange={handleChange}/>
-            <select required={true} dangerouslySetInnerHTML={{__html: Parser.parseShiftTypes()}} name="type"
+            <img className={"attendance-clock " + props.isAttendance ? "hidden" : ""} alt={"edit icon"}
+                 src={SynchroConfig.hostUrl + "edit.svg"}/>
+            <input className={props.isAttendance ? "hidden" : ""} hidden={props.isAttendance} required={true} name="id"
+                   type="hidden" value={formData.id}
+                   onChange={handleChange}/>
+            <select className={props.isAttendance ? "hidden" : ""} hidden={props.isAttendance} required={true}
+                    dangerouslySetInnerHTML={{__html: Parser.parseShiftTypes()}} name="type"
                     value={formData.type} onChange={handleChange}>
             </select>
-            <select required={true} dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} name="username"
+            <select className={props.isAttendance ? "hidden" : ""} required={true}
+                    dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} name="username"
                     value={formData.username} onChange={handleChange}>
             </select>
-            <input required={true} name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
-            <input required={true} name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>
-            <button type="submit">Edit Event</button>
-            <button type="button" onClick={handleDelete}>Delete</button>
+            <input disabled={props.isAttendance} required={true} name="start" type="datetime-local"
+                   value={formData.start} onChange={handleChange}/>
+            <input disabled={props.isAttendance} required={true} name="end" type="datetime-local" value={formData.end}
+                   onChange={handleChange}/>
+            <button className={props.isAttendance ? "hidden" : ""} type="submit">Edit Event</button>
+            <button className={props.isAttendance ? "hidden" : ""} type="button" onClick={handleDelete}>Delete</button>
         </form>
     );
 }
