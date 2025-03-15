@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {SynchroConfig} from "../config/SynchroConfig.ts"
 import {Parser} from "../service/Parser.ts";
 import {Client} from "../service/Client.ts";
@@ -36,7 +36,6 @@ export default function CreateUserForm(props: { method: () => void }) {
                 if (response.status != 200) Client.openDialog("Error creating user!")
                 else {
                     response.json().then((result) => setLink(result["token"]))
-                    console.log(link);
                     props.method();
                 }
             })
@@ -44,9 +43,6 @@ export default function CreateUserForm(props: { method: () => void }) {
                 Client.openDialog("Error creating user!")
             });
     };
-    useEffect(() => {
-        console.log(link);
-    }, [link]);
     return (
         <form className={"container-form"} onSubmit={handleSubmit}>
             <svg className={"attendance-clock"} xmlns="http://www.w3.org/2000/svg"

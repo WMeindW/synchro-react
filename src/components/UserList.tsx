@@ -88,7 +88,6 @@ export default function UserList(props: Props) {
                 processUsers(usersList["userList"])
             }
         }), 1000)
-        console.log("reloaded users")
     }, [props.stateKey]);
     return <div className={"user-list"}>{users.users}</div>
 }
