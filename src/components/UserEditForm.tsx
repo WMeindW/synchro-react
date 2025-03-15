@@ -75,6 +75,8 @@ export default function UserEditForm(props: Props) {
         })
             .then(response => {
                 if (response.status != 200) Client.openDialog("Error deleting user!")
+                else
+                    props.submit();
             })
             .catch(() => {
                 Client.openDialog("Error deleting user!")
