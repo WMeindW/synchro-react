@@ -29,7 +29,7 @@ interface Item {
 }
 
 
-export default function Events() {
+export default function Events(props: { stateKey: number }) {
     const gs: Group[] = []
     const is: Item[] = []
     const [groups, setGroups] = useState(gs);
@@ -129,9 +129,10 @@ export default function Events() {
             if (events) {
                 // @ts-ignore
                 processEvents(events["events"]);
+                setPageNumber(1);
             }
         })
-    }, []);
+    }, [props.stateKey]);
 
     useEffect(() => {
         setLabels(groups.slice((pageNumber - 1) * pageSize, ((pageNumber - 1) * pageSize) + pageSize))

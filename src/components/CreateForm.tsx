@@ -3,8 +3,7 @@ import {SynchroConfig} from "../config/SynchroConfig.ts"
 import {Parser} from "../service/Parser.ts";
 import {Client} from "../service/Client.ts";
 
-
-export default function CreateForm() {
+export default function CreateForm(props: { method: () => void }) {
     const [formData, setFormData] = useState({
         type: "",
         username: "",
@@ -34,6 +33,7 @@ export default function CreateForm() {
         })
             .then((response) => {
                 if (response.status != 200) Client.openDialog("Error creating event!")
+                else props.method();
             })
             .catch(() => Client.openDialog("Error creating event!"));
     };
@@ -54,8 +54,8 @@ export default function CreateForm() {
             <select required={true} dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} name="username"
                     value={formData.username} onChange={handleChange}>
             </select>
-            <input  required={true} name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
-            <input  required={true} name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>
+            <input required={true} name="start" type="datetime-local" value={formData.start} onChange={handleChange}/>
+            <input required={true} name="end" type="datetime-local" value={formData.end} onChange={handleChange}/>
             <button type="submit">Create Event</button>
         </form>
     );

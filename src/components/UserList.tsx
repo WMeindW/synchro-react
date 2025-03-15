@@ -17,6 +17,7 @@ interface UserList {
 
 interface Props {
     userClick: (user: User) => void;
+    stateKey: { stateKey: number }
 }
 
 export default function UserList(props: Props) {
@@ -26,7 +27,6 @@ export default function UserList(props: Props) {
 
     async function queryUsers(): Promise<UserList[]> {
         return await Client.getJson(SynchroConfig.apiUrl + "admin/query-user");
-
     }
 
     function processUsers(users: User[]) {
@@ -78,5 +78,17 @@ export default function UserList(props: Props) {
             }
         })
     }, []);
+
+    useEffect(() => {
+        setTimeout(() => queryUsers().then((usersList) => {
+            if (usersList != null) {
+                // @ts-ignore
+                setUserObjects(usersList["userList"])
+                // @ts-ignore
+                processUsers(usersList["userList"])
+            }
+        }), 1000)
+        console.log("reloaded users")
+    }, [props.stateKey]);
     return <div className={"user-list"}>{users.users}</div>
 }

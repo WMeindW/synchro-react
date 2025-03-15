@@ -225,7 +225,7 @@ input:focus {
 .user-list {
     flex-direction: column !important;
     align-items: flex-start;
-    max-width: 45em;
+    width: 50vw;
     min-width: 15em;
     overflow-y: auto;
     max-height: 85vh;
@@ -235,6 +235,7 @@ input:focus {
 .active-user {
     background-color: #D8C4B6 !important;
 }
+
 .user-card-icon {
     margin-right: auto;
     margin-left: 1em;

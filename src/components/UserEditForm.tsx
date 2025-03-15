@@ -14,6 +14,7 @@ interface User {
 
 interface Props {
     user: User
+    submit: () => void
 }
 
 export default function UserEditForm(props: Props) {
@@ -56,6 +57,8 @@ export default function UserEditForm(props: Props) {
         })
             .then(response => {
                 if (response.status != 200) Client.openDialog("Error editing user!")
+                else
+                    props.submit();
             })
             .catch(() => Client.openDialog("Error editing user!"));
     };
@@ -80,19 +83,23 @@ export default function UserEditForm(props: Props) {
 
     return <form className={"user-edit-form"} onSubmit={handleSubmit}>
         <input required={true} type="hidden" id="id" value={formData.id} onChange={handleChange} name="id"
-               />
+        />
 
-        <input required={true} placeholder={"Username"} type="text" id="username" value={formData.username} onChange={handleChange} name="username"
-               />
+        <input required={true} placeholder={"Username"} type="text" id="username" value={formData.username}
+               onChange={handleChange} name="username"
+        />
 
-        <input required={true} placeholder={"Phone"} type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
-
-        <input required={true} placeholder={"Email"} type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
-
-        <input required={true} placeholder={"Password"} type="password" id="password" name="password" value={formData.password}
+        <input required={true} placeholder={"Phone"} type="tel" id="phone" name="phone" value={formData.phone}
                onChange={handleChange}/>
 
-        <select required={true} value={formData.role} dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}} name="role"
+        <input required={true} placeholder={"Email"} type="email" id="email" name="email" value={formData.email}
+               onChange={handleChange}/>
+
+        <input placeholder={"Password"} type="password" id="password" name="password" value={formData.password}
+               onChange={handleChange}/>
+
+        <select required={true} value={formData.role} dangerouslySetInnerHTML={{__html: Parser.parseUserTypes()}}
+                name="role"
                 id="role" onChange={handleChange}>
         </select>
         <button type="submit">Edit</button>
