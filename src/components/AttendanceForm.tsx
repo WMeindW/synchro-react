@@ -31,7 +31,7 @@ export default function AttendanceForm() {
             else if ((response == "true"))
                 setCheckedIn({checkedIn: true})
         })
-    }, []);
+    }, [formData]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -49,11 +49,6 @@ export default function AttendanceForm() {
         setCheckedIn({checkedIn: !checkedIn.checkedIn})
     };
 
-    const handleChecks = (isChecked: boolean): string => {
-        if (isChecked)
-            return "Check-Out"
-        return "Check-In"
-    }
     return (
         <form className={"container-form"} onSubmit={handleSubmit}>
             <svg className={"attendance-clock"} width="2em" height="2em" viewBox="1 1 22 22"
@@ -69,7 +64,7 @@ export default function AttendanceForm() {
             <select dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} required={true} name="username"
                     defaultValue={formData.username} onChange={handleChange}>
             </select>
-            <button className={"button"} type="submit">{handleChecks(checkedIn.checkedIn)}</button>
+            <button className={"button"} type="submit">{checkedIn.checkedIn ? "Check-Out" : "Check-In"}</button>
         </form>
     );
 }

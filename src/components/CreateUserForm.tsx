@@ -44,7 +44,7 @@ export default function CreateUserForm(props: { method: () => void }) {
             });
     };
     return (
-        <form className={"container-form"} onSubmit={handleSubmit}>
+        <form autoComplete={"off"} className={"container-form"} onSubmit={handleSubmit}>
             <svg className={"attendance-clock"} xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 460 460">
                 <rect width="100%" height="100%" fill="#D8C4B6"/>

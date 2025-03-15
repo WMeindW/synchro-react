@@ -39,7 +39,7 @@ export default function CreateForm(props: { method: () => void }) {
     };
 
     return (
-        <form className={"container-form"} onSubmit={handleSubmit}>
+        <form autoComplete={"off"} className={"container-form"} onSubmit={handleSubmit}>
             <svg className={"attendance-clock"} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                  x="0px" y="0px" width="122.879px" height="122.879px"
                  viewBox="0 0 122.879 122.879" enable-background="new 0 0 122.879 122.879">

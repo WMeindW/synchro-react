@@ -59,7 +59,7 @@ export default function CreateMotd(props: Props) {
         }).catch(() => Client.openDialog("Error saving motd!"));
     };
 
-    return <form className={"container-form"} onSubmit={handleSubmit}>
+    return <form autoComplete={"off"} className={"container-form"} onSubmit={handleSubmit}>
         <div className={"rendered-motd-container"} dangerouslySetInnerHTML={renderedMotd}></div>
         <input required={true} name={"motd"} onChange={handleChange} value={formData.motd} type={"text"}
                placeholder={"Paste motd here"}></input>

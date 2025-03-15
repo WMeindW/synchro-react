@@ -83,7 +83,7 @@ export default function UserEditForm(props: Props) {
             });
     }
 
-    return <form className={"user-edit-form"} onSubmit={handleSubmit}>
+    return <form autoComplete={"off"} className={"user-edit-form"} onSubmit={handleSubmit}>
         <input required={true} type="hidden" id="id" value={formData.id} onChange={handleChange} name="id"
         />
 
