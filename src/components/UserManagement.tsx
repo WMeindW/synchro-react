@@ -17,7 +17,10 @@ export default function UserManagement(props: { stateKey: number }) {
 
     const showEditForm = (user: User) => {
         setEditForm(<UserEditForm user={user}
-                                  submit={() => setStateKey({...stateKey, stateKey: stateKey.stateKey - 3})}/>)
+                                  submit={() => {
+                                      setStateKey({...stateKey, stateKey: stateKey.stateKey - 3})
+                                      setEditForm(<div></div>);
+                                  }}/>)
     }
     useEffect(() => {
         setEditForm(<div></div>);
