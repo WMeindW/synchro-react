@@ -1,25 +1,38 @@
 import {Component} from "react";
 
-export default class Dialog extends Component<any, { opened: boolean, message: string, callback: Function }> {
+export default class Dialog extends Component<any, {
+    opened: boolean,
+    message: string,
+    callback: Function,
+    buttonText: string
+}> {
     constructor(props: any) {
         super(props);
         this.state = {
             opened: false,
             message: "",
-            callback: () => console.log("Closed")
+            callback: () => console.log("Closed"),
+            buttonText: "Close"
         };
     }
 
     public open(message: string): void {
-        this.setState({opened: true, message: message});
+        this.setState({opened: true, message: message, buttonText: "Close"});
     }
 
     public openCallback(message: string, callback: Function): void {
         this.setState({opened: true, message: message, callback: callback});
     }
 
+    public openCallbackMessage(message: string, callback: Function, buttonText: string): void {
+        this.setState({opened: true, message: message, callback: callback, buttonText: buttonText});
+    }
+
     public close(): void {
-        this.setState({opened: false, message: ""});
+        this.setState({
+            opened: false, message: "", callback: () => {
+            }, buttonText: "Close"
+        });
     }
 
     render() {
@@ -32,7 +45,7 @@ export default class Dialog extends Component<any, { opened: boolean, message: s
                         <button onClick={() => {
                             this.close();
                             this.state.callback();
-                        }}>Close
+                        }}>{this.state.buttonText}
                         </button>
                     </div>
                 </div>

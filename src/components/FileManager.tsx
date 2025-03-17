@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {MouseEventHandler, useEffect, useState} from 'react'
 import {Client} from "../service/Client.ts";
 import {SynchroConfig} from "../config/SynchroConfig.ts";
 
@@ -82,6 +82,34 @@ export default function FileManager() {
 
     };
 
+    function handleDelete(fileName: string) {
+        Client.openDialogCallbackMessage("Are you sure you want to delete " + fileName + "?", () => {
+            const ft = files.f.find((f1) => f1.name == fileName);
+            if (!ft) return;
+            if (!ft.isUploaded) {
+                const setF = files.f.filter((file) => file.name !== fileName);
+                setFiles({...files, f: setF});
+                return;
+            }
+            fetch(SynchroConfig.apiUrl + "files/delete?file=" + fileName + "&username=" + username.u, {
+                method: "GET",
+            })
+                .then((response) => {
+                    if (response.status != 200) {
+                        Client.openDialog("Error deleting file!")
+                        return;
+                    }
+                    const setF = files.f.filter((file) => file.name !== fileName);
+                    setFiles({...files, f: setF});
+                })
+                .catch(() => {
+                    Client.openDialog("Error deleting file!")
+                    return;
+                });
+        }, "Delete");
+
+    }
+
     return (<div className={"container-form"}>
             <form onSubmit={handleSubmit} style={{margin: 0}} method={"POST"} className={"container-form"}>
                 <label className={"file-input"} htmlFor="fileInput">Choose File</label>
@@ -93,13 +121,13 @@ export default function FileManager() {
             </form>
             <div className={"file-container"}>
                 {files.f.map((file, index) => (
-                    <div className={"file-card"} key={index}>
+                    <div id={file.name} className={"file-card"} key={index} onClick={() => handleDelete(file.name)}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
                             <path fill="#D8C4B6"
                                   d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/>
                         </svg>
                         <div
-                            className={"file-name"}>{file.name.length > 8 ? file.name.substring(0, 8) + '...' : file.name}</div>
+                            className={"file-name"}>{file.name.length > 24 ? file.name.substring(0, 24) + '...' : file.name}</div>
                     </div>
                 ))}
             </div>
