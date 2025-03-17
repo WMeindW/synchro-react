@@ -18,11 +18,11 @@ interface FileUploaded {
 export default function FileManager() {
     const fs: FileObject[] = [];
     const [files, setFiles] = useState({f: fs});
-    const [username, setUsername] = useState({u: "admin_user"});
+    const [username, setUsername] = useState({u: ""});
 
     useEffect(() => {
         fetchFiles().then((files: FileUploaded[]) => processFetchedFiles(files));
-    }, []);
+    }, [username]);
 
     useEffect(() => {
         console.log(files.f)
@@ -108,10 +108,6 @@ export default function FileManager() {
                     return;
                 });
         }, "Delete");
-    }
-
-    function handleDownload(fileName: string) {
-
     }
 
     return (<div className={"container-form"}>
