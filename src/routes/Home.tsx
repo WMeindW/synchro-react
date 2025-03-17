@@ -1,6 +1,7 @@
 import AttendanceForm from "../components/AttendanceForm.tsx";
 import MotdFrame from "../components/MotdFrame.tsx";
 import Logout from "../components/Logout.tsx";
+import FileManager from "../components/FileManager.tsx";
 
 export default function Home() {
     return (<div>
@@ -10,6 +11,10 @@ export default function Home() {
         <hr/>
         <div className="motd-container">
             <MotdFrame/>
+        </div>
+        <hr/>
+        <div className="container">
+            <FileManager/>
         </div>
         <hr/>
         <div className="container">
