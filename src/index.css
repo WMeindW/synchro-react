@@ -101,7 +101,7 @@ header {
 
 .dialog {
     position: absolute;
-    min-width: 30vw;
+    min-width: 10em;
     border: none;
     border-radius: 5px;
     display: flex;
@@ -111,6 +111,7 @@ header {
     background-color: #3E5879;
     z-index: 1;
     box-shadow: 0 0 2px red;
+    max-width: 90vw;
 }
 
 .dialog-message {
@@ -286,6 +287,7 @@ button {
     padding-right: 1em;
     z-index: 1;
     height: 26px;
+    min-width: 60px;
 }
 
 button:active {

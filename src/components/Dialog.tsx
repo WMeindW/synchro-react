@@ -39,7 +39,7 @@ export default class Dialog extends Component<any, {
             return (
                 <div className="dialog-container">
                     <div className="dialog">
-                        <div className="dialog-message">{this.state.message}</div>
+                        <div className="dialog-message">{this.state.message.length > 48 ? this.state.message.substring(0, 48) + '...' : this.state.message}</div>
 
                         <button hidden={this.state.callback == null} onClick={() => {
                             this.close();
