@@ -3,7 +3,7 @@ import {Component} from "react";
 export default class Dialog extends Component<any, {
     opened: boolean,
     message: string,
-    callback: Function,
+    callback: Function | null,
     buttonText: string
 }> {
     constructor(props: any) {
@@ -11,7 +11,7 @@ export default class Dialog extends Component<any, {
         this.state = {
             opened: false,
             message: "",
-            callback: () => console.log("Closed"),
+            callback: null,
             buttonText: "Close"
         };
     }
@@ -30,8 +30,7 @@ export default class Dialog extends Component<any, {
 
     public close(): void {
         this.setState({
-            opened: false, message: "", callback: () => {
-            }, buttonText: "Close"
+            opened: false, message: "", callback: null, buttonText: "Close"
         });
     }
 
@@ -42,10 +41,15 @@ export default class Dialog extends Component<any, {
                     <div className="dialog">
                         <div className="dialog-message">{this.state.message}</div>
 
+                        <button hidden={this.state.callback == null} onClick={() => {
+                            this.close();
+                            if (this.state.callback)
+                                this.state.callback();
+                        }}>{this.state.buttonText}
+                        </button>
                         <button onClick={() => {
                             this.close();
-                            this.state.callback();
-                        }}>{this.state.buttonText}
+                        }}>Close
                         </button>
                     </div>
                 </div>

@@ -432,6 +432,7 @@ input[type="file"] {
     gap: 0.5em;
     overflow: hidden;
     flex-wrap: wrap;
+    min-height: 10.5em;
 }
 
 .file-card {
@@ -441,8 +442,6 @@ input[type="file"] {
     text-align: center;
     width: 7em;
     height: 8em;
-    box-shadow: 0 0 5px #D8C4B6;
-    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -463,6 +462,15 @@ input[type="file"] {
     color: #3E5879;
 }
 
+.file-action-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 0 5px #D8C4B6;
+    border-radius: 5px;
+    padding-bottom: 0.5em;
+}
 input[type="datetime-local"] {
     text-align: center;
     cursor: pointer;

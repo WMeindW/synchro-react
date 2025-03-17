@@ -107,6 +107,9 @@ export default function FileManager() {
                     return;
                 });
         }, "Delete");
+    }
+
+    function handleDownload(fileName: string) {
 
     }
 
@@ -121,14 +124,19 @@ export default function FileManager() {
             </form>
             <div className={"file-container"}>
                 {files.f.map((file, index) => (
-                    <div id={file.name} className={"file-card"} key={index} onClick={() => handleDelete(file.name)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                            <path fill="#D8C4B6"
-                                  d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/>
-                        </svg>
-                        <div
-                            className={"file-name"}>{file.name.length > 24 ? file.name.substring(0, 24) + '...' : file.name}</div>
+                    <div className={"file-action-container"}>
+                        <div id={file.name} className={"file-card"} key={index} onClick={() => handleDelete(file.name)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                <path fill="#D8C4B6"
+                                      d="M 30.398438 2 L 7 2 L 7 48 L 43 48 L 43 14.601563 Z M 30 15 L 30 4.398438 L 40.601563 15 Z"/>
+                            </svg>
+                            <div
+                                className={"file-name"}>{file.name.length > 24 ? file.name.substring(0, 24) + '...' : file.name}
+                            </div>
+                        </div>
+                        <a className={!file.isUploaded ? "hidden" : ""} href={SynchroConfig.apiUrl + "files/get?file=" + file.name + "&username=" + username.u}>Download</a>
                     </div>
+
                 ))}
             </div>
         </div>
