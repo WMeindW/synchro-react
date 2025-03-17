@@ -1,4 +1,4 @@
-import React, {MouseEventHandler, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Client} from "../service/Client.ts";
 import {SynchroConfig} from "../config/SynchroConfig.ts";
 import {Parser} from "../service/Parser.ts";
