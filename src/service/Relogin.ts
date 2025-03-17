@@ -5,7 +5,7 @@ export class Relogin {
     private static loginAttempts: number = 0;
 
     public static async runService() {
-        while (this.loginAttempts <= 6) {
+        while (this.loginAttempts <= 3) {
             await this.delay(5000);
             try {
                 const response = await fetch(SynchroConfig.apiUrl + "auth/login.html", {

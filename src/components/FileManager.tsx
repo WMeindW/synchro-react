@@ -18,9 +18,10 @@ interface FileUploaded {
 export default function FileManager() {
     const fs: FileObject[] = [];
     const [files, setFiles] = useState({f: fs});
-    const [username, setUsername] = useState({u: ""});
+    const [username, setUsername] = useState({u: Parser.getUsernameFromCookie()});
 
     useEffect(() => {
+        setFiles({f: []});
         fetchFiles().then((files: FileUploaded[]) => processFetchedFiles(files));
     }, [username]);
 
@@ -120,8 +121,8 @@ export default function FileManager() {
                 <select required={true}
                         dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} name="username"
                         value={username.u} onChange={(e) => {
-                    setUsername({u: e.target.value});
-                }}>
+                            setUsername({u: e.target.value});
+                        }}>
                 </select>
                 <button type="submit">Upload</button>
             </form>
