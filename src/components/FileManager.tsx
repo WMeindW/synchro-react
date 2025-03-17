@@ -1,6 +1,7 @@
 import React, {MouseEventHandler, useEffect, useState} from 'react'
 import {Client} from "../service/Client.ts";
 import {SynchroConfig} from "../config/SynchroConfig.ts";
+import {Parser} from "../service/Parser.ts";
 
 interface FileObject {
     name: string
@@ -120,6 +121,12 @@ export default function FileManager() {
                     if (!e.target.files) return;
                     processFiles(e.target.files);
                 }}/>
+                <select required={true}
+                        dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} name="username"
+                        value={username.u} onChange={(e) => {
+                    setUsername({u: e.target.value});
+                }}>
+                </select>
                 <button type="submit">Upload</button>
             </form>
             <div className={"file-container"}>
@@ -134,7 +141,8 @@ export default function FileManager() {
                                 className={"file-name"}>{file.name.length > 24 ? file.name.substring(0, 24) + '...' : file.name}
                             </div>
                         </div>
-                        <a className={!file.isUploaded ? "hidden" : ""} href={SynchroConfig.apiUrl + "files/get?file=" + file.name + "&username=" + username.u}>Download</a>
+                        <a className={!file.isUploaded ? "hidden" : ""}
+                           href={SynchroConfig.apiUrl + "files/get?file=" + file.name + "&username=" + username.u}>Download</a>
                     </div>
 
                 ))}
