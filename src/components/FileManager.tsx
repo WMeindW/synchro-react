@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import 'filepond/dist/filepond.min.css'
 import {Client} from "../service/Client.ts";
 import {SynchroConfig} from "../config/SynchroConfig.ts";
