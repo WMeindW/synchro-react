@@ -423,7 +423,6 @@ input[type="file"] {
     padding: 1em;
     align-items: center;
     text-align: center;
-    cursor: pointer;
     background-color: #3E5879;
     color: #D8C4B6;
     width: 80vw;
@@ -444,6 +443,7 @@ input[type="file"] {
     height: 8em;
     box-shadow: 0 0 5px #D8C4B6;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .file-name {

@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react'
 import {Client} from "../service/Client.ts";
 import {SynchroConfig} from "../config/SynchroConfig.ts";
 
-interface File {
+interface FileObject {
     name: string
     size: number
     isUploaded: boolean
+    file: File | null
 }
 
 interface FileUploaded {
@@ -14,8 +15,10 @@ interface FileUploaded {
 }
 
 export default function FileManager() {
-    const fs: File[] = [];
+    const fs: FileObject[] = [];
     const [files, setFiles] = useState({f: fs});
+    const [username, setUsername] = useState({u: "admin_user"});
+
     useEffect(() => {
         fetchFiles().then((files: FileUploaded[]) => processFetchedFiles(files));
     }, []);
@@ -25,11 +28,11 @@ export default function FileManager() {
     }, [files]);
 
     function processFiles(fileList: FileList) {
-        const fss: File[] = files.f;
+        const fss: FileObject[] = files.f;
         Array.from(fileList).forEach(file => {
-            if (!fss.find((f1) => f1.name == file.name))
-                fss.push({name: file.name, size: file.size, isUploaded: false});
-            else {
+            if (!fss.find((f1) => f1.name == file.name)) {
+                fss.push({name: file.name, size: file.size, isUploaded: false, file: file});
+            } else {
                 Client.openDialog("File with this name already exists!")
             }
         });
@@ -37,33 +40,46 @@ export default function FileManager() {
     }
 
     async function fetchFiles() {
-        return await Client.getJson(SynchroConfig.apiUrl + "files/query?username=" + "admin_user");
+        return await Client.getJson(SynchroConfig.apiUrl + "files/query?username=" + username.u);
     }
 
     function processFetchedFiles(fs: FileUploaded[]) {
-        const fss: File[] = files.f;
-        console.log(fs);
+        const fss: FileObject[] = [];
         for (const f of fs) {
             if (fss.find((f1) => f1.name == f.fileName)) continue;
-            fss.push({name: f.fileName, size: f.size, isUploaded: true});
+            fss.push({name: f.fileName, size: f.size, isUploaded: true, file: null});
         }
         setFiles({...files, f: fss});
     }
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        fetch(SynchroConfig.apiUrl + "user/edit-event", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: jsonData
-        })
-            .then((response) => {
-                if (response.status != 200) Client.openDialog("Error editing event!")
+        const fs = files.f.filter((file) => !file.isUploaded);
+        for (const f of fs) {
+            const formData = new FormData();
+            if (!f.file) continue;
+            formData.append("file", new Blob([f.file], {type: f.file?.type}), f.name)
+            formData.append("username", username.u);
+            fetch(SynchroConfig.apiUrl + "files/upload", {
+                method: "POST",
+                body: formData
             })
-            .catch(() => Client.openDialog("Error editing event!"));
+                .then((response) => {
+                    if (response.status != 200) {
+                        Client.openDialog("Error uploading file!")
+                        return;
+                    }
+                    const setF = files.f.find((file) => file.name == f.name);
+                    if (setF)
+                        setF.isUploaded = true;
+                    setFiles({...files, f: files.f});
+                })
+                .catch(() => {
+                    Client.openDialog("Error uploading file!")
+                    return;
+                });
+        }
+
     };
 
     return (<div className={"container-form"}>
