@@ -395,6 +395,13 @@ select::-webkit-scrollbar-corner {
 }
 
 input[type="file"] {
+    display: none;
+}
+
+.file-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     cursor: pointer;
     background-color: #3E5879;
@@ -403,11 +410,52 @@ input[type="file"] {
     height: 26px;
     border: none;
     border-radius: 4px;
-    margin-right: 15px;
+    box-shadow: 0 0 5px #3E5879;
 }
 
-input[type="file"]:hover {
+.file-input:hover {
     color: #F5EFE7;;
+}
+
+.file-container {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    background-color: #3E5879;
+    color: #D8C4B6;
+    width: 80vw;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 5px #3E5879;
+    gap: 0.5em;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+.file-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 7em;
+    height: 8em;
+    box-shadow: 0 0 5px #D8C4B6;
+    border-radius: 5px;
+}
+
+.file-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    width: 8em;
+    height: 9em;
+    z-index: 1;
+    color: #3E5879;
 }
 
 input[type="datetime-local"] {
