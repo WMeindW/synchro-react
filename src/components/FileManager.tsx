@@ -141,7 +141,7 @@ export default function FileManager() {
                             </div>
                         </div>
                         <a className={!file.isUploaded ? "hidden" : ""}
-                           href={SynchroConfig.apiUrl + "files/get?file=" + file.name + "&username=" + username.u}>Download</a>
+                           href={SynchroConfig.apiUrl + "files/get?file=" + encodeBase64Unicode(file.name) + "&username=" + username.u}>Download</a>
                     </div>
 
                 ))}
