@@ -37,6 +37,12 @@ export default function FileManager() {
         setFiles({...files, f: fss});
     }
 
+    const encodeBase64Unicode = (text: string): string => {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(text);
+        return btoa(String.fromCharCode(...data));
+    };
+
     async function fetchFiles() {
         return await Client.getJson(SynchroConfig.apiUrl + "files/query?username=" + username.u);
     }
@@ -56,7 +62,7 @@ export default function FileManager() {
         for (const f of fs) {
             const formData = new FormData();
             if (!f.file) continue;
-            formData.append("file", new Blob([f.file], {type: f.file?.type}), f.name)
+            formData.append("file", new Blob([f.file], {type: f.file?.type}), encodeBase64Unicode(f.name))
             formData.append("username", username.u);
             fetch(SynchroConfig.apiUrl + "files/upload", {
                 method: "POST",
@@ -89,7 +95,7 @@ export default function FileManager() {
                 setFiles({...files, f: setF});
                 return;
             }
-            fetch(SynchroConfig.apiUrl + "files/delete?file=" + fileName + "&username=" + username.u, {
+            fetch(SynchroConfig.apiUrl + "files/delete?file=" + encodeBase64Unicode(fileName) + "&username=" + username.u, {
                 method: "GET",
             })
                 .then((response) => {
