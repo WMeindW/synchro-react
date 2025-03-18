@@ -25,10 +25,6 @@ export default function FileManager() {
         fetchFiles().then((files: FileUploaded[]) => processFetchedFiles(files));
     }, [username]);
 
-    useEffect(() => {
-        console.log(files.f)
-    }, [files]);
-
     function processFiles(fileList: FileList) {
         const fss: FileObject[] = files.f;
         Array.from(fileList).forEach(file => {
@@ -121,8 +117,8 @@ export default function FileManager() {
                 <select required={true}
                         dangerouslySetInnerHTML={{__html: Parser.parseUsers()}} name="username"
                         value={username.u} onChange={(e) => {
-                            setUsername({u: e.target.value});
-                        }}>
+                    setUsername({u: e.target.value});
+                }}>
                 </select>
                 <button type="submit">Upload</button>
             </form>
