@@ -87,11 +87,11 @@ export default function UserEditForm(props: Props) {
         <input required={true} type="hidden" id="id" value={formData.id} onChange={handleChange} name="id"
         />
 
-        <input required={true} placeholder={"Username"} type="text" id="username" value={formData.username}
+        <input pattern={"(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]"} required={true} placeholder={"Username"} type="text" id="username" value={formData.username}
                onChange={handleChange} name="username"
         />
 
-        <input required={true} placeholder={"Phone"} type="tel" id="phone" name="phone" value={formData.phone}
+        <input pattern={"\\+?[1-9]\\d{1,14}"} required={true} placeholder={"Phone"} type="tel" id="phone" name="phone" value={formData.phone}
                onChange={handleChange}/>
 
         <input required={true} placeholder={"Email"} type="email" id="email" name="email" value={formData.email}
